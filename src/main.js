@@ -2,7 +2,8 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import ReactDom from 'react-dom';
 import {HashRouter} from 'react-router-dom';
-
+ 
+//testing -Matt
 import configureStore from './store/configureStore';
 
 import {App} from './components/App.js';
