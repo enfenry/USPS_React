@@ -2,6 +2,8 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import BookModal from '../components/BookModal';
+import { Button } from 'reactstrap';
 
 const BookRender = ({ bookData }) => {
 
@@ -11,8 +13,28 @@ const BookRender = ({ bookData }) => {
                 <td> {book.book_id} </td>
                 <td> {book.title} </td>
                 <td> {book.author} </td>
+                <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td>
+                <td><button className="btn btn-danger delete" onClick={() => handleDelete(book)}>Delete</button></td>
             </tr>
         );
+    }
+
+
+    function handleAdd() {
+        // this.props.toggleModal();
+        // this.props.fillModal({},true);
+        console.log('at handleAdd');
+    }
+
+    function handleUpdate(book) {
+        // this.props.toggleModal();
+        // this.props.fillModal(book,false);
+        console.log('book at handleUpdate',book);
+    }
+
+    function handleDelete(book) {
+        console.log('book at handleDelete', book);
+        // BookActions.deleteBook(book);
     }
 
     let content = '';
@@ -57,12 +79,18 @@ const BookRender = ({ bookData }) => {
         <div>
             <h1>Books</h1>
             {content}
+            <BookModal />
+            {/* <BookModal modal={this.props.modal} toggleModal={this.props.toggleModal} handleInputChange={this.props.handleInputChange} /> */}
+            <Button color="primary" onClick={() => {handleAdd()}}>Add Book</Button>
         </div>
     );
 }
 
 BookRender.propTypes = {
-    bookData: PropTypes.object
+    bookData: PropTypes.object,
+    modal: PropTypes.object,
+    toggleModal: PropTypes.func,
+    fillModal: PropTypes.func
 };
 
 export default BookRender;

@@ -16,4 +16,3 @@ ReactDom.render((
       </HashRouter>
     </Provider>
   ), document.getElementById('app'));
-  
