@@ -3,7 +3,6 @@ import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
-
 function configureStore(initialState) {
   const middlewares = [
     reduxImmutableStateInvariant(),

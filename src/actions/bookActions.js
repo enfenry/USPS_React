@@ -15,8 +15,6 @@ export const readBooks = () => {
           console.log(error);
           dispatch(_readBookFailed(error));
       });
-
-
   };
 }
 
