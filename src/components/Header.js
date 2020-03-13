@@ -10,7 +10,7 @@ const Header = () => {
                     <ul className="list-inline">
                         <li className="list-inline-item"> 
                             <Link to="/" className="navbar-brand">
-                                <img width="90px" height="30px" src="images/logo.png" />
+                                <img width="60px" height="90px" src="images/handicon.png" />
                             </Link>
                         </li>
                         <li className="list-inline-item"><Link to="/" replace>Home</Link></li>
