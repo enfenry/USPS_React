@@ -15,6 +15,7 @@ const Header = () => {
                         </li>
                         <li className="list-inline-item"><Link to="/" replace>Home</Link></li>
                         <li className="list-inline-item"><Link to="/books" replace>Books</Link></li>
+                        <li className="list-inline-item"><Link to="/Application" replace>Application</Link></li>
                     </ul>
                 </div>
             </nav>
