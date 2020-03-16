@@ -20,7 +20,7 @@ export class App extends React.Component{
                     <Route exact path='/' component={Home}/>
                     <Route path='/books' component={BookContainer}/>
                     <Route path='/application' component={Application}/>
-                    <Route path='/customer' component={Customer}/>
+                    <Route path='/customer' component={CustomerContainer}/>
                     <Route path='/newapp' component={NewApp}/>
 
 
