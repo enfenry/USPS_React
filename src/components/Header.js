@@ -3,6 +3,9 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import { Button } from 'reactstrap';
+import { authContext } from '../adalConfig.js';
+
 const Header = () => {
         return(
             <nav className="navbar navbar-inverse">
@@ -16,6 +19,7 @@ const Header = () => {
                         <li className="list-inline-item"><Link to="/" replace>Home</Link></li>
                         <li className="list-inline-item"><Link to="/books" replace>Books</Link></li>
                         <li className="list-inline-item"><Link to="/Application" replace>Application</Link></li>
+                        <Button color="primary" onClick={() => authContext.logOut()}>Log out</Button>
                     </ul>
                 </div>
             </nav>
