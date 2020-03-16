@@ -8,11 +8,24 @@ import { Button } from 'reactstrap';
 const BookRender = ({ bookData }) => {
 
     function createBookRow(book){
+        let appTypeValue = book.ss_applicationtype;
+        var appTypeLabel = ""
+        if (appTypeValue === 717800000)
+        {
+            appTypeLabel = "Address Change"
+        } else if (appTypeValue === 717800001)
+        {
+            appTypeLabel = "Mail Forwarding"
+        } else if (appTypeValue === 717800002)
+        {
+            appTypeLabel = "Package Submission"
+        }
         return (
-            <tr key={book.book_id}>
-                <td> {book.book_id} </td>
-                <td> {book.title} </td>
-                <td> {book.author} </td>
+            <tr key={book.ss_name }>
+                <td> {book.ss_name} </td>
+                <td> {book.ss_applicationid} </td>
+                <td> {appTypeLabel} </td>
+                <td> {book.createdon} </td>
                 <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td>
                 <td><button className="btn btn-danger delete" onClick={() => handleDelete(book)}>Delete</button></td>
             </tr>
@@ -54,14 +67,16 @@ const BookRender = ({ bookData }) => {
         content = 
             (<table className="table">
                 <thead>
-                    <tr>
+                <tr>
+                        <th>Name</th>
                         <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                    </tr>
+                        <th>Type</th>
+                        <th>Created On</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {bookData.books.map((book) => createBookRow(book))}
+                    {console.log(bookData)}
+                    {bookData.books.value.map((book) => createBookRow(book))}
                 </tbody>    
             </table>)
     }
@@ -79,7 +94,7 @@ const BookRender = ({ bookData }) => {
         <div>
             <h1>Books</h1>
             {content}
-            <BookModal />
+            {/* <BookModal /> */}
             {/* <BookModal modal={this.props.modal} toggleModal={this.props.toggleModal} handleInputChange={this.props.handleInputChange} /> */}
             <Button color="primary" onClick={() => {handleAdd()}}>Add Book</Button>
         </div>
