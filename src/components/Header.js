@@ -3,6 +3,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { Button } from 'reactstrap';
+import { authContext } from '../adalConfig.js';
+
 const Header = () => {
     return (
 
@@ -23,11 +26,9 @@ const Header = () => {
                         <li className="list-inline-item"><Link to="/Application" replace>Completed Applications</Link></li>
                         <li className="list-inline-item"><Link to="/customer" replace>Customers</Link></li>
                         <li className="list-inline-item"><Link to="/newapp" replace>New Application</Link></li>
-
                     </h5>
                 </ul>
             </nav>
-
         </div>
 
     );

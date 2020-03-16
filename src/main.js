@@ -6,16 +6,19 @@ import {HashRouter} from 'react-router-dom';
 //testing -Matt
 import configureStore from './store/configureStore';
 
+import { runWithAdal } from 'react-adal';
+import { authContext } from './adalConfig.js';
+
 import {App} from './components/App.js';
 
 const store = configureStore();
 
-ReactDom.render((
+runWithAdal(authContext, () => {
+  ReactDom.render((
     <Provider store={store}>
       <HashRouter>
         <App />
       </HashRouter>
     </Provider>
   ), document.getElementById('app'));
-  
-
+}, false);
