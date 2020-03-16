@@ -4,9 +4,9 @@ import React from 'react';
 
 const Home = () => {
         return(
-            <div className="jumbotron">
-                <h1>USPS Dynamics Project (Link to book tab does not work)</h1>
-            </div>
+            <div className="mr-xl-n2">
+            <h1>This where charts and stuff will go </h1>
+        </div>
         );
 }
 
