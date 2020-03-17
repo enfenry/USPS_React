@@ -1,13 +1,24 @@
 
 import axios from 'axios'
+import { adalApiFetch } from '../adalConfig.js';
 
 import { READ_BOOKS_SUCCESFUL, READ_BOOKS_FAILURE, READ_BOOKS_PENDING} from '../constants/actionTypes';
 
 export const readBooks = () => {
+
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications";
+    let config = {
+        method: 'get',
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+      };
+
   return dispatch => {
       dispatch(_readBookStarted());
 
-      return axios.get(`http://www.mocky.io/v2/5daca80c30000092002987ad`)
+      return adalApiFetch(axios, uri, config)
       .then(res => {
           dispatch(_readBookSuccess(res));
       })
