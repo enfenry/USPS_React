@@ -3,7 +3,6 @@
 import React from 'react';
 import {Bar} from 'react-chartjs-2';
 
-<<<<<<< Updated upstream
 const state = {
     labels: ['January', 'February', 'March',
              'April', 'May'],
@@ -17,31 +16,6 @@ const state = {
       }
     ]
   }
-=======
-/*export default class Home extends Component{
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            labels: ["1", "2", "3", "4", "5"],
-            datasets: [
-                {
-                    label: "Videos",
-                    backgroundColor: "rgba(255, 0, 255, 0.75)",
-                    data: [4,5,1,10,32,2,12]
-                },
-                {
-                    label: "Subscriptions",
-                    backgroundColor: "rgba(0,255,0,0.75)",
-                    data: [14,15,21,0,12,4,2]
-
-                }
-            ]
-        }
-    }
-    
-} */
->>>>>>> Stashed changes
 
 
 const Home = () => {
@@ -49,7 +23,6 @@ const Home = () => {
             <div className="mr-xl-n2">
             
             <h1>This where charts and stuff will go </h1>
-<<<<<<< Updated upstream
             <Bar
           data={state}
           options={{
@@ -65,19 +38,6 @@ const Home = () => {
           }}
         />
           
-=======
-
-            <div style={{position: "relative", width: 600, height: 550}}>
-            <Bar>
-                options={{
-                    responsive: true
-                }}
-                
-            </Bar>
-            
-            </div>
-            
->>>>>>> Stashed changes
         </div>
       
 
