@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import * as bookActions from '../actions/bookActions';
 import BookRender from './BookRender';
+import ModalContainer from '../containers/ModalContainer';
 
 const BookContainer = (props) => {
 
@@ -18,6 +19,7 @@ const BookContainer = (props) => {
    
     return(
         <div>
+            <ModalContainer />
             <BookRender {...props} />
         </div>
     );
