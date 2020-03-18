@@ -49,14 +49,4 @@ EntitiesRender.propTypes = {
     handleAdd: PropTypes.func,
 };
 
-/*schema: {
-    title: string,
-    columns: [{
-        displayName: string, 
-        formatter: entity => string
-    }],
-    entities: [{}],
-    keyGetter: entity => key
-}*/
-
 export default EntitiesRender;
