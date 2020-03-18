@@ -1,5 +1,3 @@
-export const READ_BOOKS_SUCCESFUL = 'READ_BOOKS_SUCCESFUL';
-export const READ_BOOKS_PENDING = 'READ_BOOKS_PENDING';
-export const READ_BOOKS_FAILURE = 'READ_BOOKS_FAILURE';
-
-//this file was not deleted because it's used by bookReducer.
+export const READ_ENTITIES_SUCCESFUL = 'READ_ENTITIES_SUCCESFUL';
+export const READ_ENTITIES_PENDING = 'READ_ENTITIES_PENDING';
+export const READ_ENTITIES_FAILURE = 'READ_ENTITIES_FAILURE';
