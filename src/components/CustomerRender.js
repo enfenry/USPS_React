@@ -5,14 +5,15 @@ import PropTypes from 'prop-types';
 //import BookModal from '../components/BookModal';
 import { Button } from 'reactstrap';
 
-const BookRender = ({ bookData }) => {
+const CustomerRender = ({ bookData }) => {
 
     function createBookRow(book){
+        
         return (
-            <tr key={book.book_id}>
-                <td> {book.book_id} </td>
-                <td> {book.title} </td>
-                <td> {book.author} </td>
+            <tr key={book.lastname }>
+                <td> {book.firstname} </td>
+                <td> {book.lastname} </td>
+                <td> {book.createdon} </td>
                 <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td>
                 <td><button className="btn btn-danger delete" onClick={() => handleDelete(book)}>Delete</button></td>
             </tr>
@@ -54,14 +55,15 @@ const BookRender = ({ bookData }) => {
         content = 
             (<table className="table">
                 <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Title</th>
-                        <th>Author</th>
-                    </tr>
+                <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Created On</th>
+                </tr>
                 </thead>
                 <tbody>
-                    {bookData.books.map((book) => createBookRow(book))}
+                    {console.log(bookData)}
+                    {bookData.books.value.map((book) => createBookRow(book))}
                 </tbody>    
             </table>)
     }
@@ -79,18 +81,18 @@ const BookRender = ({ bookData }) => {
         <div>
             <h1>Books</h1>
             {content}
-            <BookModal />
+            {/* <BookModal /> */}
             {/* <BookModal modal={this.props.modal} toggleModal={this.props.toggleModal} handleInputChange={this.props.handleInputChange} /> */}
             <Button color="primary" onClick={() => {handleAdd()}}>Add Book</Button>
         </div>
     );
 }
 
-BookRender.propTypes = {
+CustomerRender.propTypes = {
     bookData: PropTypes.object,
     modal: PropTypes.object,
     toggleModal: PropTypes.func,
     fillModal: PropTypes.func
 };
 
-export default BookRender;
+export default CustomerRender;
