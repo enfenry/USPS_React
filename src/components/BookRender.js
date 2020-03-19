@@ -4,6 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 //import BookModal from '../components/BookModal';
 import { Button } from 'reactstrap';
+//<BookModal /><BookModal modal={this.props.modal} toggleModal={this.props.toggleModal} handleInputChange={this.props.handleInputChange} />
+
 
 const BookRender = ({ bookData }) => {
 
@@ -79,8 +81,7 @@ const BookRender = ({ bookData }) => {
         <div>
             <h1>Books</h1>
             {content}
-            <BookModal />
-            {/* <BookModal modal={this.props.modal} toggleModal={this.props.toggleModal} handleInputChange={this.props.handleInputChange} /> */}
+            
             <Button color="primary" onClick={() => {handleAdd()}}>Add Book</Button>
         </div>
     );
