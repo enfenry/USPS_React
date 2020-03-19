@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { show } from 'redux-modal'
@@ -6,19 +6,13 @@ import { Button } from 'reactstrap'
 import DynamicModal from './DynamicModal'
 import PropTypes from 'prop-types';
 
-class ModalContainer extends Component {
-  static propTypes = {
-    show: PropTypes.func,
-    name: PropTypes.string,
-    label: PropTypes.string,
-    entity: PropTypes.object
-  };
+const ModalContainer = (props) => {
 
-  handleOpen = name => () => {
-    this.props.show(name, this.props)
-  };
+  function handleOpen (name) {
+      props.show(name, props);
+  }
 
-  handleButtonStyle = label => {
+  function handleButtonStyle (label) {
     switch (label) {
       case 'Update':
         return 'btn btn-primary';
@@ -29,18 +23,23 @@ class ModalContainer extends Component {
     }
   }
 
-  render() {
     return (
       <div>
         <p>
-          <Button className={this.handleButtonStyle(this.props.label)} onClick={this.handleOpen("dynamic")}>{this.props.label}</Button>
+          <Button className={handleButtonStyle(props.label)} onClick={() => handleOpen("dynamic")}>{props.label}</Button>
           <DynamicModal name="dynamic">
             Content to be rendered here.
             </DynamicModal>
         </p>
       </div>
     )
-  }
+}
+
+ModalContainer.propTypes = {
+  show: PropTypes.func,
+  name: PropTypes.string,
+  label: PropTypes.string,
+  entity: PropTypes.object
 }
 
 export default connect(
