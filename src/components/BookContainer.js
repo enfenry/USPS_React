@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 
 import * as bookActions from '../actions/bookActions';
 import BookRender from './BookRender';
-import ModalContainer from '../modals/ModalContainer';
 
 const BookContainer = (props) => {
 
