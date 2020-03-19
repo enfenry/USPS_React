@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
+import ModalContainer from '../modals/ModalContainer';
 
 const BookRender = ({ bookData }) => {
 
@@ -25,11 +26,14 @@ const BookRender = ({ bookData }) => {
                 <td> {book.ss_applicationid} </td>
                 <td> {appTypeLabel} </td>
                 <td> {book.createdon} </td>
-                <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td>
-                <td><button className="btn btn-danger delete" onClick={() => handleDelete(book)}>Delete</button></td>
+                <td><ModalContainer label="Update" name={book.ss_name} entity={book}  /></td>
+                <td><ModalContainer label="Delete" name={book.ss_name} entity={book}/></td>
+                {/* <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td> */}
+                {/* <td><button className="btn btn-danger delete" onClick={() => handleDelete(book)}>Delete</button></td> */}
             </tr>
         );
     }
+
 
 
     function handleAdd() {
@@ -71,6 +75,8 @@ const BookRender = ({ bookData }) => {
                         <th>ID</th>
                         <th>Type</th>
                         <th>Created On</th>
+                        <th></th>
+                        <th></th>
                 </tr>
                 </thead>
                 <tbody>

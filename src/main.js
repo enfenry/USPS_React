@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import ReactDom from 'react-dom';
 import {HashRouter} from 'react-router-dom';
 
-import DevTools from './containers/DevTools';
+import DevTools from './DevTools';
  
 //testing -Matt
 import configureStore from './store/configureStore';

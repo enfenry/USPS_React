@@ -4,7 +4,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers';
 
 import { createLogger } from 'redux-logger'
-import DevTools from '../containers/DevTools';
+import DevTools from '../DevTools';
 
 function configureStore(initialState) {
 
