@@ -12,8 +12,6 @@ const EntitiesContainer = (props) => {
 
     let entityColumnConfig = columnConfig[props.match.path];
 
-    console.log(props);
-
     if (!props.entitiesData) {
         return (
             <div className="alert alert-danger" role="alert">
