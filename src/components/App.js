@@ -15,6 +15,7 @@ export class App extends React.Component{
                 <Switch>
                     <Route exact path='/' component={Home}/>
                     <Route path='/applications' component={EntitiesContainer}/>
+                    <Route path='/customers' component={EntitiesContainer}/>
                 </Switch>
             </div>
         );

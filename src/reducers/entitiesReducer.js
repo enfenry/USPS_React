@@ -1,4 +1,4 @@
-import { READ_ENTITIES_SUCCESFUL, READ_ENTITIES_PENDING, READ_ENTITIES_FAILURE } from '../constants/actionTypes';
+import {READ_ENTITIES_SUCCESFUL, READ_ENTITIES_PENDING, READ_ENTITIES_FAILURE, DELETE_ENTITIES_SUCCESFUL, DELETE_ENTITIES_FAILURE} from '../constants/actionTypes';
 
 export default function entitiesReducer(state = {}, action) {
   switch (action.type) {
@@ -8,6 +8,10 @@ export default function entitiesReducer(state = {}, action) {
       return { ...state, entitiesData: { requestPending: true } };
     case READ_ENTITIES_FAILURE:
       return { ...state, entitiesData: { requestFailed: true } };
+    case DELETE_ENTITIES_SUCCESFUL:
+      return { ...state, entitiesData: { entities: action.data, requestSuccess: true } };
+    case DELETE_ENTITIES_FAILURE:
+      return { ...state, entitiesData: { requestFailed: true } };      
     default:
       return state;
   }

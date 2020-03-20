@@ -18,6 +18,7 @@ const Header = () => {
                 <h5 align="center">
                     <li className="list-inline-item"><Link to="/" replace>Home</Link></li>
                     <li className="list-inline-item"><Link to="/applications" replace>Applications</Link></li>
+                    <li className="list-inline-item"><Link to="/customers" replace>Customers</Link></li>
                     <li className="list-inline-item"><Button color="primary" onClick={() => authContext.logOut()}>Log out</Button></li>
                 </h5>
             </ul>

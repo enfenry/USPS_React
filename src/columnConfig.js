@@ -32,5 +32,21 @@ export const columnConfig = {
             }
         ],
         keyGetter: x => x.ss_applicationid
+    },
+
+    "/customers": {
+        title: "Customers",
+        uri: "https://sstack.crm.dynamics.com/api/data/v9.1/contacts",
+        columns: [
+            {
+                displayName: "Name",
+                formatter: x => x.fullname
+            },
+            {
+                displayName: "ID",
+                formatter: x => x.contactid
+            }
+        ],
+        keyGetter: x => x.contactid
     }
 };

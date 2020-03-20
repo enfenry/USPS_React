@@ -38,6 +38,8 @@ const EntitiesRender = ({ title, columns, entities, keyGetter, handleSelect, han
     );
 }
 
+
+
 EntitiesRender.propTypes = {
     title: PropTypes.string,
     columns: PropTypes.array,
@@ -48,5 +50,6 @@ EntitiesRender.propTypes = {
     handleDelete: PropTypes.func,
     handleAdd: PropTypes.func,
 };
+
 
 export default EntitiesRender;

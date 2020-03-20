@@ -48,7 +48,9 @@ const EntitiesContainer = (props) => {
                     keyGetter={entityColumnConfig.keyGetter}
                     handleSelect={x => console.log("Select", x)}
                     handleUpdate={x => console.log("Update", x)}
-                    handleDelete={x => console.log("Delete", x)}
+                    handleDelete={x => {
+                        props.actions.deleteEntities(entityColumnConfig.uri, entityColumnConfig.keyGetter(x))
+                    }}
                     handleAdd={() => console.log("Add")}
                 />
             </div>
