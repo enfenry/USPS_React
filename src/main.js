@@ -16,13 +16,14 @@ import { columnConfig } from './columnConfig';
 
 const store = configureStore();
 
-for (var prop in columnConfig) {
-  if (Object.prototype.hasOwnProperty.call(columnConfig, prop)) {
-    store.dispatch(entityActions.readEntities(prop, columnConfig[prop].uri));
-  }
-}
-
 runWithAdal(authContext, () => {
+
+  for (var prop in columnConfig) {
+    if (Object.prototype.hasOwnProperty.call(columnConfig, prop)) {
+      store.dispatch(entityActions.readEntities(prop, columnConfig[prop].uri));
+    }
+  }
+
   ReactDom.render((
     <Provider store={store}>
       <HashRouter>
