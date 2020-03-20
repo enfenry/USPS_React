@@ -1,48 +1,115 @@
 "use strict"
 
 import React from 'react';
-import {Bar} from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
-const state = {
-    labels: ['January', 'February', 'March',
-             'April', 'May'],
-    datasets: [
-      {
-        label: 'Rainfall',
-        backgroundColor: 'rgba(75,192,192,1)',
-        borderColor: 'rgba(0,0,0,1)',
-        borderWidth: 2,
-        data: [65, 59, 80, 81, 56]
-      }
-    ]
-  }
+import * as entityActions from '../actions/entityActions';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
+const Home = (props) => {
 
-const Home = () => {
-        return(
-            <div className="mr-xl-n2">
-            
-            <h1>This where charts and stuff will go </h1>
-            <Bar
-          data={state}
-          options={{
-            title:{
-              display:true,
-              text:'Average Rainfall per month',
-              fontSize:20
-            },
-            legend:{
-              display:true,
-              position:'right'
-            }
-          }}
-        />
-          
-        </div>
-      
-
-        
+    if (!props.entitiesData) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                No entity data!
+            </div>
         );
+    }
+
+    let applicationsData = props.entitiesData["/applications"];
+
+    if (!applicationsData) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                Entities not found!
+            </div>
+        );
+    } else if (applicationsData.requestPending) {
+        return (
+            <div className="d-flex justify-content-center">
+                <div className="spinner-border" role="status">
+                    <span className="sr-only">Loading...</span>
+                </div>
+            </div>
+        );
+    } else if (applicationsData.requestFailed) {
+        return (
+            <div className="alert alert-danger" role="alert">
+                Error while loading entities!
+            </div>
+        );
+    } else if (applicationsData.requestSuccess) {
+
+        var distribution = [0, 0, 0];
+        applicationsData.entities.value.forEach((application) => {
+            switch (application.ss_applicationtype) {
+                case 717800000:
+                    distribution[0]++;
+                    break;
+                case 717800001:
+                    distribution[1]++;
+                    break;
+                case 717800002:
+                    distribution[2]++;
+                    break;
+            }
+        });
+
+        const data = {
+            labels: [
+                "Address Change",
+                "Mail Forwarding",
+                "Package Submission"
+            ],
+            datasets: [{
+                data: distribution,
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB',
+                    '#FFCE56'
+                ]
+            }]
+        };
+
+        return (
+            <div className="mr-xl-n2">
+                <Doughnut 
+                    data={data}
+                    height={256}
+                    options={{ maintainAspectRatio: false }}
+                />
+            </div>
+        );
+
+    } else {
+        return null;
+    }
 }
 
-export default Home;
+Home.propTypes = {
+    actions: PropTypes.object
+};
+
+function mapStateToProps(state) {
+    return {
+        entitiesData: state.entitiesReducer.entitiesData
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators(entityActions, dispatch)
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Home);
