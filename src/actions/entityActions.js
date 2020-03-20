@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { adalApiFetch } from '../adalConfig.js';
 
-import { READ_ENTITIES_SUCCESFUL, READ_ENTITIES_FAILURE, READ_ENTITIES_PENDING, DELETE_ENTITIES_SUCCESFUL, DELETE_ENTITIES_FAILURE} from '../constants/actionTypes';
+import { READ_ENTITIES_SUCCESFUL, READ_ENTITIES_FAILURE, READ_ENTITIES_PENDING, DELETE_ENTITIES_SUCCESFUL, DELETE_ENTITIES_FAILURE } from '../constants/actionTypes';
 
-export const readEntities = (uri) => {
+export const readEntities = (path, uri) => {
 
     let config = {
         method: 'get',
@@ -14,15 +14,15 @@ export const readEntities = (uri) => {
     };
 
     return dispatch => {
-        dispatch(_readEntitiesStarted());
+        dispatch(_readEntitiesStarted(path));
 
         return adalApiFetch(axios, uri, config)
             .then(res => {
-                dispatch(_readEntitiesSuccess(res));
+                dispatch(_readEntitiesSuccess(path, res));
             })
             .catch((error) => {
                 console.log(error);
-                dispatch(_readEntitiesFailed(error));
+                dispatch(_readEntitiesFailed(path, error));
             });
     };
 }
@@ -37,7 +37,7 @@ export const readEntities = (uri) => {
 //         'Content-Type': 'application/json; charset=utf-8',
 //     };
 
-    
+
 //     return dispatch => {
 //         dispatch(_readEntitiesStarted());
 
@@ -78,7 +78,7 @@ export const readEntities = (uri) => {
 // }
 
 export const deleteEntities = (base_uri, id) => {
-    let uri = base_uri+"("+id+")";
+    let uri = base_uri + "(" + id + ")";
     let config = {
         method: 'delete',
         'OData-MaxVersion': 4.0,
@@ -104,23 +104,26 @@ export const deleteEntities = (base_uri, id) => {
     };
 }
 
-const _readEntitiesSuccess = (res) => {
+const _readEntitiesSuccess = (path, res) => {
     return {
         type: READ_ENTITIES_SUCCESFUL,
+        path,
         data: res.data
     };
 }
 
-const _readEntitiesFailed = (error) => {
+const _readEntitiesFailed = (path, error) => {
     return {
         type: READ_ENTITIES_FAILURE,
+        path,
         error
     };
 }
 
-const _readEntitiesStarted = () => {
+const _readEntitiesStarted = (path) => {
     return {
-        type: READ_ENTITIES_PENDING
+        type: READ_ENTITIES_PENDING,
+        path
     };
 }
 
