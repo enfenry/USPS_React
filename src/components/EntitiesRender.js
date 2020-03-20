@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 
-const EntityList = ({ title, columns, entities, keyGetter, handleSelect, handleUpdate, handleDelete, handleAdd}) => {
+const EntitiesRender = ({ title, columns, entities, keyGetter, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
 
     return(
         <div>
@@ -38,7 +38,9 @@ const EntityList = ({ title, columns, entities, keyGetter, handleSelect, handleU
     );
 }
 
-EntityList.propTypes = {
+
+
+EntitiesRender.propTypes = {
     title: PropTypes.string,
     columns: PropTypes.array,
     entities: PropTypes.array,
@@ -49,14 +51,5 @@ EntityList.propTypes = {
     handleAdd: PropTypes.func,
 };
 
-/*schema: {
-    title: string,
-    columns: [{
-        displayName: string, 
-        formatter: entity => string
-    }],
-    entities: [{}],
-    keyGetter: entity => key
-}*/
 
-export default EntityList;
+export default EntitiesRender;
