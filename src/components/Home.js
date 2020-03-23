@@ -4,6 +4,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
 import * as applicationsActions from '../actions/applicationsActions';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,6 +13,7 @@ const Home = (props) => {
 
     if (props.applicationsRequestPending) {
 
+
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -19,6 +21,7 @@ const Home = (props) => {
                 </div>
             </div>
         );
+
 
     } else if (props.applicationsRequestFailed) {
 
@@ -41,6 +44,7 @@ const Home = (props) => {
                     break;
                 case 717800002:
                     distribution0[2]++;
+
                     break;
             }
         });
@@ -52,6 +56,7 @@ const Home = (props) => {
         });
 
         const data0 = {
+
             labels: [
                 "Address Change",
                 "Mail Forwarding",
@@ -59,6 +64,7 @@ const Home = (props) => {
             ],
             datasets: [{
                 data: distribution0,
+
                 backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -71,6 +77,7 @@ const Home = (props) => {
                 ]
             }]
         };
+
 
         const data1 = {
             labels: [
@@ -107,6 +114,7 @@ const Home = (props) => {
                     />
                 </div>
             </React.Fragment>
+
         );
 
     } else {
@@ -124,12 +132,14 @@ function mapStateToProps(state) {
         applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
         applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
         applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess
+
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(applicationsActions, dispatch)
+
     }
 }
 

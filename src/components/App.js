@@ -5,8 +5,10 @@ import {Switch, Route} from 'react-router-dom';
 
 import Header from './Header.js';
 import Home from './Home.js';
+
 import ApplicationsContainer from './ApplicationsContainer';
 import CustomersContainer from './CustomersContainer';
+
 
 export class App extends React.Component{
     render() {
@@ -17,6 +19,7 @@ export class App extends React.Component{
                     <Route exact path='/' component={Home}/>
                     <Route path='/applications' component={ApplicationsContainer}/>
                     <Route path='/customers' component={CustomersContainer}/>
+
                 </Switch>
             </div>
         );
