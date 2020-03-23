@@ -54,7 +54,7 @@ let SignInForm = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field className="input" name="appType" component={renderField} type="select"
+          <Field name="appType" component={renderField} type="select"
             label="Application Type" defaultValue={props.data.appTypeLabel}>
             <option value="Address Change">Address Change</option>
             <option value="Package Submission">Package Submission</option>
@@ -75,27 +75,10 @@ let SignInForm = props => {
 
 const validate = val => {
   const errors = {};
-  if (!val.firstName) {
-    console.log('First Name is required');
+  
+  if (!val.appName) {
+    console.log('App Name is required');
     errors.firstName = 'Required';
-  }
-  if (!val.lastName) {
-    console.log('Last Name is required');
-    errors.lastName = 'Required';
-  }
-  if (!val.email) {
-    console.log('email is required');
-    errors.email = 'Required';
-  } else if (!/^.+@.+$/i.test(val.email)) {
-    console.log('email is invalid');
-    errors.email = 'Invalid email address';
-  }
-  if (!val.age) {
-    errors.age = 'Required'
-  } else if (isNaN(Number(val.age))) {
-    errors.age = 'Must be a number'
-  } else if (Number(val.age) < 18) {
-    errors.age = 'Sorry, you must be at least 18 years old'
   }
   return errors;
 };
