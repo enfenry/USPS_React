@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { connectModal } from 'redux-modal'
 
-import ApplicationUpdate from './ApplicationUpdate';
+import AppUpdateForm from './AppUpdateForm';
 
 const MyModal = (props) => {
+  
   function renderBody(label, entity) {
     // console.log('label', label,'entity',entity);
-
     if (label === 'Delete') {
       return (<div>{'Are you sure?'}
         <Button color="delete" onClick={props.handleAction}>{props.label}</Button>
@@ -18,7 +18,7 @@ const MyModal = (props) => {
       switch (entity) {
         case 'Application':
           return (
-            <ApplicationUpdate {...props} />
+            <AppUpdateForm {...props} />
           );
         default:
           return 'Invalid Entity';
@@ -28,7 +28,7 @@ const MyModal = (props) => {
 
 
   return (
-    <Modal isOpen={props.show}
+    <Modal isOpen={props.show} size ="lg"
     // backdrop={true}
     >
       <ModalHeader>{props.label} {props.name}</ModalHeader>

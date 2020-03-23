@@ -7,10 +7,8 @@ import DynamicModal from './DynamicModal'
 import PropTypes from 'prop-types';
 
 const ModalContainer = (props) => {
-  // console.log('modalcontainer props', props);
   function handleOpen (name) {
     let newProps = {...props, name: props.data.ss_name};
-    // console.log('newProps at handleOpen', newProps);
       props.show(name, newProps);
   }
 

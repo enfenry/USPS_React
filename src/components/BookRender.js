@@ -8,6 +8,10 @@ import ModalContainer from '../modals/ModalContainer';
 
 const BookRender = ({ bookData }) => {
 
+    function handleSignIn (values) {
+        console.log(values);
+      }
+
     function createBookRow(book) {
         let appTypeValue = book.ss_applicationtype;
         var appTypeLabel = ""
@@ -24,7 +28,7 @@ const BookRender = ({ bookData }) => {
                 <td> {book.ss_applicationid} </td>
                 <td> {appTypeLabel} </td>
                 <td> {book.createdon} </td>
-                <td><ModalContainer label="Update" data={{...book, appTypeLabel: appTypeLabel}} entity="Application"/></td>
+                <td><ModalContainer label="Update" data={{...book, appTypeLabel: appTypeLabel}} entity="Application" onSubmit={handleSignIn}/></td>
                 <td><ModalContainer label="Delete" data={{...book, appTypeLabel: appTypeLabel}} entity="Application" /></td>
                 
                 {/* <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td> */}
