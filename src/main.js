@@ -11,9 +11,16 @@ import { authContext } from './adalConfig.js';
 
 import {App} from './components/App.js';
 
+import * as applicationsActions from './actions/applicationsActions';
+import * as customersActions from './actions/customersActions';
+
 const store = configureStore();
 
 runWithAdal(authContext, () => {
+
+  store.dispatch(applicationsActions.readApplications());
+  store.dispatch(customersActions.readCustomers());
+
   ReactDom.render((
     <Provider store={store}>
       <HashRouter>
