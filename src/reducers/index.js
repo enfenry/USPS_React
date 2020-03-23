@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
-import entitiesReducer from './entitiesReducer';
+
+import applicationsReducer from './applicationsReducer';
+import customersReducer from './customersReducer';
 
 const rootReducer = combineReducers({
-  entitiesReducer,
+  applicationsReducer,
+  customersReducer
+
 });
 
 export default rootReducer;

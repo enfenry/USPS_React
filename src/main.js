@@ -14,15 +14,16 @@ import { App } from './components/App.js';
 import * as entityActions from './actions/entityActions';
 import { columnConfig } from './columnConfig';
 
+import * as applicationsActions from './actions/applicationsActions';
+import * as customersActions from './actions/customersActions';
+
 const store = configureStore();
 
 runWithAdal(authContext, () => {
 
-  for (var prop in columnConfig) {
-    if (Object.prototype.hasOwnProperty.call(columnConfig, prop)) {
-      store.dispatch(entityActions.readEntities(prop, columnConfig[prop].uri));
-    }
-  }
+  store.dispatch(applicationsActions.readApplications());
+  store.dispatch(customersActions.readCustomers());
+
 
   ReactDom.render((
     <Provider store={store}>

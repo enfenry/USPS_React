@@ -5,7 +5,10 @@ import {Switch, Route} from 'react-router-dom';
 
 import Header from './Header.js';
 import Home from './Home.js';
-import EntitiesContainer from './EntitiesContainer.js';
+
+import ApplicationsContainer from './ApplicationsContainer';
+import CustomersContainer from './CustomersContainer';
+
 
 export class App extends React.Component{
     render() {
@@ -14,8 +17,9 @@ export class App extends React.Component{
                 <Header />
                 <Switch>
                     <Route exact path='/' component={Home}/>
-                    <Route path='/applications' component={EntitiesContainer}/>
-                    <Route path='/customers' component={EntitiesContainer}/>
+                    <Route path='/applications' component={ApplicationsContainer}/>
+                    <Route path='/customers' component={CustomersContainer}/>
+
                 </Switch>
             </div>
         );
