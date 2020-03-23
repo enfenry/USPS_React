@@ -22,8 +22,6 @@ export class App extends React.Component{
                     <Route path='/applications' component={Applications}/>
                     <Route path='/customer' component={Customer}/>
                     <Route path='/newapp' component={NewApp}/>
-
-
                 </Switch>
             </div>
         );

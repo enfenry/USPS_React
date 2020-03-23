@@ -7,9 +7,11 @@ import DynamicModal from './DynamicModal'
 import PropTypes from 'prop-types';
 
 const ModalContainer = (props) => {
-
+  // console.log('modalcontainer props', props);
   function handleOpen (name) {
-      props.show(name, props);
+    let newProps = {...props, name: props.data.ss_name};
+    // console.log('newProps at handleOpen', newProps);
+      props.show(name, newProps);
   }
 
   function handleButtonStyle (label) {
@@ -26,10 +28,8 @@ const ModalContainer = (props) => {
     return (
       <div>
         <p>
-          <Button className={handleButtonStyle(props.label)} onClick={() => handleOpen("dynamic")}>{props.label}</Button>
-          <DynamicModal name="dynamic">
-            Content to be rendered here.
-            </DynamicModal>
+          <Button className={handleButtonStyle(props.label)} onClick={() => handleOpen(props.data.ss_name)}>{props.label}</Button>
+          <DynamicModal name={props.data.ss_name} />
         </p>
       </div>
     )
@@ -39,7 +39,11 @@ ModalContainer.propTypes = {
   show: PropTypes.func,
   name: PropTypes.string,
   label: PropTypes.string,
-  entity: PropTypes.object
+  entity: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 }
 
 export default connect(
