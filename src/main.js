@@ -13,8 +13,9 @@ import { authContext } from './adalConfig.js';
 
 import { App } from './components/App.js';
 
-import * as entityActions from './actions/entityActions';
-import { columnConfig } from './columnConfig';
+// CURRENTLY NOT IN USE - DIDN'T WANT TO DELETE WITHOUT CHECKING THOUGH
+// import * as entityActions from './actions/entityActions';
+// import { columnConfig } from './columnConfig';
 
 import * as applicationsActions from './actions/applicationsActions';
 import * as customersActions from './actions/customersActions';

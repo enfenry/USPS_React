@@ -4,6 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connectModal } from 'redux-modal';
 
 import AppUpdate from './AppUpdate';
+import AppSelect from './AppSelect';
 
 const MyModal = (props) => {
   
@@ -21,10 +22,8 @@ const MyModal = (props) => {
       switch (entity) {
         case 'Application':
           return (
-            <div>
-              <p>{'Work in progress'}</p>
-              <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
-            </div>)
+            <AppSelect {...props} />
+          );
         default:
           return 'Invalid Entity';
       }

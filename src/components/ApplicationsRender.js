@@ -45,7 +45,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
                                 <td>{application.createdon}</td>
                                 <td align="right"><ModalContainer label="Select" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" /></td>
                                 <td align="right"><ModalContainer label="Update" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values,application)} /></td>
-                                <td align="right"><ModalContainer label="Delete" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={handleDelete} /></td>
+                                <td align="right"><ModalContainer label="Delete" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={() => handleDelete(application)} /></td>
                             </tr>
                         )
                     }
