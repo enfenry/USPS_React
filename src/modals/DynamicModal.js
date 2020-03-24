@@ -1,24 +1,39 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { connectModal } from 'redux-modal'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
+import { connectModal } from 'redux-modal';
 
-import AppUpdateForm from './AppUpdateForm';
+import AppUpdate from './AppUpdate';
 
 const MyModal = (props) => {
   
   function renderBody(label, entity) {
-    // console.log('label', label,'entity',entity);
+
     if (label === 'Delete') {
-      return (<div>{'Are you sure?'}
-        <Button color="delete" onClick={props.handleAction}>{props.label}</Button>
+      return (
+      <div>
+        <p>{'Are you sure?'}</p>
+        <Button color="danger" onClick={props.handleAction}>{props.label}</Button>
+        <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
       </div>)
+    }
+    else if (label === 'Select') {
+      switch (entity) {
+        case 'Application':
+          return (
+            <div>
+              <p>{'Work in progress'}</p>
+              <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
+            </div>)
+        default:
+          return 'Invalid Entity';
+      }
     }
     else {
       switch (entity) {
         case 'Application':
           return (
-            <AppUpdateForm {...props} />
+            <AppUpdate {...props} />
           );
         default:
           return 'Invalid Entity';
@@ -35,9 +50,6 @@ const MyModal = (props) => {
       <ModalBody>
         {renderBody(props.label, props.entity)}
       </ModalBody>
-      <ModalFooter>
-        <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
-      </ModalFooter>
     </Modal>
   );
 }

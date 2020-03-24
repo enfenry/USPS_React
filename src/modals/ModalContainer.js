@@ -1,12 +1,13 @@
-import React from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { show } from 'redux-modal'
-import { Button } from 'reactstrap'
-import DynamicModal from './DynamicModal'
+import React from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { show } from 'redux-modal';
+import { Button } from 'reactstrap';
+import DynamicModal from './DynamicModal';
 import PropTypes from 'prop-types';
 
 const ModalContainer = (props) => {
+
   function handleOpen (name) {
     let newProps = {...props, name: props.data.ss_name};
       props.show(name, newProps);
@@ -14,10 +15,12 @@ const ModalContainer = (props) => {
 
   function handleButtonStyle (label) {
     switch (label) {
+      case 'Select':
+        return 'btn-secondary';
       case 'Update':
-        return 'btn btn-primary';
+        return 'btn-success';
       case 'Delete':
-        return 'btn btn-danger';
+        return 'btn-danger';
       default:
         break;
     }
@@ -26,7 +29,8 @@ const ModalContainer = (props) => {
     return (
       <div>
         <p>
-          <Button className={handleButtonStyle(props.label)} onClick={() => handleOpen(props.data.ss_name)}>{props.label}</Button>
+          <Button className={'btn ' + handleButtonStyle(props.label)}
+           onClick={() => handleOpen(props.data.ss_name)}>{props.label}</Button>
           <DynamicModal name={props.data.ss_name} />
         </p>
       </div>
@@ -38,6 +42,7 @@ ModalContainer.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   entity: PropTypes.string,
+  data: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

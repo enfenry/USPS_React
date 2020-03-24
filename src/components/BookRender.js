@@ -3,14 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
-import { show } from 'redux-modal'
 import ModalContainer from '../modals/ModalContainer';
 
 const BookRender = ({ bookData }) => {
-
-    function handleSignIn (values) {
-        console.log(values);
-      }
 
     function createBookRow(book) {
         let appTypeValue = book.ss_applicationtype;
@@ -28,33 +23,24 @@ const BookRender = ({ bookData }) => {
                 <td> {book.ss_applicationid} </td>
                 <td> {appTypeLabel} </td>
                 <td> {book.createdon} </td>
-                <td><ModalContainer label="Update" data={{...book, appTypeLabel: appTypeLabel}} entity="Application" onSubmit={handleSignIn}/></td>
-                <td><ModalContainer label="Delete" data={{...book, appTypeLabel: appTypeLabel}} entity="Application" /></td>
-                
-                {/* <td><button className="btn btn-secondary update" onClick={() => handleUpdate(book)}>Update</button></td> */}
-                {/* <td><button className="btn btn-danger delete" onClick={() => handleDelete(book)}>Delete</button></td> */}
+                <td><ModalContainer label="Select" data={{ ...book, appTypeLabel: appTypeLabel }} entity="Application" /></td>
+                <td><ModalContainer label="Update" data={{ ...book, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={handleUpdate} /></td>
+                <td><ModalContainer label="Delete" data={{ ...book, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={handleDelete} /></td>
             </tr>
         );
     }
 
-
-
-    function handleAdd() {
-        // this.props.toggleModal();
-        // this.props.fillModal({},true);
-        console.log('at handleAdd');
+    function handleAdd(values) {
+        console.log('handleAdd values',values);
+    }
+    function handleUpdate(values) {
+        console.log('handleUpdate values', values);
     }
 
-    function handleUpdate(book) {
-        // this.props.toggleModal();
-        // this.props.fillModal(book,false);
-        console.log('book at handleUpdate', book);
+    function handleDelete(values) {
+        console.log('handleDelete values', values);
     }
 
-    function handleDelete(book) {
-        console.log('book at handleDelete', book);
-        // BookActions.deleteBook(book);
-    }
 
     let content = '';
 
@@ -78,6 +64,7 @@ const BookRender = ({ bookData }) => {
                         <th>ID</th>
                         <th>Type</th>
                         <th>Created On</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
