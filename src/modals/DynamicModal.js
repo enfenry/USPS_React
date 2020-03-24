@@ -14,7 +14,7 @@ const MyModal = (props) => {
       return (
       <div>
         <p>{'Are you sure?'}</p>
-        <Button color="danger" onClick={props.handleAction}>{props.label}</Button>
+        <Button color="danger" onClick={props.onSubmit}>{props.label}</Button>
         <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
       </div>)
     }
@@ -57,7 +57,7 @@ MyModal.propTypes = {
   name: PropTypes.string,
   entity: PropTypes.string,
   label: PropTypes.string,
-  handleAction: PropTypes.func,
+  onSubmit: PropTypes.func,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
