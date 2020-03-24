@@ -11,13 +11,13 @@ let AppUpdate = props => {
     <Form onSubmit={handleSubmit} className="form">
       <FormGroup className="field">
         <div className="control">
-          <Field name="appName" component={renderField} type="text" label="Name" defaultValue={props.name} />
+          <Field name="ss_name" component={renderField} type="text" label="Name" defaultValue={props.name} />
         </div>
       </FormGroup>
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="appType" component={renderField} type="select"
+          <Field name="ss_applicationtype" component={renderField} type="select"
             label="Application Type" defaultValue={props.data.appTypeLabel}>
             <option value="Address Change">Address Change</option>
             <option value="Package Submission">Package Submission</option>
@@ -28,7 +28,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="product" component={renderField} type="select"
+          <Field name="_ss_product_value" component={renderField} type="select"
             label="Product" defaultValue={props.data._ss_product_value}>
             {/* Package Submission Products */}
             <option value="EnvelopeFlatRate">Envelope (Flat Rate)</option>
@@ -49,7 +49,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="shippingSpeed" component={renderField} type="select"
+          <Field name="_ss_shippingspeed_value" component={renderField} type="select"
             label="Shipping Speed" defaultValue={props.data._ss_shippingspeed_value}>
             {/* Shipping Speed Products */}
             <option value="StandardShipping">Standard Shipping</option>
@@ -61,7 +61,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="customer" component={renderField} type="select"
+          <Field name="_ss_customer_value" component={renderField} type="select"
             label="Customer" defaultValue={props.data._ss_customer_value}>
             {/* Need to pull data at some point to create options for each Address */}
             <option value="ExampleCustomer1">Example Customer 1</option>
@@ -71,7 +71,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="destinationAddress" component={renderField} type="select"
+          <Field name="_ss_destinationaddress_value" component={renderField} type="select"
             label="Destination Address" defaultValue={props.data._ss_destinationaddress_value}>
             {/* Need to pull data at some point to create options for each Address */}
             <option value="ExampleAddress1">Example Address 1</option>
@@ -93,7 +93,7 @@ let AppUpdate = props => {
 const validate = val => {
   const errors = {};
 
-  if (!val.appName) {
+  if (!val.ss_name) {
     errors.firstName = 'Required';
   }
   return errors;
@@ -106,7 +106,7 @@ const renderField = (props) => {
   // Necessary due to Field component from redux-form (conflicts with defaultValue being set)
   delete input.value;
 
-  function checkType(type) {
+  function checkInputType(type) {
     if (type === "select") {
       return (
         <Input className="input" {...input} type={type} defaultValue={defaultValue}>
@@ -125,7 +125,7 @@ const renderField = (props) => {
     <div>
       <div className="control">
         <Label className="field">{label}</Label>
-        {checkType(type)}
+        {checkInputType(type)}
         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
       </div>
     </div>
