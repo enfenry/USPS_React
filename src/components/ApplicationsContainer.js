@@ -31,8 +31,10 @@ const ApplicationsContainer = (props) => {
             <div className="m-5">
                 <ApplicationsRender
                     applications={props.applications}
-                    handleSelect={x => console.log("Select", x)}
-                    handleUpdate={x => console.log("Update", x)}
+                    handleUpdate={ (values,application) => {
+                        console.log("Update values", values);
+                        console.log("Update application", application);
+                    }}
                     handleDelete={x => props.actions.deleteApplication(x.ss_applicationid)}
                     handleAdd={() => console.log("Add")}
                 />

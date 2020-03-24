@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
+import ModalContainer from '../modals/ModalContainer';
 
 function getApplicationTypeName(applicationType) {
     switch (applicationType) {
@@ -17,7 +18,7 @@ function getApplicationTypeName(applicationType) {
     }
 }
 
-const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
+const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAdd }) => {
     return (
         <div>
             <h1>Applications</h1>
@@ -29,21 +30,25 @@ const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDe
                         <th scope="col">Type</th>
                         <th scope="col">Created On</th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    {applications.map(application =>
-                        <tr key={application.ss_applicationid}>
-                            <td>{application.ss_name}</td>
-                            <td>{application.ss_applicationid}</td>
-                            <td>{getApplicationTypeName(application.applicationType)}</td>
-                            <td>{application.createdon}</td>
-                            <td align="right">
-                                <button className="btn btn-success mr-1" onClick={() => handleSelect(application)}>Select</button>
-                                <button className="btn btn-secondary mr-1" onClick={() => handleUpdate(application)}>Update</button>
-                                <button className="btn btn-danger" onClick={() => handleDelete(application)}>Delete</button>
-                            </td>
-                        </tr>
+                    {applications.map(application => {
+                        const appTypeLabel = getApplicationTypeName(application.ss_applicationtype);
+                        return (
+                            <tr key={application.ss_applicationid}>
+                                <td>{application.ss_name}</td>
+                                <td>{application.ss_applicationid}</td>
+                                <td>{appTypeLabel}</td>
+                                <td>{application.createdon}</td>
+                                <td align="right"><ModalContainer label="Select" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" /></td>
+                                <td align="right"><ModalContainer label="Update" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values,application)} /></td>
+                                <td align="right"><ModalContainer label="Delete" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={handleDelete} /></td>
+                            </tr>
+                        )
+                    }
                     )}
                 </tbody>
             </table>
