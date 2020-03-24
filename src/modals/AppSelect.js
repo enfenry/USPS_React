@@ -6,41 +6,41 @@ const AppSelect = props => {
     return (
         <div>
             <div>
-                <p>
+                <div>
                     <span>Name: </span>
-                    <div>{props.name}</div>
-                </p>
+                    <p>{props.name}</p>
+                </div>
 
             </div>
             <div>
-                <p>
+                <div>
                     <span>Application Type: </span>
-                    <div>{props.data.appTypeLabel}</div>
-                </p>
+                    <p>{props.data.appTypeLabel}</p>
+                </div>
             </div>
             <div>
-                <p>
+                <div>
                     <span>Product: </span>
-                    <div>{props.data._ss_product_value}</div>
-                </p>
+                    <p>{props.data._ss_product_value}</p>
+                </div>
             </div>
             <div>
-                <p>
+                <div>
                     <span>Shipping Speed: </span>
-                    <div>{props.data._ss_shippingspeed_value}</div>
-                </p>
+                    <p>{props.data._ss_shippingspeed_value}</p>
+                </div>
             </div>
             <div>
-                <p>
+                <div>
                     <span>Customer: </span>
-                    <div>{props.data._ss_customer_value}</div>
-                </p>
+                    <p>{props.data._ss_customer_value}</p>
+                </div>
             </div>
             <div>
-                <p>
+                <div>
                     <span>Destination Address: </span>
-                    <div>{props.data._ss_destinationaddress_value}</div>
-                </p>
+                    <p>{props.data._ss_destinationaddress_value}</p>
+                </div>
             </div>
 
             <div className="control">
