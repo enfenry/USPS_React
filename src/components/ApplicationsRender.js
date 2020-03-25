@@ -19,7 +19,9 @@ function getApplicationTypeName(applicationType) {
     }
 }
 
-const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAdd }) => {
+
+
+const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
     return (
         <div>
             {/* <DynamicModal name="dynamic"/> */}

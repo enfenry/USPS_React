@@ -3,6 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
+//import InfiniteScroll from 'react-infinite-scroll-component';
+import { MDBDataTable } from 'mdbreact';
+//import {CustomersContainer} from './CustomersContainer';
 
 const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
     return (
@@ -34,6 +37,8 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
         </div>
     );
 }
+
+
 
 CustomersRender.propTypes = {
     customers: PropTypes.array,
