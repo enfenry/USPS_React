@@ -53,7 +53,7 @@ export const deleteApplication = (id) => {
     };
 }
 
-const _readApplicationsSuccess = (res) => {
+export const _readApplicationsSuccess = (res) => {
     return {
         type: READ_APPLICATIONS_SUCCESFUL,
         data: res.data
