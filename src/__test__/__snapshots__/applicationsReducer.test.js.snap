@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`applications reducer should handle READ_APPLICATIONS_FAILURE 1`] = `
+Object {
+  "applicationsRequestFailed": true,
+  "applicationsRequestPending": false,
+  "applicationsRequestSuccess": false,
+}
+`;
+
+exports[`applications reducer should handle READ_APPLICATIONS_PENDING 1`] = `
+Object {
+  "applicationsRequestFailed": false,
+  "applicationsRequestPending": true,
+  "applicationsRequestSuccess": false,
+}
+`;
+
+exports[`applications reducer should handle READ_APPLICATIONS_SUCCESFUL 1`] = `
+Object {
+  "applications": Array [
+    "dummy data",
+  ],
+  "applicationsRequestFailed": false,
+  "applicationsRequestPending": false,
+  "applicationsRequestSuccess": true,
+}
+`;
+
+exports[`applications reducer should return the initial state 1`] = `Object {}`;

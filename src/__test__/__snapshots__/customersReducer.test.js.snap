@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`customers reducer should handle READ_CUSTOMERS_FAILURE 1`] = `
+Object {
+  "customersRequestFailed": true,
+  "customersRequestPending": false,
+  "customersRequestSuccess": false,
+}
+`;
+
+exports[`customers reducer should handle READ_CUSTOMERS_PENDING 1`] = `
+Object {
+  "customersRequestFailed": false,
+  "customersRequestPending": true,
+  "customersRequestSuccess": false,
+}
+`;
+
+exports[`customers reducer should handle READ_CUSTOMERS_SUCCESFUL 1`] = `
+Object {
+  "customers": Array [
+    "dummy data",
+  ],
+  "customersRequestFailed": false,
+  "customersRequestPending": false,
+  "customersRequestSuccess": true,
+}
+`;
+
+exports[`customers reducer should return the initial state 1`] = `Object {}`;
