@@ -1,12 +1,14 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { reduxForm, Field } from 'redux-form';
-import PropTypes from 'prop-types'
+import { reduxForm, Field, formValueSelector  } from 'redux-form';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux'; 
+ 
 
 let AppUpdate = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, appTypeValue } = props;
+  const showPackageFields = (appTypeValue || props.data.appTypeLabel) === 'Package Submission';
 
-  console.log('AppUpdate props', props);
   return (
     <Form onSubmit={handleSubmit} className="form">
       <FormGroup className="field">
@@ -49,7 +51,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_shippingspeed_value" component={renderField} type="select"
+          <Field show={showPackageFields} name="_ss_shippingspeed_value" component={renderField} type="select"
             label="Shipping Speed" defaultValue={props.data._ss_shippingspeed_value}>
             {/* Shipping Speed Products */}
             <option value="StandardShipping">Standard Shipping</option>
@@ -99,9 +101,13 @@ const validate = val => {
   return errors;
 };
 
+// const handleChange = values => {
+  // console.log(values);
+// }
+
 const renderField = (props) => {
 
-  const { input, label, type, defaultValue, meta: { touched, error, warning } } = props;
+  const { input, label, type, defaultValue, show, meta: { touched, error, warning } } = props;
 
   // Necessary due to Field component from redux-form (conflicts with defaultValue being set)
   delete input.value;
@@ -122,7 +128,7 @@ const renderField = (props) => {
   }
 
   return (
-    <div>
+    <div style={{display: show === true || show === undefined ? 'block' : 'none' }} >
       <div className="control">
         <Label className="field">{label}</Label>
         {checkInputType(type)}
@@ -136,6 +142,7 @@ renderField.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   type: PropTypes.string,
+  show: PropTypes.bool,
   defaultValue: PropTypes.string,
   meta: PropTypes.object,
   children: PropTypes.oneOfType([
@@ -149,6 +156,7 @@ AppUpdate.propTypes = {
   handleHide: PropTypes.func,
   name: PropTypes.string,
   data: PropTypes.object,
+  appTypeValue: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -157,8 +165,23 @@ AppUpdate.propTypes = {
 
 AppUpdate = reduxForm({
   form: 'appUpdate',
+  // onChange: handleChange,
   validate,
 })(AppUpdate);
+
+const selector = formValueSelector('appUpdate');
+
+AppUpdate = connect(state => {
+
+  // can select values individually
+  const appTypeValue = selector(state, 'ss_applicationtype')
+  // or together as a group
+  // const { firstName, lastName } = selector(state, 'firstName', 'lastName')
+  return {
+    appTypeValue,
+    // fullName: `${firstName || ''} ${lastName || ''}`
+  }
+})(AppUpdate)
 
 export default AppUpdate;
 

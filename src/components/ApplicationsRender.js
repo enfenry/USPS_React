@@ -3,7 +3,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
-import ModalContainer from '../modals/ModalContainer';
+import ModalButton from '../modals/ModalButton';
+// import DynamicModal from '../modals/DynamicModal';
 
 function getApplicationTypeName(applicationType) {
     switch (applicationType) {
@@ -21,6 +22,7 @@ function getApplicationTypeName(applicationType) {
 const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAdd }) => {
     return (
         <div>
+            {/* <DynamicModal name="dynamic"/> */}
             <h1>Applications</h1>
             <table className="table">
                 <thead>
@@ -43,9 +45,9 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
                                 <td>{application.ss_applicationid}</td>
                                 <td>{appTypeLabel}</td>
                                 <td>{application.createdon}</td>
-                                <td align="right"><ModalContainer label="Select" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" /></td>
-                                <td align="right"><ModalContainer label="Update" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values,application)} /></td>
-                                <td align="right"><ModalContainer label="Delete" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={() => handleDelete(application)} /></td>
+                                <td align="right"><ModalButton label="Select" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" /></td>
+                                <td align="right"><ModalButton label="Update" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, application)} /></td>
+                                <td align="right"><ModalButton label="Delete" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={() => handleDelete(application)} /></td>
                             </tr>
                         )
                     }
