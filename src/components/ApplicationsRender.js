@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import ModalButton from '../modals/ModalButton';
 // import DynamicModal from '../modals/DynamicModal';
+import { MDBDataTable } from 'mdbreact';
+
 
 function getApplicationTypeName(applicationType) {
     switch (applicationType) {
@@ -19,41 +21,102 @@ function getApplicationTypeName(applicationType) {
     }
 }
 
-const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAdd }) => {
+
+const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
+    const appTypeLabel = getApplicationTypeName(applications.ss_applicationtype);
+
+    function getAppBodyContent() {
+        let tableData = applications;
+    
+        tableData.forEach(obj => {
+            obj["select"] = (
+              <input
+                type="button"
+                value="select"
+                onClick={() => handleSelect(obj)}
+              />
+            );
+            obj["delete"] = (
+              <input
+                type="button"
+                value="delete"
+                onClick={() => handleDelete(obj)}
+              />
+            );
+            obj["update"] = (
+              <input
+                type="button"
+                value="update"
+                onClick={() => handleUpdate(obj)}
+              />
+            );
+          });
+      
+          
+        return tableData;
+      }
+
+      let data = {
+        columns: [
+            {
+                label: 'ID',
+                field: 'ss_applicationid',
+                sort: 'asc',
+                width: 150
+              },
+    
+              {
+                label: 'App Name',
+                field: 'ss_name',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: 'Type',
+                field: 'ss_applicationtype',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: 'Created On',
+                field: 'createdon',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: '',
+                field: 'select',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: '',
+                field: 'delete',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: '',
+                field: 'update',
+                sort: 'asc',
+                width: 150
+              },
+    
+        ],
+        rows: getAppBodyContent()
+            
+          
+    }
     return (
         <div>
             {/* <DynamicModal name="dynamic"/> */}
             <h1>Applications</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">ID</th>
-                        <th scope="col">Type</th>
-                        <th scope="col">Created On</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {applications.map(application => {
-                        const appTypeLabel = getApplicationTypeName(application.ss_applicationtype);
-                        return (
-                            <tr key={application.ss_applicationid}>
-                                <td>{application.ss_name}</td>
-                                <td>{application.ss_applicationid}</td>
-                                <td>{appTypeLabel}</td>
-                                <td>{application.createdon}</td>
-                                <td align="right"><ModalButton label="Select" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" /></td>
-                                <td align="right"><ModalButton label="Update" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, application)} /></td>
-                                <td align="right"><ModalButton label="Delete" data={{ ...application, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={() => handleDelete(application)} /></td>
-                            </tr>
-                        )
-                    }
-                    )}
-                </tbody>
-            </table>
+            <MDBDataTable
+            striped
+            bordered
+            small
+            data={data}
+          />
             <Button color="primary" onClick={handleAdd}>Add</Button>
         </div>
     );
