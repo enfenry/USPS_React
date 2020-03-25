@@ -1,13 +1,20 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { reduxForm, Field, formValueSelector  } from 'redux-form';
+import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux'; 
- 
+import { connect } from 'react-redux';
 
 let AppUpdate = props => {
-  const { handleSubmit, appTypeValue } = props;
+  const { handleSubmit, appTypeValue, customers } = props;
   const showPackageFields = (appTypeValue || props.data.appTypeLabel) === 'Package Submission';
+  
+  const renderCustomerOptions = customers => {
+    return customers.map(customer => {
+      return (
+        <option key={customer.contactid} value={customer.contactid}>{customer.fullname}</option>
+      )
+    })
+  }
 
   return (
     <Form onSubmit={handleSubmit} className="form">
@@ -65,8 +72,7 @@ let AppUpdate = props => {
         <div className="control">
           <Field name="_ss_customer_value" component={renderField} type="select"
             label="Customer" defaultValue={props.data._ss_customer_value}>
-            {/* Need to pull data at some point to create options for each Address */}
-            <option value="ExampleCustomer1">Example Customer 1</option>
+            {renderCustomerOptions(customers)}
           </Field>
         </div>
       </FormGroup>
@@ -84,7 +90,7 @@ let AppUpdate = props => {
 
       <div className="field">
         <div className="control">
-          <Button className="button is-link" color="success">Submit</Button>{' '}
+          <Button className="button is-link" color="success" onClick={props.handleHide}>Submit</Button>{' '}
           <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
         </div>
       </div>
@@ -101,10 +107,6 @@ const validate = val => {
   return errors;
 };
 
-// const handleChange = values => {
-  // console.log(values);
-// }
-
 const renderField = (props) => {
 
   const { input, label, type, defaultValue, show, meta: { touched, error, warning } } = props;
@@ -112,30 +114,21 @@ const renderField = (props) => {
   // Necessary due to Field component from redux-form (conflicts with defaultValue being set)
   delete input.value;
 
-  function checkInputType(type) {
-    if (type === "select") {
-      return (
+  return (
+    <div style={{ display: show ? 'block' : 'none' }} >
+      <div className="control">
+        <Label className="field">{label}</Label>
         <Input className="input" {...input} type={type} defaultValue={defaultValue}>
           {props.children}
         </Input>
-      )
-    }
-    else {
-      return (
-        <Input className="input" {...input} placeholder={label} type={type} defaultValue={defaultValue} />
-      )
-    }
-  }
-
-  return (
-    <div style={{display: show === true || show === undefined ? 'block' : 'none' }} >
-      <div className="control">
-        <Label className="field">{label}</Label>
-        {checkInputType(type)}
         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
       </div>
     </div>
   )
+}
+
+renderField.defaultProps = {
+  show: true
 }
 
 renderField.propTypes = {
@@ -144,6 +137,7 @@ renderField.propTypes = {
   type: PropTypes.string,
   show: PropTypes.bool,
   defaultValue: PropTypes.string,
+  customers: PropTypes.arrayOf(PropTypes.object),
   meta: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -165,23 +159,19 @@ AppUpdate.propTypes = {
 
 AppUpdate = reduxForm({
   form: 'appUpdate',
-  // onChange: handleChange,
   validate,
 })(AppUpdate);
 
-const selector = formValueSelector('appUpdate');
-
-AppUpdate = connect(state => {
-
-  // can select values individually
+function mapStateToProps(state) {
+  const selector = formValueSelector('appUpdate');
   const appTypeValue = selector(state, 'ss_applicationtype')
-  // or together as a group
-  // const { firstName, lastName } = selector(state, 'firstName', 'lastName')
+
   return {
     appTypeValue,
-    // fullName: `${firstName || ''} ${lastName || ''}`
+    customers: state.customersReducer.customers,
   }
-})(AppUpdate)
+}
 
-export default AppUpdate;
-
+export default connect(
+  mapStateToProps
+)(AppUpdate);

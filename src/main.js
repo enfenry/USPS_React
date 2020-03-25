@@ -23,7 +23,6 @@ runWithAdal(authContext, () => {
   store.dispatch(applicationsActions.readApplications());
   store.dispatch(customersActions.readCustomers());
 
-
   ReactDom.render((
     <Provider store={store}>
       <div>
