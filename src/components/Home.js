@@ -3,30 +3,17 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
-import * as entityActions from '../actions/entityActions';
+import * as applicationsActions from '../actions/applicationsActions';
+
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const Home = (props) => {
 
-    if (!props.entitiesData) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                No entity data!
-            </div>
-        );
-    }
+    if (props.applicationsRequestPending) {
 
-    let applicationsData = props.entitiesData["/applications"];
 
-    if (!applicationsData) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Entities not found!
-            </div>
-        );
-    } else if (applicationsData.requestPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -34,37 +21,50 @@ const Home = (props) => {
                 </div>
             </div>
         );
-    } else if (applicationsData.requestFailed) {
+
+
+    } else if (props.applicationsRequestFailed) {
+
         return (
             <div className="alert alert-danger" role="alert">
-                Error while loading entities!
+                Error while loading applications!
             </div>
         );
-    } else if (applicationsData.requestSuccess) {
 
-        var distribution = [0, 0, 0];
-        applicationsData.entities.value.forEach((application) => {
+    } else if (props.applicationsRequestSuccess) {
+
+        var distribution0 = [0, 0, 0];
+        props.applications.forEach((application) => {
             switch (application.ss_applicationtype) {
                 case 717800000:
-                    distribution[0]++;
+                    distribution0[0]++;
                     break;
                 case 717800001:
-                    distribution[1]++;
+                    distribution0[1]++;
                     break;
                 case 717800002:
-                    distribution[2]++;
+                    distribution0[2]++;
+
                     break;
             }
         });
 
-        const data = {
+
+        var distribution1 = [0, 0];
+        props.applications.forEach((application) => {
+            distribution1[application.statecode]++;
+        });
+
+        const data0 = {
+
             labels: [
                 "Address Change",
                 "Mail Forwarding",
                 "Package Submission"
             ],
             datasets: [{
-                data: distribution,
+                data: distribution0,
+
                 backgroundColor: [
                     '#FF6384',
                     '#36A2EB',
@@ -78,14 +78,43 @@ const Home = (props) => {
             }]
         };
 
+
+        const data1 = {
+            labels: [
+                "Active",
+                "Inactive",
+            ],
+            datasets: [{
+                data: distribution1,
+                backgroundColor: [
+                    '#FF6384',
+                    '#36A2EB'
+                ],
+                hoverBackgroundColor: [
+                    '#FF6384',
+                    '#36A2EB'
+                ]
+            }]
+        };
+
         return (
-            <div className="mr-xl-n2">
-                <Doughnut 
-                    data={data}
-                    height={256}
-                    options={{ maintainAspectRatio: false }}
-                />
-            </div>
+            <React.Fragment>
+                <div>
+                    <Doughnut
+                        data={data0}
+                        height={256}
+                        options={{ maintainAspectRatio: false }}
+                    />
+                </div>
+                <div>
+                    <Doughnut
+                        data={data1}
+                        height={256}
+                        options={{ maintainAspectRatio: false }}
+                    />
+                </div>
+            </React.Fragment>
+
         );
 
     } else {
@@ -99,13 +128,18 @@ Home.propTypes = {
 
 function mapStateToProps(state) {
     return {
-        entitiesData: state.entitiesReducer.entitiesData
+        applications: state.applicationsReducer.applications,
+        applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
+        applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
+        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess
+
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(entityActions, dispatch)
+        actions: bindActionCreators(applicationsActions, dispatch)
+
     }
 }
 
