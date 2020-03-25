@@ -1,4 +1,3 @@
-// Link.react.test.js
 import React from 'react';
 import ApplicationsContainer from '../components/ApplicationsContainer';
 import renderer from 'react-test-renderer';
