@@ -7,33 +7,86 @@ import { Button } from 'reactstrap';
 import { MDBDataTable } from 'mdbreact';
 //import {CustomersContainer} from './CustomersContainer';
 
+
 const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
+    function getTableBodyContent() {
+        let tableData = customers;
+    
+        tableData.forEach(obj => {
+          obj["select"] = (
+            <input
+              type="button"
+              value="select"
+              onClick={() => handleSelect(obj)}
+            />
+          );
+          obj["delete"] = (
+            <input
+              type="button"
+              value="delete"
+              onClick={() => handleDelete(obj)}
+            />
+          );
+          obj["update"] = (
+            <input
+              type="button"
+              value="update"
+              onClick={() => handleUpdate(obj)}
+            />
+          );
+        });
+    
+        return tableData;
+      }
+    let data = {
+        columns: [
+            {
+                label: 'ID',
+                field: 'contactid',
+                sort: 'asc',
+                width: 150
+              },
+    
+              {
+                label: 'Name',
+                field: 'fullname',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: '',
+                field: 'select',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: '',
+                field: 'delete',
+                sort: 'asc',
+                width: 150
+              },
+              {
+                label: '',
+                field: 'update',
+                sort: 'asc',
+                width: 150
+              },
+    
+        ],
+        rows: getTableBodyContent()
+            
+          
+    }
     return (
         <div>
             <h1>Customers</h1>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">ID</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {customers.map(customer =>
-                        <tr key={customer.contactid}>
-                            <td>{customer.fullname}</td>
-                            <td>{customer.contactid}</td>
-                            <td align="right">
-                                <button className="btn btn-success mr-1" onClick={() => handleSelect(customer)}>Select</button>
-                                <button className="btn btn-secondary mr-1" onClick={() => handleUpdate(customer)}>Update</button>
-                                <button className="btn btn-danger" onClick={() => handleDelete(customer)}>Delete</button>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-            <Button color="primary" onClick={handleAdd}>Add</Button>
+            <MDBDataTable
+            striped
+            bordered
+            small
+            data={data}
+          />
+          <Button color="primary" onClick={handleAdd}>Add</Button>
         </div>
     );
 }
