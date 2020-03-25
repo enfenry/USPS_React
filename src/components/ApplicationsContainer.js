@@ -27,6 +27,9 @@ const ApplicationsContainer = (props) => {
         );
     } else if (props.applicationsRequestSuccess) {
         console.log(props.applications);
+        props.applications.forEach(app => {
+            console.log(app.ss_product);
+        })
         return (
             <div className="m-5">
                 <ApplicationsRender
