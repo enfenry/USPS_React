@@ -4,7 +4,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import ModalButton from '../modals/ModalButton';
-// import DynamicModal from '../modals/DynamicModal';
 import { MDBDataTable } from 'mdbreact';
 
 
@@ -22,38 +21,32 @@ function getApplicationTypeName(applicationType) {
 }
 
 
-const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
-    const appTypeLabel = getApplicationTypeName(applications.ss_applicationtype);
+const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAdd }) => {
 
     function getAppBodyContent() {
         let tableData = applications;
     
-        tableData.forEach(obj => {
-            obj["select"] = (
-              <input
-                type="button"
-                value="select"
-                onClick={() => handleSelect(obj)}
-              />
+        return tableData.map(obj => {
+            // Deep Clone object to avoid adding to it while mapping over it during map
+            let newObj = JSON.parse(JSON.stringify(obj))
+            const appTypeLabel = getApplicationTypeName(obj.ss_applicationtype);
+
+            newObj["select"] = (
+                <ModalButton label="Select" data={{ ...newObj, appTypeLabel: appTypeLabel }} entity="Application" />
             );
-            obj["delete"] = (
-              <input
-                type="button"
-                value="delete"
-                onClick={() => handleDelete(obj)}
-              />
+            newObj["delete"] = (
+                <ModalButton label="Update" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, obj)} />
             );
-            obj["update"] = (
-              <input
-                type="button"
-                value="update"
-                onClick={() => handleUpdate(obj)}
-              />
+            newObj["update"] = (
+                <ModalButton label="Delete" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={() => handleDelete(obj)} />
             );
+
+            newObj["appTypeLabel"] = appTypeLabel;
+            return newObj;
           });
       
           
-        return tableData;
+        // return tableData;
       }
 
       let data = {
@@ -73,7 +66,7 @@ const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDe
               },
               {
                 label: 'Type',
-                field: 'ss_applicationtype',
+                field: 'appTypeLabel',
                 sort: 'asc',
                 width: 150
               },
@@ -109,7 +102,6 @@ const ApplicationsRender = ({ applications, handleSelect, handleUpdate, handleDe
     }
     return (
         <div>
-            {/* <DynamicModal name="dynamic"/> */}
             <h1>Applications</h1>
             <MDBDataTable
             striped
