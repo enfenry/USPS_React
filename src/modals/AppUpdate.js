@@ -26,7 +26,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="ss_applicationtype" component={renderField} type="view"
+          <Field name="ss_applicationtype" component={renderField} type="select"
             label="Application Type" defaultValue={data.appTypeLabel}>
             <option value="Address Change">Address Change</option>
             <option value="Package Submission">Package Submission</option>
@@ -37,7 +37,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_product_value" component={renderField} type="view"
+          <Field name="_ss_product_value" component={renderField} type="select"
             label="Product" defaultValue={data._ss_product_value}>
             {/* Package Submission Products */}
             <option value="EnvelopeFlatRate">Envelope (Flat Rate)</option>
@@ -58,7 +58,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field show={showPackageFields} name="_ss_shippingspeed_value" component={renderField} type="view"
+          <Field show={showPackageFields} name="_ss_shippingspeed_value" component={renderField} type="select"
             label="Shipping Speed" defaultValue={data._ss_shippingspeed_value}>
             {/* Shipping Speed Products */}
             <option value="StandardShipping">Standard Shipping</option>
@@ -70,7 +70,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_customer_value" component={renderField} type="view"
+          <Field name="_ss_customer_value" component={renderField} type="select"
             label="Customer" defaultValue={data._ss_customer_value}>
             {renderOptions(customers,"contactid","fullname")}
           </Field>
@@ -79,7 +79,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_destinationaddress_value" component={renderField} type="view"
+          <Field name="_ss_destinationaddress_value" component={renderField} type="select"
             label="Destination Address" defaultValue={data._ss_destinationaddress_value}>
             {/* Need to pull data at some point to create options for each Address */}
             {/* {renderOptions(addresses,"contactid","fullname")} */}
@@ -102,9 +102,9 @@ let AppUpdate = props => {
 const validate = val => {
   const errors = {};
 
-  if (!val.ss_name) {
-    errors.firstName = 'Required';
-  }
+  // if (!val.ss_name) {
+  //   errors.ss_name = 'Required';
+  // }
   return errors;
 };
 
