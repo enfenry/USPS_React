@@ -1,5 +1,5 @@
 import applicationsReducer from '../reducers/applicationsReducer';
-import { READ_APPLICATIONS_SUCCESFUL, READ_APPLICATIONS_PENDING, READ_APPLICATIONS_FAILURE } from '../constants/actionTypes';
+import { READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_PENDING, READ_APPLICATIONS_FAILURE } from '../constants/actionTypes';
 import expect from 'expect';
 
 describe('applications reducer', () => {
@@ -24,7 +24,7 @@ describe('applications reducer', () => {
 
     it('should handle READ_APPLICATIONS_SUCCESFUL', () => {
         expect(applicationsReducer({}, {
-            type: READ_APPLICATIONS_SUCCESFUL,
+            type: READ_APPLICATIONS_SUCCESSFUL,
             data: {
                 value: [
                     "dummy data"

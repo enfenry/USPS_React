@@ -16,7 +16,7 @@ const ModalButton = (props) => {
     switch (label) {
       case 'Add':
         return 'btn-primary'
-      case 'Select':
+      case 'View':
         return 'btn-secondary';
       case 'Update':
         return 'btn-success';

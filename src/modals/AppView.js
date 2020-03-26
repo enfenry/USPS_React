@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types'
 
-const AppSelect = props => {
+const AppView = props => {
     return (
         <div>
             <div>
@@ -51,7 +51,7 @@ const AppSelect = props => {
 }
 
 
-AppSelect.propTypes = {
+AppView.propTypes = {
     handleHide: PropTypes.func,
     name: PropTypes.string,
     data: PropTypes.object,
@@ -61,5 +61,5 @@ AppSelect.propTypes = {
     ])
 }
 
-export default AppSelect;
+export default AppView;
 

@@ -8,16 +8,16 @@ import { MDBDataTable } from 'mdbreact';
 //import {CustomersContainer} from './CustomersContainer';
 
 
-const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
+const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, handleAdd }) => {
     function getTableBodyContent() {
         let tableData = customers;
     
         tableData.forEach(obj => {
-          obj["select"] = (
+          obj["view"] = (
             <input
               type="button"
-              value="select"
-              onClick={() => handleSelect(obj)}
+              value="view"
+              onClick={() => handleView(obj)}
             />
           );
           obj["delete"] = (
@@ -55,7 +55,7 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
               },
               {
                 label: '',
-                field: 'select',
+                field: 'view',
                 sort: 'asc',
                 width: 150
               },
@@ -95,7 +95,7 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
 
 CustomersRender.propTypes = {
     customers: PropTypes.array,
-    handleSelect: PropTypes.func,
+    handleView: PropTypes.func,
     handleUpdate: PropTypes.func,
     handleDelete: PropTypes.func,
     handleAdd: PropTypes.func,

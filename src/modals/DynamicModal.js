@@ -4,7 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connectModal } from 'redux-modal';
 
 import AppUpdate from './AppUpdate';
-import AppSelect from './AppSelect';
+import AppView from './AppView';
 
 const MyModal = (props) => {
 
@@ -27,12 +27,12 @@ const MyModal = (props) => {
           default:
             return 'Invalid Entity';
         }
-      case 'Select':
+      case 'View':
       default:
         switch (entity) {
           case 'Application':
             return (
-              <AppSelect {...props} />
+              <AppView {...props} />
             );
           default:
             return 'Invalid Entity';

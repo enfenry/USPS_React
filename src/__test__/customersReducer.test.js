@@ -1,5 +1,5 @@
 import customersReducer from '../reducers/customersReducer';
-import { READ_CUSTOMERS_SUCCESFUL, READ_CUSTOMERS_PENDING, READ_CUSTOMERS_FAILURE } from '../constants/actionTypes';
+import { READ_CUSTOMERS_SUCCESSFUL, READ_CUSTOMERS_PENDING, READ_CUSTOMERS_FAILURE } from '../constants/actionTypes';
 import expect from 'expect';
 
 describe('customers reducer', () => {
@@ -22,9 +22,9 @@ describe('customers reducer', () => {
         })).toMatchSnapshot();
     });
 
-    it('should handle READ_CUSTOMERS_SUCCESFUL', () => {
+    it('should handle READ_CUSTOMERS_SUCCESSFUL', () => {
         expect(customersReducer({}, {
-            type: READ_CUSTOMERS_SUCCESFUL,
+            type: READ_CUSTOMERS_SUCCESSFUL,
             data: {
                 value: [
                     "dummy data"
