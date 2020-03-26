@@ -31,9 +31,9 @@ const CustomersContainer = (props) => {
             <div className="m-5">
                 <CustomersRender
                     customers={props.customers}
-                    handleSelect={x => console.log("Select", x)}
+                    handleSelect={x => console.log("Select is fa sar work", x)}
                     handleUpdate={x => console.log("Update", x)}
-                    handleDelete={x => props.actions.deleteCustomer(x.ss_customerid)}
+                    handleDelete={x => props.actions.deleteCustomer(x.contactid)}
                     handleAdd={() => console.log("Add")}
                 />
             </div>

@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ApplicationsContainer renders correctly 1`] = `
+<div
+  className="m-5"
+>
+  <div>
+    <h1>
+      Applications
+    </h1>
+    <table
+      className="table"
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            Name
+          </th>
+          <th
+            scope="col"
+          >
+            ID
+          </th>
+          <th
+            scope="col"
+          >
+            Type
+          </th>
+          <th
+            scope="col"
+          >
+            Created On
+          </th>
+          <th
+            scope="col"
+          />
+          <th
+            scope="col"
+          />
+          <th
+            scope="col"
+          />
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            example name
+          </td>
+          <td>
+            example id
+          </td>
+          <td>
+            example application type
+          </td>
+          <td>
+            example date
+          </td>
+          <td
+            align="right"
+          >
+            <div>
+              <p>
+                <button
+                  aria-label={null}
+                  className="btn btn-secondary btn btn-secondary"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Select
+                </button>
+              </p>
+            </div>
+          </td>
+          <td
+            align="right"
+          >
+            <div>
+              <p>
+                <button
+                  aria-label={null}
+                  className="btn btn-success btn btn-secondary"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Update
+                </button>
+              </p>
+            </div>
+          </td>
+          <td
+            align="right"
+          >
+            <div>
+              <p>
+                <button
+                  aria-label={null}
+                  className="btn btn-danger btn btn-secondary"
+                  onClick={[Function]}
+                  type="button"
+                >
+                  Delete
+                </button>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      aria-label={null}
+      className="btn btn-primary"
+      onClick={[Function]}
+      type="button"
+    >
+      Add
+    </button>
+  </div>
+</div>
+`;

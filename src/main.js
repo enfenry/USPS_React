@@ -13,10 +13,6 @@ import { authContext } from './adalConfig.js';
 
 import { App } from './components/App.js';
 
-// CURRENTLY NOT IN USE - DIDN'T WANT TO DELETE WITHOUT CHECKING THOUGH
-// import * as entityActions from './actions/entityActions';
-// import { columnConfig } from './columnConfig';
-
 import * as applicationsActions from './actions/applicationsActions';
 import * as customersActions from './actions/customersActions';
 
@@ -26,7 +22,6 @@ runWithAdal(authContext, () => {
 
   store.dispatch(applicationsActions.readApplications());
   store.dispatch(customersActions.readCustomers());
-
 
   ReactDom.render((
     <Provider store={store}>

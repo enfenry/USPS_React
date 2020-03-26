@@ -26,7 +26,6 @@ const ApplicationsContainer = (props) => {
             </div>
         );
     } else if (props.applicationsRequestSuccess) {
-        console.log(props.applications);
         return (
             <div className="m-5">
                 <ApplicationsRender

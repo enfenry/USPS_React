@@ -1,24 +1,33 @@
 import React from 'react';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { reduxForm, Field } from 'redux-form';
-import PropTypes from 'prop-types'
+import { reduxForm, Field, formValueSelector } from 'redux-form';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 let AppUpdate = props => {
-  const { handleSubmit } = props;
+  const { handleSubmit, handleHide, name, data, appTypeValue, customers } = props;
+  const showPackageFields = (appTypeValue || data.appTypeLabel) === 'Package Submission';
+  
+  const renderCustomerOptions = customers => {
+    return customers.map(customer => {
+      return (
+        <option key={customer.contactid} value={customer.contactid}>{customer.fullname}</option>
+      )
+    })
+  }
 
-  console.log('AppUpdate props', props);
   return (
     <Form onSubmit={handleSubmit} className="form">
       <FormGroup className="field">
         <div className="control">
-          <Field name="ss_name" component={renderField} type="text" label="Name" defaultValue={props.name} />
+          <Field name="ss_name" component={renderField} type="text" label="Name" defaultValue={name} />
         </div>
       </FormGroup>
 
       <FormGroup className="field">
         <div className="control">
           <Field name="ss_applicationtype" component={renderField} type="select"
-            label="Application Type" defaultValue={props.data.appTypeLabel}>
+            label="Application Type" defaultValue={data.appTypeLabel}>
             <option value="Address Change">Address Change</option>
             <option value="Package Submission">Package Submission</option>
             <option value="Mail Forwarding">Mail Forwarding</option>
@@ -29,7 +38,7 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="_ss_product_value" component={renderField} type="select"
-            label="Product" defaultValue={props.data._ss_product_value}>
+            label="Product" defaultValue={data._ss_product_value}>
             {/* Package Submission Products */}
             <option value="EnvelopeFlatRate">Envelope (Flat Rate)</option>
             <option value="SmallBoxFlatRate">Small Box (Flat Rate)</option>
@@ -49,8 +58,8 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_shippingspeed_value" component={renderField} type="select"
-            label="Shipping Speed" defaultValue={props.data._ss_shippingspeed_value}>
+          <Field show={showPackageFields} name="_ss_shippingspeed_value" component={renderField} type="select"
+            label="Shipping Speed" defaultValue={data._ss_shippingspeed_value}>
             {/* Shipping Speed Products */}
             <option value="StandardShipping">Standard Shipping</option>
             <option value="PriorityMail">Priority Mail</option>
@@ -62,9 +71,8 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="_ss_customer_value" component={renderField} type="select"
-            label="Customer" defaultValue={props.data._ss_customer_value}>
-            {/* Need to pull data at some point to create options for each Address */}
-            <option value="ExampleCustomer1">Example Customer 1</option>
+            label="Customer" defaultValue={data._ss_customer_value}>
+            {renderCustomerOptions(customers)}
           </Field>
         </div>
       </FormGroup>
@@ -72,7 +80,7 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="_ss_destinationaddress_value" component={renderField} type="select"
-            label="Destination Address" defaultValue={props.data._ss_destinationaddress_value}>
+            label="Destination Address" defaultValue={data._ss_destinationaddress_value}>
             {/* Need to pull data at some point to create options for each Address */}
             <option value="ExampleAddress1">Example Address 1</option>
           </Field>
@@ -82,8 +90,8 @@ let AppUpdate = props => {
 
       <div className="field">
         <div className="control">
-          <Button className="button is-link" color="success">Submit</Button>{' '}
-          <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
+          <Button className="button is-link" color="success" onClick={handleHide}>Submit</Button>{' '}
+          <Button color="secondary" onClick={handleHide}>Cancel</Button>
         </div>
       </div>
     </Form>
@@ -101,41 +109,33 @@ const validate = val => {
 
 const renderField = (props) => {
 
-  const { input, label, type, defaultValue, meta: { touched, error, warning } } = props;
+  const { input, label, type, defaultValue, show, meta: { touched, error, warning } } = props;
 
   // Necessary due to Field component from redux-form (conflicts with defaultValue being set)
   delete input.value;
 
-  function checkInputType(type) {
-    if (type === "select") {
-      return (
+  return (
+    <div style={{ display: show ? 'block' : 'none' }} >
+      <div className="control">
+        <Label className="field">{label}</Label>
         <Input className="input" {...input} type={type} defaultValue={defaultValue}>
           {props.children}
         </Input>
-      )
-    }
-    else {
-      return (
-        <Input className="input" {...input} placeholder={label} type={type} defaultValue={defaultValue} />
-      )
-    }
-  }
-
-  return (
-    <div>
-      <div className="control">
-        <Label className="field">{label}</Label>
-        {checkInputType(type)}
         {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
       </div>
     </div>
   )
 }
 
+renderField.defaultProps = {
+  show: true
+}
+
 renderField.propTypes = {
   input: PropTypes.object,
   label: PropTypes.string,
   type: PropTypes.string,
+  show: PropTypes.bool,
   defaultValue: PropTypes.string,
   meta: PropTypes.object,
   children: PropTypes.oneOfType([
@@ -149,6 +149,8 @@ AppUpdate.propTypes = {
   handleHide: PropTypes.func,
   name: PropTypes.string,
   data: PropTypes.object,
+  customers: PropTypes.arrayOf(PropTypes.object),
+  appTypeValue: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
@@ -160,5 +162,16 @@ AppUpdate = reduxForm({
   validate,
 })(AppUpdate);
 
-export default AppUpdate;
+function mapStateToProps(state) {
+  const selector = formValueSelector('appUpdate');
+  const appTypeValue = selector(state, 'ss_applicationtype')
 
+  return {
+    appTypeValue,
+    customers: state.customersReducer.customers,
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(AppUpdate);

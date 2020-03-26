@@ -3,10 +3,9 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { show } from 'redux-modal';
 import { Button } from 'reactstrap';
-import DynamicModal from './DynamicModal';
 import PropTypes from 'prop-types';
 
-const ModalContainer = (props) => {
+const ModalButton = (props) => {
 
   function handleOpen (name) {
     let newProps = {...props, name: props.data.ss_name};
@@ -15,6 +14,8 @@ const ModalContainer = (props) => {
 
   function handleButtonStyle (label) {
     switch (label) {
+      case 'Add':
+        return 'btn-primary'
       case 'Select':
         return 'btn-secondary';
       case 'Update':
@@ -30,14 +31,13 @@ const ModalContainer = (props) => {
       <div>
         <p>
           <Button className={'btn ' + handleButtonStyle(props.label)}
-           onClick={() => handleOpen(props.data.ss_name)}>{props.label}</Button>
-          <DynamicModal name={props.data.ss_name} />
+           onClick={() => handleOpen("dynamic")}>{props.label}</Button>
         </p>
       </div>
     )
 }
 
-ModalContainer.propTypes = {
+ModalButton.propTypes = {
   show: PropTypes.func,
   name: PropTypes.string,
   label: PropTypes.string,
@@ -52,4 +52,4 @@ ModalContainer.propTypes = {
 export default connect(
   null,
   dispatch => bindActionCreators({ show }, dispatch)
-)(ModalContainer)
+)(ModalButton)

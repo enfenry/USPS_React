@@ -7,42 +7,42 @@ import AppUpdate from './AppUpdate';
 import AppSelect from './AppSelect';
 
 const MyModal = (props) => {
-  
+
   function renderBody(label, entity) {
 
-    if (label === 'Delete') {
-      return (
-      <div>
-        <p>{'Are you sure?'}</p>
-        <Button color="danger" onClick={props.handleAction}>{props.label}</Button>
-        <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
-      </div>)
-    }
-    else if (label === 'Select') {
-      switch (entity) {
-        case 'Application':
-          return (
-            <AppSelect {...props} />
-          );
-        default:
-          return 'Invalid Entity';
-      }
-    }
-    else {
-      switch (entity) {
-        case 'Application':
-          return (
-            <AppUpdate {...props} />
-          );
-        default:
-          return 'Invalid Entity';
-      }
+    switch (label) {
+      case 'Delete':
+        return (
+          <div>
+            <p>{'Are you sure?'}</p>
+            <Button color="danger" onClick={props.onSubmit}>{props.label}</Button>
+            <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
+          </div>)
+      case 'Update':
+        switch (entity) {
+          case 'Application':
+            return (
+              <AppUpdate {...props} />
+            );
+          default:
+            return 'Invalid Entity';
+        }
+      case 'Select':
+      default:
+        switch (entity) {
+          case 'Application':
+            return (
+              <AppSelect {...props} />
+            );
+          default:
+            return 'Invalid Entity';
+        }
     }
   }
 
 
   return (
-    <Modal isOpen={props.show} size ="lg"
+    <Modal isOpen={props.show} size="lg"
     // backdrop={true}
     >
       <ModalHeader>{props.label} {props.name}</ModalHeader>
@@ -57,7 +57,7 @@ MyModal.propTypes = {
   name: PropTypes.string,
   entity: PropTypes.string,
   label: PropTypes.string,
-  handleAction: PropTypes.func,
+  onSubmit: PropTypes.func,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
