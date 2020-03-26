@@ -32,7 +32,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
             const appTypeLabel = getApplicationTypeName(obj.ss_applicationtype);
 
             newObj["view"] = (
-                <ModalButton label="View" data={{ ...newObj, appTypeLabel: appTypeLabel }} entity="Application" />
+                <ModalButton label="View" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" />
             );
             newObj["delete"] = (
                 <ModalButton label="Update" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, obj)} />
@@ -103,13 +103,13 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
     return (
         <div>
             <h1>Applications</h1>
+            <Button color="primary" onClick={handleAdd}>Create New Application</Button>
             <MDBDataTable
             striped
             bordered
             small
             data={data}
           />
-            <Button color="primary" onClick={handleAdd}>Add</Button>
         </div>
     );
 }

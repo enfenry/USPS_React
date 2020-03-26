@@ -275,6 +275,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                   data-test="page-link"
                   onClick={[Function]}
                 >
+
                   <span>
                     Previous
                   </span>
@@ -287,6 +288,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                 <a
                   className="page-link page-link"
                   data-test="page-link"
+
                   onClick={[Function]}
                 >
                   1

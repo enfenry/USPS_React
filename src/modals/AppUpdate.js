@@ -8,10 +8,10 @@ let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers } = props;
   const showPackageFields = (appTypeValue || data.appTypeLabel) === 'Package Submission';
   
-  const renderCustomerOptions = customers => {
-    return customers.map(customer => {
+  const renderOptions = (array,value,display) => {
+    return array.map(el => {
       return (
-        <option key={customer.contactid} value={customer.contactid}>{customer.fullname}</option>
+        <option key={el[value]} value={el[value]}>{el[display]}</option>
       )
     })
   }
@@ -72,7 +72,7 @@ let AppUpdate = props => {
         <div className="control">
           <Field name="_ss_customer_value" component={renderField} type="view"
             label="Customer" defaultValue={data._ss_customer_value}>
-            {renderCustomerOptions(customers)}
+            {renderOptions(customers,"contactid","fullname")}
           </Field>
         </div>
       </FormGroup>
@@ -82,6 +82,7 @@ let AppUpdate = props => {
           <Field name="_ss_destinationaddress_value" component={renderField} type="view"
             label="Destination Address" defaultValue={data._ss_destinationaddress_value}>
             {/* Need to pull data at some point to create options for each Address */}
+            {/* {renderOptions(addresses,"contactid","fullname")} */}
             <option value="ExampleAddress1">Example Address 1</option>
           </Field>
         </div>
@@ -101,9 +102,9 @@ let AppUpdate = props => {
 const validate = val => {
   const errors = {};
 
-  if (!val.ss_name) {
-    errors.firstName = 'Required';
-  }
+  // if (!val.ss_name) {
+  //   errors.ss_name = 'Required';
+  // }
   return errors;
 };
 
