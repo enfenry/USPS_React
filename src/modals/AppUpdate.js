@@ -137,7 +137,6 @@ renderField.propTypes = {
   type: PropTypes.string,
   show: PropTypes.bool,
   defaultValue: PropTypes.string,
-  customers: PropTypes.arrayOf(PropTypes.object),
   meta: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -150,6 +149,7 @@ AppUpdate.propTypes = {
   handleHide: PropTypes.func,
   name: PropTypes.string,
   data: PropTypes.object,
+  customers: PropTypes.arrayOf(PropTypes.object),
   appTypeValue: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

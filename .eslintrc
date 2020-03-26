@@ -1,6 +1,9 @@
 {
   "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "root": true,
   "parserOptions": {
     "ecmaFeatures": {
@@ -8,10 +11,14 @@
       "experimentalObjectRestSpread": true
     }
   },
+  "plugins": [
+    "jest"
+  ],
   "env": {
     "browser": true,
     "node": true,
-    "jquery": true
+    "jquery": true,
+    "jest/globals": true
   },
   "rules": {
     "quotes": 0,
@@ -21,8 +28,10 @@
     "no-underscore-dangle": 0,
     "no-alert": 0,
     "no-lone-blocks": 0,
-    "no-console":0,
-    "react/jsx-uses-vars": ["error"]
+    "no-console": 0,
+    "react/jsx-uses-vars": [
+      "error"
+    ]
   },
   "globals": {
     "jQuery": true,
