@@ -8,7 +8,7 @@ import { MDBDataTable } from 'mdbreact';
 //import {CustomersContainer} from './CustomersContainer';
 
 
-const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, handleAdd }) => {
+const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, handleAdd }) => {
   function getTableBodyContent() {
     let tableData = customers;
 
@@ -17,11 +17,11 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
       // Deep Clone object to avoid adding to it while mapping over it during map
       let newObj = JSON.parse(JSON.stringify(obj))
 
-      newObj["select"] = (
+      newObj["view"] = (
         <input
           type="button"
-          value="select"
-          onClick={() => handleSelect(obj)}
+          value="view"
+          onClick={() => handleView(obj)}
         />
       );
       newObj["delete"] = (
@@ -59,7 +59,7 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
       },
       {
         label: '',
-        field: 'select',
+        field: 'view',
         sort: 'asc',
         width: 150
       },
@@ -99,7 +99,7 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
 
 CustomersRender.propTypes = {
   customers: PropTypes.array,
-  handleSelect: PropTypes.func,
+  handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
   handleAdd: PropTypes.func,

@@ -31,8 +31,8 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
             let newObj = JSON.parse(JSON.stringify(obj))
             const appTypeLabel = getApplicationTypeName(obj.ss_applicationtype);
 
-            newObj["select"] = (
-                <ModalButton label="Select" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" />
+            newObj["view"] = (
+                <ModalButton label="View" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" />
             );
             newObj["delete"] = (
                 <ModalButton label="Update" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, obj)} />
@@ -78,7 +78,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
               },
               {
                 label: '',
-                field: 'select',
+                field: 'view',
                 sort: 'asc',
                 width: 150
               },
@@ -116,7 +116,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
 
 ApplicationsRender.propTypes = {
     applications: PropTypes.array,
-    handleSelect: PropTypes.func,
+    handleView: PropTypes.func,
     handleUpdate: PropTypes.func,
     handleDelete: PropTypes.func,
     handleAdd: PropTypes.func,
