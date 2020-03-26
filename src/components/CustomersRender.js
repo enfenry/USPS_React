@@ -54,6 +54,12 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
                 width: 150
               },
               {
+                label: 'Email',
+                field: 'emailaddress1',
+                sort: 'asc',
+                width: 150
+              },
+              {
                 label: '',
                 field: 'select',
                 sort: 'asc',
