@@ -16,7 +16,7 @@ Object {
 }
 `;
 
-exports[`customers reducer should handle READ_CUSTOMERS_SUCCESFUL 1`] = `
+exports[`customers reducer should handle READ_CUSTOMERS_SUCCESSFUL 1`] = `
 Object {
   "customers": Array [
     "dummy data",
