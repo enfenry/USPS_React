@@ -5,15 +5,33 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 let AppUpdate = props => {
-  const { handleSubmit, handleHide, name, data, appTypeValue, customers } = props;
-  const showPackageFields = (appTypeValue || data.appTypeLabel) === 'Package Submission';
-  
-  const renderOptions = (array,value,display) => {
+  const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
+  const isPackageSubmission = (appTypeValue || data.appTypeLabel) === 'Package Submission';
+  const isMailForwarding = (appTypeValue || data.appTypeLabel) === 'Mail Forwarding';
+  const isAddressChange = (appTypeValue || data.appTypeLabel) === 'Address Change';
+
+  const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
+
+  const renderOptions = (array, value, display) => {
     return array.map(el => {
       return (
         <option key={el[value]} value={el[value]}>{el[display]}</option>
       )
     })
+  }
+
+  const filterProducts = () => {
+    let filterProducts = products;
+    if (isPackageSubmission) {
+      filterProducts = products.filter(product => product.hierarchypath === "USPS\\Package Submission");
+    }
+    else if (isMailForwarding) {
+      filterProducts = products.filter(product => product.hierarchypath === "USPS\\Mail Forwarding");
+    }
+    else if (isAddressChange) {
+      filterProducts = products.filter(product => product.hierarchypath === "USPS\\Address Change");
+    }
+    return filterProducts;
   }
 
   return (
@@ -39,31 +57,18 @@ let AppUpdate = props => {
         <div className="control">
           <Field name="_ss_product_value" component={renderField} type="select"
             label="Product" defaultValue={data._ss_product_value}>
-            {/* Package Submission Products */}
-            <option value="EnvelopeFlatRate">Envelope (Flat Rate)</option>
-            <option value="SmallBoxFlatRate">Small Box (Flat Rate)</option>
-            <option value="MediumBoxFlatRate">Medium Box (Flat Rate)</option>
-            <option value="LargeBoxFlatRate">Large Box (Flat Rate)</option>
-            <option value="CalculatedVolume">Calculated Volume</option>
-
-            {/* Forward Duration Products */}
-            <option value="1Year">1 Year</option>
-            <option value="2Years">2 Years</option>
-
-            {/* Change Address Products */}
-            <option value="ChangeAddress">Change Address</option>
+            <option value={null}></option>
+            {renderOptions(filterProducts(), "productid", "name")}
           </Field>
         </div>
       </FormGroup>
 
       <FormGroup className="field">
         <div className="control">
-          <Field show={showPackageFields} name="_ss_shippingspeed_value" component={renderField} type="select"
+          <Field show={isPackageSubmission} name="_ss_shippingspeed_value" component={renderField} type="select"
             label="Shipping Speed" defaultValue={data._ss_shippingspeed_value}>
-            {/* Shipping Speed Products */}
-            <option value="StandardShipping">Standard Shipping</option>
-            <option value="PriorityMail">Priority Mail</option>
-            <option value="PriorityMailExpress">Priority Mail Express</option>
+            <option value={null}></option>
+            {renderOptions(shippingSpeeds, "productid", "name")}
           </Field>
         </div>
       </FormGroup>
@@ -72,7 +77,7 @@ let AppUpdate = props => {
         <div className="control">
           <Field name="_ss_customer_value" component={renderField} type="select"
             label="Customer" defaultValue={data._ss_customer_value}>
-            {renderOptions(customers,"contactid","fullname")}
+            {renderOptions(customers, "contactid", "fullname")}
           </Field>
         </div>
       </FormGroup>
@@ -81,9 +86,7 @@ let AppUpdate = props => {
         <div className="control">
           <Field name="_ss_destinationaddress_value" component={renderField} type="select"
             label="Destination Address" defaultValue={data._ss_destinationaddress_value}>
-            {/* Need to pull data at some point to create options for each Address */}
-            {/* {renderOptions(addresses,"contactid","fullname")} */}
-            <option value="ExampleAddress1">Example Address 1</option>
+            {renderOptions(addresses, "ss_customaddressid", "ss_name")}
           </Field>
         </div>
       </FormGroup>
@@ -102,9 +105,9 @@ let AppUpdate = props => {
 const validate = val => {
   const errors = {};
 
-  // if (!val.ss_name) {
-  //   errors.ss_name = 'Required';
-  // }
+  if (!val.ss_name) {
+    errors.ss_name = 'Required';
+  }
   return errors;
 };
 
@@ -151,6 +154,8 @@ AppUpdate.propTypes = {
   name: PropTypes.string,
   data: PropTypes.object,
   customers: PropTypes.arrayOf(PropTypes.object),
+  addresses: PropTypes.arrayOf(PropTypes.object),
+  products: PropTypes.arrayOf(PropTypes.object),
   appTypeValue: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -170,6 +175,8 @@ function mapStateToProps(state) {
   return {
     appTypeValue,
     customers: state.customersReducer.customers,
+    addresses: state.addressesReducer.addresses,
+    products: state.productsReducer.products,
   }
 }
 
