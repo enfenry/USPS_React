@@ -32,7 +32,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
             const appTypeLabel = getApplicationTypeName(obj.ss_applicationtype);
 
             newObj["select"] = (
-                <ModalButton label="Select" data={{ ...newObj, appTypeLabel: appTypeLabel }} entity="Application" />
+                <ModalButton label="Select" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" />
             );
             newObj["delete"] = (
                 <ModalButton label="Update" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, obj)} />
