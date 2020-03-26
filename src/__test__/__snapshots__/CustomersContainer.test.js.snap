@@ -43,7 +43,7 @@ exports[`CustomersContainer renders correctly 1`] = `
               className="btn btn-success mr-1"
               onClick={[Function]}
             >
-              Select
+              View
             </button>
             <button
               className="btn btn-secondary mr-1"
