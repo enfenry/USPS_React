@@ -103,13 +103,13 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
     return (
         <div>
             <h1>Applications</h1>
+            <Button color="primary" onClick={handleAdd}>Create New Application</Button>
             <MDBDataTable
             striped
             bordered
             small
             data={data}
           />
-            <Button color="primary" onClick={handleAdd}>Add</Button>
         </div>
     );
 }

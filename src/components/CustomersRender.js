@@ -80,13 +80,13 @@ const CustomersRender = ({ customers, handleSelect, handleUpdate, handleDelete, 
     return (
         <div>
             <h1>Customers</h1>
+            <Button color="primary" onClick={handleAdd}>Add New Customer</Button>
             <MDBDataTable
             striped
             bordered
             small
             data={data}
           />
-          <Button color="primary" onClick={handleAdd}>Add</Button>
         </div>
     );
 }
