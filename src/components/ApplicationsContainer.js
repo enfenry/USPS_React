@@ -11,7 +11,7 @@ const ApplicationsContainer = (props) => {
 
     console.log(props);
 
-    if (props.applicationsRequestPending) {
+    if (props.applicationsRequestPending || props.ordersRequestPending || props.productsRequestPending || props.customersRequestPending || props.addressesRequestPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -49,11 +49,36 @@ ApplicationsContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
+    console.log("state");
+    console.log(state);
+    console.log("apps");
+    console.log(state.applications);
+    console.log("applic");
+    console.log(state.applicationsReducer.applications);
+    console.log("products");
+    console.log(state.productsReducer.products);
     return {
         applications: state.applicationsReducer.applications,
+        products: state.productsReducer.products,
+        orders: state.ordersReducer.orders,
+        customers: state.customersReducer.customers,
+        addresses: state.addressesReducer.addresses,
+
         applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
         applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
-        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess
+        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess,
+
+        productsRequestPending: state.productsReducer.productsRequestPending,
+        productsRequestFailed: state.productsReducer.productsRequestFailed,
+        productsRequestSuccess: state.productsReducer.productsRequestSuccess,
+
+        ordersRequestPending: state.ordersReducer.ordersRequestPending,
+        ordersRequestFailed: state.ordersReducer.ordersRequestFailed,
+        ordersRequestSuccess: state.ordersReducer.ordersRequestSuccess,
+
+        addressesRequestPending: state.addressesReducer.addressesRequestPending,
+        addressesRequestFailed: state.addressesReducer.addressesRequestFailed,
+        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess
     }
 }
 
