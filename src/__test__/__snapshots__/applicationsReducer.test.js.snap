@@ -1,5 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`applications reducer should handle DELETE_APPLICATION_SUCCESSFUL 1`] = `
+Object {
+  "applications": Array [
+    Object {
+      "ss_applicationid": "a",
+    },
+    Object {
+      "ss_applicationid": "c",
+    },
+  ],
+  "applicationsRequestFailed": false,
+  "applicationsRequestPending": false,
+  "applicationsRequestSuccess": true,
+}
+`;
+
 exports[`applications reducer should handle READ_APPLICATIONS_FAILURE 1`] = `
 Object {
   "applicationsRequestFailed": true,

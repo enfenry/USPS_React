@@ -17,7 +17,11 @@ test('ApplicationsContainer renders correctly', () => {
         ss_applicationtype: "example application type"
       }],
       applicationsRequestSuccess: true
-    }
+    },
+    productsReducer: {products: []},
+    ordersReducer: {orders: []},
+    customersReducer: {customers: []},
+    addressesReducer: {addresses: []},
   });
   const component = renderer.create(
     <Provider store={store}>

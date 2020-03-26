@@ -9,6 +9,7 @@ import { MDBDataTable } from 'mdbreact';
 
 
 const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, handleAdd }) => {
+
   function getTableBodyContent() {
     let tableData = customers;
 
@@ -98,11 +99,12 @@ const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, ha
 
 
 CustomersRender.propTypes = {
-  customers: PropTypes.array,
-  handleView: PropTypes.func,
-  handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func,
-  handleAdd: PropTypes.func,
+    customers: PropTypes.array,
+    handleView: PropTypes.func,
+    handleUpdate: PropTypes.func,
+    handleDelete: PropTypes.func,
+    handleAdd: PropTypes.func,
+
 };
 
 export default CustomersRender;

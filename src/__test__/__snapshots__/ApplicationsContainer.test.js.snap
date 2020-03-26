@@ -8,107 +8,317 @@ exports[`ApplicationsContainer renders correctly 1`] = `
     <h1>
       Applications
     </h1>
-    <table
-      className="table"
+    <div
+      className="dataTables_wrapper dt-bootstrap4"
+      data-test="datatable"
     >
-      <thead>
-        <tr>
-          <th
-            scope="col"
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12 col-md-6"
+          data-test="datatable-entries"
+        >
+          <div
+            className="dataTables_length bs-select"
+            data-test="datatable-select"
           >
-            Name
-          </th>
-          <th
-            scope="col"
-          >
-            ID
-          </th>
-          <th
-            scope="col"
-          >
-            Type
-          </th>
-          <th
-            scope="col"
-          >
-            Created On
-          </th>
-          <th
-            scope="col"
-          />
-          <th
-            scope="col"
-          />
-          <th
-            scope="col"
-          />
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            example name
-          </td>
-          <td>
-            example id
-          </td>
-          <td>
-            example application type
-          </td>
-          <td>
-            example date
-          </td>
-          <td
-            align="right"
-          >
-            <div>
-              <p>
-                <button
-                  aria-label={null}
-                  className="btn btn-secondary btn btn-secondary"
-                  onClick={[Function]}
-                  type="button"
+            <label>
+              Show entries
+              <select
+                className="custom-select custom-select-sm form-control form-control-sm"
+                onChange={[Function]}
+                style={
+                  Object {
+                    "marginLeft": ".5rem",
+                  }
+                }
+                value={10}
+              >
+                <option
+                  value={10}
                 >
-                  View
-                </button>
-              </p>
-            </div>
-          </td>
-          <td
-            align="right"
-          >
-            <div>
-              <p>
-                <button
-                  aria-label={null}
-                  className="btn btn-success btn btn-secondary"
-                  onClick={[Function]}
-                  type="button"
+                  10
+                </option>
+                <option
+                  value={20}
                 >
-                  Update
-                </button>
-              </p>
-            </div>
-          </td>
-          <td
-            align="right"
-          >
-            <div>
-              <p>
-                <button
-                  aria-label={null}
-                  className="btn btn-danger btn btn-secondary"
-                  onClick={[Function]}
-                  type="button"
+                  20
+                </option>
+                <option
+                  value={50}
                 >
-                  Delete
-                </button>
-              </p>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+                  50
+                </option>
+                <option
+                  value={100}
+                >
+                  100
+                </option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div
+          className="col-sm-12 col-md-6"
+          data-test="datatable-search"
+        >
+          <div
+            className="dataTables_filter"
+            data-test="datatable-input"
+          >
+            <label>
+              Search
+              <input
+                className="form-control form-control-sm"
+                onChange={[Function]}
+                placeholder="Search"
+                type="search"
+                value=""
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+          data-test="datatable-table"
+        >
+          <div
+            className=""
+            data-test="table"
+            style={
+              Object {
+                "maxHeight": undefined,
+              }
+            }
+          >
+            <table
+              className="table table-bordered table-sm table-striped dataTable"
+              entries={10}
+            >
+              <thead
+                data-test="datatable-head"
+              >
+                <tr>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    ID
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    App Name
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    Type
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    Created On
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                data-test="table-body"
+              >
+                <tr>
+                  <td>
+                    example id
+                  </td>
+                  <td>
+                    example name
+                  </td>
+                  <td>
+                    example application type
+                  </td>
+                  <td>
+                    example date
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <thead
+                data-test="table-foot"
+              >
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    App Name
+                  </th>
+                  <th>
+                    Type
+                  </th>
+                  <th>
+                    Created On
+                  </th>
+                  <th>
+                    
+                  </th>
+                  <th>
+                    
+                  </th>
+                  <th>
+                    
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12 col-md-5"
+          data-test="datatable-info"
+        >
+          <div
+            aria-live="polite"
+            className="dataTables_info"
+            role="status"
+          >
+            Showing 1 to 1 of 1 entries
+          </div>
+        </div>
+        <div
+          className="col-sm-12 col-md-7"
+          data-test="datatable-pagination"
+        >
+          <div
+            className="dataTables_paginate"
+          >
+            <ul
+              className="pagination"
+              data-test="pagination"
+            >
+              <li
+                className="disabled page-item"
+                data-test="page-item"
+              >
+                <a
+                  aria-label="Previous"
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+
+                  <span>
+                    Previous
+                  </span>
+                </a>
+              </li>
+              <li
+                className="active page-item"
+                data-test="page-item"
+              >
+                <a
+                  className="page-link page-link"
+                  data-test="page-link"
+
+                  onClick={[Function]}
+                >
+                  1
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </a>
+              </li>
+              <li
+                className="disabled page-item"
+                data-test="page-item"
+              >
+                <a
+                  aria-label="Next"
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  <span>
+                    Next
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <button
       aria-label={null}
       className="btn btn-primary"
