@@ -7,8 +7,6 @@ import { connect } from 'react-redux';
 let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
   const isPackageSubmission = (appTypeValue || data.appTypeLabel) === 'Package Submission';
-  const isMailForwarding = (appTypeValue || data.appTypeLabel) === 'Mail Forwarding';
-  const isAddressChange = (appTypeValue || data.appTypeLabel) === 'Address Change';
 
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
@@ -21,17 +19,7 @@ let AppUpdate = props => {
   }
 
   const filterProducts = () => {
-    let filterProducts = products;
-    if (isPackageSubmission) {
-      filterProducts = products.filter(product => product.hierarchypath === "USPS\\Package Submission");
-    }
-    else if (isMailForwarding) {
-      filterProducts = products.filter(product => product.hierarchypath === "USPS\\Mail Forwarding");
-    }
-    else if (isAddressChange) {
-      filterProducts = products.filter(product => product.hierarchypath === "USPS\\Address Change");
-    }
-    return filterProducts;
+      return products.filter(product => product.hierarchypath === `USPS\\${(appTypeValue || data.appTypeLabel)}`);
   }
 
   return (
@@ -44,7 +32,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="ss_applicationtype" component={renderField} type="view"
+          <Field name="ss_applicationtype" component={renderField} type="select"
             label="Application Type" defaultValue={data.appTypeLabel}>
             <option value="Address Change">Address Change</option>
             <option value="Package Submission">Package Submission</option>
@@ -55,7 +43,7 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_product_value" component={renderField} type="view"
+          <Field name="_ss_product_value" component={renderField} type="select"
             label="Product" defaultValue={data._ss_product_value}>
             <option value={null}></option>
             {renderOptions(filterProducts(), "productid", "name")}
@@ -75,8 +63,9 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_customer_value" component={renderField} type="view"
+          <Field name="_ss_customer_value" component={renderField} type="select"
             label="Customer" defaultValue={data._ss_customer_value}>
+              <option value={null}></option>
             {renderOptions(customers, "contactid", "fullname")}
           </Field>
         </div>
@@ -84,8 +73,9 @@ let AppUpdate = props => {
 
       <FormGroup className="field">
         <div className="control">
-          <Field name="_ss_destinationaddress_value" component={renderField} type="view"
+          <Field name="_ss_destinationaddress_value" component={renderField} type="select"
             label="Destination Address" defaultValue={data._ss_destinationaddress_value}>
+              <option value={null}></option>
             {renderOptions(addresses, "ss_customaddressid", "ss_name")}
           </Field>
         </div>

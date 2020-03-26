@@ -61,7 +61,6 @@ const AppView = props => {
     )
 }
 
-
 AppView.propTypes = {
     handleHide: PropTypes.func,
     name: PropTypes.string,
