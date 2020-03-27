@@ -1,0 +1,285 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppUpdate renders correctly 1`] = `
+<form
+  className="form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Name
+          </label>
+          <input
+            className="input form-control"
+            name="ss_name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Application Type
+          </label>
+          <select
+            className="input form-control"
+            name="ss_applicationtype"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+          >
+            <option
+              value="Address Change"
+            >
+              Address Change
+            </option>
+            <option
+              value="Package Submission"
+            >
+              Package Submission
+            </option>
+            <option
+              value="Mail Forwarding"
+            >
+              Mail Forwarding
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Product
+          </label>
+          <select
+            className="input form-control"
+            name="_ss_product_value"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+          >
+            <option
+              value={null}
+            />
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Shipping Speed
+          </label>
+          <select
+            className="input form-control"
+            name="_ss_shippingspeed_value"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+          >
+            <option
+              value={null}
+            />
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Customer
+          </label>
+          <select
+            className="input form-control"
+            defaultValue="B"
+            name="_ss_customer_value"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+          >
+            <option
+              value={null}
+            />
+            <option
+              value="A"
+            >
+              Alice Astronaut
+            </option>
+            <option
+              value="B"
+            >
+              Bobby Butcher
+            </option>
+            <option
+              value="C"
+            >
+              Charlie Cobbler
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Destination Address
+          </label>
+          <select
+            className="input form-control"
+            name="_ss_destinationaddress_value"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+          >
+            <option
+              value={null}
+            />
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+    >
+      <button
+        aria-label={null}
+        className="button is-link btn btn-success"
+        onClick={[Function]}
+      >
+        Submit
+      </button>
+       
+      <button
+        aria-label={null}
+        className="btn btn-secondary"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+`;
