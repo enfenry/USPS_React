@@ -21,7 +21,7 @@ let AppUpdate = props => {
   }
 
   const filterProducts = () => {
-      return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(appTypeValue) || data.appTypeLabel)}`);
+      return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)) || data.appTypeLabel)}`);
   }
 
   return (
