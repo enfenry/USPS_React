@@ -5,15 +5,16 @@ import PropTypes from 'prop-types';
 import { Button } from 'reactstrap';
 import ModalButton from '../modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
+import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/applicationTypes';
 
 
-function getApplicationTypeName(applicationType) {
+export function getApplicationTypeName(applicationType) {
     switch (applicationType) {
-        case 717800000:
+        case ADDRESS_CHANGE:
             return "Address Change";
-        case 717800001:
+        case MAIL_FORWARDING:
             return "Mail Forwarding";
-        case 717800002:
+        case PACKAGE_SUBMISSION:
             return "Package Submission";
         default:
             return applicationType;

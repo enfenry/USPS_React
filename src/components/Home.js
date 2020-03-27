@@ -4,6 +4,7 @@ import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
 import * as applicationsActions from '../actions/applicationsActions';
+import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/applicationTypes';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -36,13 +37,13 @@ const Home = (props) => {
         var distribution0 = [0, 0, 0];
         props.applications.forEach((application) => {
             switch (application.ss_applicationtype) {
-                case 717800000:
+                case ADDRESS_CHANGE:
                     distribution0[0]++;
                     break;
-                case 717800001:
+                case MAIL_FORWARDING:
                     distribution0[1]++;
                     break;
-                case 717800002:
+                case PACKAGE_SUBMISSION:
                     distribution0[2]++;
 
                     break;

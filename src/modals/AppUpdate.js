@@ -3,12 +3,12 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import {getApplicationTypeName} from '../components/ApplicationsRender';
+import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/applicationTypes';
 
 let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
-  const isPackageSubmission = (appTypeValue || data.appTypeLabel) === 'Package Submission';
-
-  console.log('appupdate props',props);
+  const isPackageSubmission = (appTypeValue || data.ss_applicationtype) === PACKAGE_SUBMISSION;
 
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
@@ -21,7 +21,7 @@ let AppUpdate = props => {
   }
 
   const filterProducts = () => {
-      return products.filter(product => product.hierarchypath === `USPS\\${(appTypeValue || data.appTypeLabel)}`);
+      return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(appTypeValue) || data.appTypeLabel)}`);
   }
 
   return (
@@ -35,10 +35,10 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="ss_applicationtype" component={renderField} type="select"
-            label="Application Type" defaultValue={data.appTypeLabel}>
-            <option value="Address Change">Address Change</option>
-            <option value="Package Submission">Package Submission</option>
-            <option value="Mail Forwarding">Mail Forwarding</option>
+            label="Application Type" defaultValue={data.ss_applicationtype}>
+            <option value={ADDRESS_CHANGE}>Address Change</option>
+            <option value={MAIL_FORWARDING}>Mail Forwarding</option>
+            <option value={PACKAGE_SUBMISSION}>Package Submission</option>
           </Field>
         </div>
       </FormGroup>
