@@ -11,11 +11,17 @@ export default function applicationsReducer(state = {}, action) {
         case READ_APPLICATIONS_FAILURE:
             return { ...state, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };
 
-        case UPDATE_APPLICATION_SUCCESSFUL:
-            return { ...state, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
+        case UPDATE_APPLICATION_SUCCESSFUL: {
+            const itemIndex = state.applications.findIndex((e) => (e.ss_applicationid === action.id));
+            let apps = JSON.parse(JSON.stringify(state.applications));    
+            let newApplications = apps.map((item, index) => {
+                if (index !== itemIndex) {return item} 
+                    return Object.assign(item, action.data);
+            })
+            return { ...state, applications: newApplications, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
+        }
         case UPDATE_APPLICATION_FAILURE:
-            return { ...state, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };    
-
+            return { ...state, applications:state.applications, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };    
         case DELETE_APPLICATION_SUCCESSFUL:
             return { ...state, applications: state.applications.filter((e) => e.ss_applicationid !== action.data), applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
         case DELETE_APPLICATION_FAILURE:

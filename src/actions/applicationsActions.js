@@ -33,12 +33,8 @@ export const readApplications = () => {
 
 
 export const updateApplication = (values, id) => {
-    console.log("values", values);
-    console.log("id", id);
 
     let application = {}
-
-    console.log(values);
 
     if (values.ss_name) {application.ss_name = values.ss_name}
     if (values.ss_applicationtype) {application.ss_applicationtype = parseInt(values.ss_applicationtype)}
@@ -47,8 +43,6 @@ export const updateApplication = (values, id) => {
     if (values._ss_product_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_product_value})`}
     if (values._ss_shippingspeed_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
     if (values._ss_destinationaddress_value) {application["ss_DestinationAddress@odata.bind"] = `/ss_customaddresses(${values._ss_destinationaddress_value})`}
-
-    console.log("application", application);
 
     let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications(" + id + ")";
     let config = {
@@ -63,9 +57,8 @@ export const updateApplication = (values, id) => {
     return dispatch => {
 
         return adalApiFetch(axios, uri, config)
-            .then(res => {
-                console.log("response: ", res);
-                dispatch(_updateApplicationSuccess(res));
+            .then(() => {
+                dispatch(_updateApplicationSuccess(application, id));
             })
             .catch((error) => {
                 console.log(error);
@@ -119,10 +112,11 @@ const _readApplicationsStarted = () => {
     };
 }
 
-const _updateApplicationSuccess = (res) => {
+const _updateApplicationSuccess = (application, id) => {
     return {
         type: UPDATE_APPLICATION_SUCCESSFUL,
-        data: res.data
+        data: application,
+        id: id
     };
 }
 
