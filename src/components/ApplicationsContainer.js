@@ -34,7 +34,9 @@ const ApplicationsContainer = (props) => {
                         console.log("Update values", values);
                         console.log("Update application", application);
                     }}
-                    handleDelete={x => props.actions.deleteApplication(x.ss_applicationid)}
+                    handleDelete={x => {
+                        console.log('Deleting', x );
+                        props.actions.deleteApplication(x.ss_applicationid)}}
                     handleAdd={() => console.log("Add")}
                 />
             </div>

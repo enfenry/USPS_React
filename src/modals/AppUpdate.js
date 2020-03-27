@@ -8,6 +8,8 @@ let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
   const isPackageSubmission = (appTypeValue || data.appTypeLabel) === 'Package Submission';
 
+  console.log('appupdate props',props);
+
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
   const renderOptions = (array, value, display) => {
@@ -84,7 +86,7 @@ let AppUpdate = props => {
 
       <div className="field">
         <div className="control">
-          <Button className="button is-link" color="success" onClick={handleHide}>Submit</Button>{' '}
+          <Button className="button is-link" color="success" onClick={handleSubmit}>Submit</Button>{' '}
           <Button color="secondary" onClick={handleHide}>Cancel</Button>
         </div>
       </div>
@@ -95,9 +97,21 @@ let AppUpdate = props => {
 const validate = val => {
   const errors = {};
 
-  if (!val.ss_name) {
-    errors.ss_name = 'Required';
-  }
+  // if (!val.ss_name) {
+  //   errors.ss_name = 'Required';
+  // }
+  // if (!val.ss_applicationtype) {
+  //   errors.ss_applicationtype = 'Required';
+  // }
+  // if (!val._ss_product_value) {
+  //   errors._ss_product_value = 'Required';
+  // }
+  // if (!val._ss_customer_value) {
+  //   errors._ss_customer_value = 'Required';
+  // }
+  // if (!val._ss_destinationaddress_value) {
+  //   errors._ss_destinationaddress_value = 'Required';
+  // }
   return errors;
 };
 
