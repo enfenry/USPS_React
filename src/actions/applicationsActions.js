@@ -32,11 +32,23 @@ export const readApplications = () => {
 }
 
 
-export const updateApplications = (values, id) => {
+export const updateApplication = (values, id) => {
+    console.log("values", values);
+    console.log("id", id);
 
-    let application = {
+    let application = {}
 
-    }
+    console.log(values);
+
+    if (values.ss_name) {application.ss_name = values.ss_name}
+    if (values.ss_applicationtype) {application.ss_applicationtype = parseInt(values.ss_applicationtype)}
+
+    if (values._ss_customer_value) {application["ss_Customer@odata.bind"] = `/contacts(${values._ss_customer_value})`}
+    if (values._ss_product_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_product_value})`}
+    if (values._ss_shippingspeed_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
+    if (values._ss_destinationaddress_value) {application["ss_DestinationAddress@odata.bind"] = `/ss_customaddresses(${values._ss_destinationaddress_value})`}
+
+    console.log("application", application);
 
     let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications(" + id + ")";
     let config = {
@@ -50,16 +62,16 @@ export const updateApplications = (values, id) => {
 
     return dispatch => {
 
-
         return adalApiFetch(axios, uri, config)
             .then(res => {
+                console.log("response: ", res);
                 dispatch(_updateApplicationSuccess(res));
             })
             .catch((error) => {
                 console.log(error);
                 dispatch(_updateApplicationFailed(error));
             });
-    };
+    }
 }
 
 export const deleteApplication = (id) => {
@@ -109,14 +121,14 @@ const _readApplicationsStarted = () => {
 
 const _updateApplicationSuccess = (res) => {
     return {
-        type: READ_APPLICATIONS_SUCCESSFUL,
+        type: UPDATE_APPLICATION_SUCCESSFUL,
         data: res.data
     };
 }
 
 const _updateApplicationFailed = (error) => {
     return {
-        type: READ_APPLICATIONS_FAILURE,
+        type: UPDATE_APPLICATION_FAILURE,
         error
     };
 }
