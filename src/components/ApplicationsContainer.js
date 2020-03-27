@@ -30,12 +30,10 @@ const ApplicationsContainer = (props) => {
             <div className="m-5">
                 <ApplicationsRender
                     applications={props.applications}
-                    handleUpdate={ (values,application) => {
-                        console.log("Update values", values);
-                        console.log("Update application", application);
+                    handleUpdate={(values, application) => {
+                        props.actions.updateApplication(values, application.ss_applicationid)
                     }}
                     handleDelete={x => {
-                        console.log('Deleting', x );
                         props.actions.deleteApplication(x.ss_applicationid)}}
                     handleAdd={() => console.log("Add")}
                 />
@@ -51,14 +49,6 @@ ApplicationsContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-    console.log("state");
-    console.log(state);
-    console.log("apps");
-    console.log(state.applications);
-    console.log("applic");
-    console.log(state.applicationsReducer.applications);
-    console.log("products");
-    console.log(state.productsReducer.products);
     return {
         applications: state.applicationsReducer.applications,
         products: state.productsReducer.products,
