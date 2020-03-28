@@ -11,8 +11,6 @@ let AppUpdate = props => {
   const isPackageSubmission = (parseInt(appTypeValue) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
-  console.log('appUpdate props',props);
-
   const renderOptions = (array, value, display) => {
     return array.map(el => {
       return (
