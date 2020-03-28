@@ -7,6 +7,33 @@ import { READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_FAILURE, READ_APPLICATI
          DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE  
 } from '../constants/actionTypes';
 
+export const addApplication = () => {
+
+    let config = {
+        method: 'post',
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        headers: {
+            'Prefer': 'return=representation'
+         },
+    };
+
+    return dispatch => {
+        dispatch(_readApplicationsStarted());
+
+        return adalApiFetch(axios, "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications", config)
+            .then(res => {
+                dispatch(_readApplicationsSuccess(res));
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(_readApplicationsFailed(error));
+            });
+    };
+}
+
 export const readApplications = () => {
 
     let config = {
@@ -51,14 +78,17 @@ export const updateApplication = (values, id) => {
         'OData-Version': 4.0,
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
+        headers: {
+           'Prefer': 'return=representation'
+        },
         data: application
     };
 
     return dispatch => {
 
         return adalApiFetch(axios, uri, config)
-            .then(() => {
-                dispatch(_updateApplicationSuccess(application, id));
+            .then((res) => {
+                dispatch(_updateApplicationSuccess(res, id));
             })
             .catch((error) => {
                 console.log(error);
@@ -82,10 +112,8 @@ export const deleteApplication = (id) => {
         return adalApiFetch(axios, uri, config)
             .then(() => {
                 dispatch(_deleteApplicationSuccess(id));
-                console.log("good");
             })
             .catch((error) => {
-                console.log("bad");
                 console.log(error);
                 dispatch(_deleteApplicationFailed(error));
             });
@@ -112,10 +140,10 @@ const _readApplicationsStarted = () => {
     };
 }
 
-const _updateApplicationSuccess = (application, id) => {
+const _updateApplicationSuccess = (res, id) => {
     return {
         type: UPDATE_APPLICATION_SUCCESSFUL,
-        data: application,
+        data: res.data,
         id: id
     };
 }

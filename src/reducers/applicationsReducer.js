@@ -14,11 +14,8 @@ export default function applicationsReducer(state = {}, action) {
         case UPDATE_APPLICATION_SUCCESSFUL: {
             const itemIndex = state.applications.findIndex((e) => (e.ss_applicationid === action.id));
             let apps = JSON.parse(JSON.stringify(state.applications));    
-            let newApplications = apps.map((item, index) => {
-                if (index !== itemIndex) {return item} 
-                    return Object.assign(item, action.data);
-            })
-            return { ...state, applications: newApplications, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
+            apps[itemIndex]=action.data
+            return { ...state, applications: apps, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
         }
         case UPDATE_APPLICATION_FAILURE:
             return { ...state, applications:state.applications, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };    
