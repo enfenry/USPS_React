@@ -3,10 +3,8 @@ export default function applicationsReducer(state = {}, action) {
 
     switch (action.type) {
 
-        case CREATE_APPLICATION_SUCCESSFUL: {
-            let apps = JSON.parse(JSON.stringify(state.applications)).push(action.data);    
-            return { ...state, applications: apps, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
-        }
+        case CREATE_APPLICATION_SUCCESSFUL: 
+            return { ...state, applications: [...state.applications].push(action.data), applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false }; 
         case CREATE_APPLICATION_FAILURE:
             return { ...state, applications:state.applications, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };    
 
@@ -19,8 +17,8 @@ export default function applicationsReducer(state = {}, action) {
 
         case UPDATE_APPLICATION_SUCCESSFUL: {
             const itemIndex = state.applications.findIndex((e) => (e.ss_applicationid === action.id));
-            let apps = JSON.parse(JSON.stringify(state.applications));    
-            apps[itemIndex]=action.data
+            let apps = [...state.applications];   
+            apps[itemIndex]=action.data;
             return { ...state, applications: apps, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
         }
         case UPDATE_APPLICATION_FAILURE:
