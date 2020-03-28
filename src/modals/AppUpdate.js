@@ -9,8 +9,6 @@ import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/
 let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
   const isPackageSubmission = (parseInt(appTypeValue) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
-  console.log('AppUpdate','isPackageSubmission', isPackageSubmission,'appTypeValue', appTypeValue,'data.ss_applicationtype',data.ss_applicationtype);
-
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
   const renderOptions = (array, value, display) => {
@@ -96,7 +94,7 @@ let AppUpdate = props => {
 };
 
 const validate = (values, props) => {
-  const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
+  const { data } = props;
   const errors = {};
 
   const valueOrProp = (fieldName) => {
@@ -104,7 +102,6 @@ const validate = (values, props) => {
   }
 
   const isPackageSubmission = (parseInt(values.ss_applicationtype) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
-  console.log('validate', 'isPackageSubmission', isPackageSubmission,'appTypeValue', appTypeValue,'data.ss_applicationtype',data.ss_applicationtype);
 
   if (!(valueOrProp('ss_name'))) {
     errors.ss_name = 'Required';
