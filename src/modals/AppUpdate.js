@@ -8,8 +8,7 @@ import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/
 
 let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
-  const isPackageSubmission = (appTypeValue || data.ss_applicationtype) === PACKAGE_SUBMISSION;
-
+  const isPackageSubmission = (parseInt(appTypeValue) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
   const renderOptions = (array, value, display) => {
@@ -94,24 +93,34 @@ let AppUpdate = props => {
   );
 };
 
-const validate = val => {
+const validate = (values, props) => {
+  const { data } = props;
   const errors = {};
 
-  // if (!val.ss_name) {
-  //   errors.ss_name = 'Required';
-  // }
-  // if (!val.ss_applicationtype) {
-  //   errors.ss_applicationtype = 'Required';
-  // }
-  // if (!val._ss_product_value) {
-  //   errors._ss_product_value = 'Required';
-  // }
-  // if (!val._ss_customer_value) {
-  //   errors._ss_customer_value = 'Required';
-  // }
-  // if (!val._ss_destinationaddress_value) {
-  //   errors._ss_destinationaddress_value = 'Required';
-  // }
+  const valueOrProp = (fieldName) => {
+    return values[fieldName] || data[fieldName];
+  }
+
+  const isPackageSubmission = (parseInt(values.ss_applicationtype) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
+
+  if (!(valueOrProp('ss_name'))) {
+    errors.ss_name = 'Required';
+  }
+  if (!(valueOrProp('ss_applicationtype'))) {
+    errors.ss_applicationtype = 'Required';
+  }
+  if (!(valueOrProp('_ss_product_value'))) {
+    errors._ss_product_value = 'Required';
+  }
+  if (!(valueOrProp('_ss_shippingspeed_value')) && isPackageSubmission) {
+    errors._ss_shippingspeed_value = 'Required';
+  }
+  if (!(valueOrProp('_ss_customer_value'))) {
+    errors._ss_customer_value = 'Required';
+  }
+  if (!(valueOrProp('_ss_destinationaddress_value'))) {
+    errors._ss_destinationaddress_value = 'Required';
+  }
   return errors;
 };
 
@@ -129,7 +138,7 @@ const renderField = (props) => {
         <Input className="input" {...input} type={type} defaultValue={defaultValue}>
           {props.children}
         </Input>
-        {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+        {touched && ((error && <span style={{color:'red'}}>{error}</span>) || (warning && <span style={{color:'orange'}}>{warning}</span>))}
       </div>
     </div>
   )
@@ -170,6 +179,9 @@ AppUpdate.propTypes = {
 AppUpdate = reduxForm({
   form: 'appUpdate',
   validate,
+  onSubmitSuccess: (result, dispatch, props) => {
+    props.handleHide();
+  }
 })(AppUpdate);
 
 function mapStateToProps(state) {
