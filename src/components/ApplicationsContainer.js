@@ -31,6 +31,8 @@ const ApplicationsContainer = (props) => {
                 <ApplicationsRender
                     applications={props.applications}
                     handleUpdate={(values, application) => {
+                        console.log('values',values);
+                        console.log('application',application);
                         props.actions.updateApplication(values, application.ss_applicationid)
                     }}
                     handleDelete={x => {

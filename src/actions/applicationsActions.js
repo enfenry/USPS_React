@@ -41,7 +41,7 @@ export const updateApplication = (values, id) => {
 
     if (values._ss_customer_value) {application["ss_Customer@odata.bind"] = `/contacts(${values._ss_customer_value})`}
     if (values._ss_product_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_product_value})`}
-    if (values._ss_shippingspeed_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
+    if (values._ss_shippingspeed_value) {application["ss_ShippingSpeed@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
     if (values._ss_destinationaddress_value) {application["ss_DestinationAddress@odata.bind"] = `/ss_customaddresses(${values._ss_destinationaddress_value})`}
 
     let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications(" + id + ")";
