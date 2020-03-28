@@ -9,8 +9,6 @@ import { bindActionCreators } from 'redux';
 
 const ApplicationsContainer = (props) => {
 
-    console.log(props);
-
     if (props.applicationsRequestPending || props.ordersRequestPending || props.productsRequestPending || props.customersRequestPending || props.addressesRequestPending) {
         return (
             <div className="d-flex justify-content-center">
@@ -31,8 +29,6 @@ const ApplicationsContainer = (props) => {
                 <ApplicationsRender
                     applications={props.applications}
                     handleUpdate={(values, application) => {
-                        console.log('values',values);
-                        console.log('application',application);
                         props.actions.updateApplication(values, application.ss_applicationid)
                     }}
                     handleDelete={x => {
