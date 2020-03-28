@@ -11,6 +11,8 @@ let AppUpdate = props => {
   const isPackageSubmission = (parseInt(appTypeValue) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
+  console.log('appUpdate props',props);
+
   const renderOptions = (array, value, display) => {
     return array.map(el => {
       return (
@@ -153,7 +155,10 @@ renderField.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
   show: PropTypes.bool,
-  defaultValue: PropTypes.string,
+  defaultValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
   meta: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -169,7 +174,7 @@ AppUpdate.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.object),
   addresses: PropTypes.arrayOf(PropTypes.object),
   products: PropTypes.arrayOf(PropTypes.object),
-  appTypeValue: PropTypes.string,
+  appTypeValue: PropTypes.number,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

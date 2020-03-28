@@ -8,15 +8,17 @@ import AppView from './AppView';
 
 const MyModal = (props) => {
 
-  function renderBody(label, entity) {
+  const {onSubmit, handleHide, show, name, label, entity} = props;
+
+  const renderBody = (label, entity) => {
 
     switch (label) {
       case 'Delete':
         return (
           <div>
             <p>{'Are you sure?'}</p>
-            <Button color="danger" onClick={props.onSubmit}>{props.label}</Button>
-            <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
+            <Button color="danger" onClick={onSubmit}>{label}</Button>
+            <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
       case 'Update':
         switch (entity) {
@@ -42,12 +44,12 @@ const MyModal = (props) => {
 
 
   return (
-    <Modal isOpen={props.show} size="lg"
+    <Modal isOpen={show} size="lg"
     // backdrop={true}
     >
-      <ModalHeader>{props.label} {props.name}</ModalHeader>
+      <ModalHeader>{label} {name}</ModalHeader>
       <ModalBody>
-        {renderBody(props.label, props.entity)}
+        {renderBody(label, entity)}
       </ModalBody>
     </Modal>
   );
