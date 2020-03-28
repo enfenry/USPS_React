@@ -1,8 +1,12 @@
-import { READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_PENDING, READ_APPLICATIONS_FAILURE, UPDATE_APPLICATION_SUCCESSFUL, UPDATE_APPLICATION_FAILURE, DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE } from '../constants/actionTypes';
-
+import { CREATE_APPLICATION_SUCCESSFUL, CREATE_APPLICATION_FAILURE, READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_PENDING, READ_APPLICATIONS_FAILURE, UPDATE_APPLICATION_SUCCESSFUL, UPDATE_APPLICATION_FAILURE, DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE } from '../constants/actionTypes'
 export default function applicationsReducer(state = {}, action) {
 
     switch (action.type) {
+
+        case CREATE_APPLICATION_SUCCESSFUL: 
+            return { ...state, applications: [...state.applications].push(action.data), applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false }; 
+        case CREATE_APPLICATION_FAILURE:
+            return { ...state, applications:state.applications, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };    
 
         case READ_APPLICATIONS_SUCCESSFUL:
             return { ...state, applications: action.data.value, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
@@ -13,15 +17,13 @@ export default function applicationsReducer(state = {}, action) {
 
         case UPDATE_APPLICATION_SUCCESSFUL: {
             const itemIndex = state.applications.findIndex((e) => (e.ss_applicationid === action.id));
-            let apps = JSON.parse(JSON.stringify(state.applications));    
-            let newApplications = apps.map((item, index) => {
-                if (index !== itemIndex) {return item} 
-                    return Object.assign(item, action.data);
-            })
-            return { ...state, applications: newApplications, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
+            let apps = [...state.applications];   
+            apps[itemIndex]=action.data;
+            return { ...state, applications: apps, applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
         }
         case UPDATE_APPLICATION_FAILURE:
             return { ...state, applications:state.applications, applicationsRequestSuccess: false, applicationsRequestPending: false, applicationsRequestFailed: true };    
+
         case DELETE_APPLICATION_SUCCESSFUL:
             return { ...state, applications: state.applications.filter((e) => e.ss_applicationid !== action.data), applicationsRequestSuccess: true, applicationsRequestPending: false, applicationsRequestFailed: false };
         case DELETE_APPLICATION_FAILURE:

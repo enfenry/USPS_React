@@ -7,8 +7,33 @@ import { READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_FAILURE, READ_APPLICATI
          DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE  
 } from '../constants/actionTypes';
 
-export const readApplications = () => {
+export const createApplication = (application) => {
 
+    let config = {
+        method: 'post',
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        headers: {
+            'Prefer': 'return=representation'
+         },
+         data: application
+    };
+
+    return dispatch => {
+        return adalApiFetch(axios, "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications", config)
+            .then(res => {
+                dispatch(_createApplicationSuccess(res));
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(_createApplicationFailed(error));
+            });
+    };
+}
+
+export const readApplications = () => {
     let config = {
         method: 'get',
         'OData-MaxVersion': 4.0,
@@ -16,7 +41,6 @@ export const readApplications = () => {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
     };
-
     return dispatch => {
         dispatch(_readApplicationsStarted());
 
@@ -31,14 +55,12 @@ export const readApplications = () => {
     };
 }
 
-
 export const updateApplication = (values, id) => {
 
     let application = {}
 
     if (values.ss_name) {application.ss_name = values.ss_name}
     if (values.ss_applicationtype) {application.ss_applicationtype = parseInt(values.ss_applicationtype)}
-
     if (values._ss_customer_value) {application["ss_Customer@odata.bind"] = `/contacts(${values._ss_customer_value})`}
     if (values._ss_product_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_product_value})`}
     if (values._ss_shippingspeed_value) {application["ss_ShippingSpeed@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
@@ -51,14 +73,17 @@ export const updateApplication = (values, id) => {
         'OData-Version': 4.0,
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
+        headers: {
+           'Prefer': 'return=representation'
+        },
         data: application
     };
 
     return dispatch => {
 
         return adalApiFetch(axios, uri, config)
-            .then(() => {
-                dispatch(_updateApplicationSuccess(application, id));
+            .then((res) => {
+                dispatch(_updateApplicationSuccess(res, id));
             })
             .catch((error) => {
                 console.log(error);
@@ -82,13 +107,25 @@ export const deleteApplication = (id) => {
         return adalApiFetch(axios, uri, config)
             .then(() => {
                 dispatch(_deleteApplicationSuccess(id));
-                console.log("good");
             })
             .catch((error) => {
-                console.log("bad");
                 console.log(error);
                 dispatch(_deleteApplicationFailed(error));
             });
+    };
+}
+
+const _createApplicationSuccess = (res) => {
+    return {
+        type: CREATE_APPLICATION_SUCCESSFUL,
+        data: res.data
+    };
+}
+
+const _createApplicationFailed = (error) => {
+    return {
+        type: CREATE_APPLICATION_FAILURE,
+        error
     };
 }
 
@@ -112,10 +149,10 @@ const _readApplicationsStarted = () => {
     };
 }
 
-const _updateApplicationSuccess = (application, id) => {
+const _updateApplicationSuccess = (res, id) => {
     return {
         type: UPDATE_APPLICATION_SUCCESSFUL,
-        data: application,
+        data: res.data,
         id: id
     };
 }
