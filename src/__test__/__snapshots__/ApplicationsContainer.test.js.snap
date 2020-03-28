@@ -8,6 +8,14 @@ exports[`ApplicationsContainer renders correctly 1`] = `
     <h1>
       Applications
     </h1>
+    <button
+      aria-label={null}
+      className="btn btn-primary"
+      onClick={[Function]}
+      type="button"
+    >
+      Create New Application
+    </button>
     <div
       className="dataTables_wrapper dt-bootstrap4"
       data-test="datatable"
@@ -275,7 +283,6 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                   data-test="page-link"
                   onClick={[Function]}
                 >
-
                   <span>
                     Previous
                   </span>
@@ -288,7 +295,6 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                 <a
                   className="page-link page-link"
                   data-test="page-link"
-
                   onClick={[Function]}
                 >
                   1
@@ -319,14 +325,6 @@ exports[`ApplicationsContainer renders correctly 1`] = `
         </div>
       </div>
     </div>
-    <button
-      aria-label={null}
-      className="btn btn-primary"
-      onClick={[Function]}
-      type="button"
-    >
-      Add
-    </button>
   </div>
 </div>
 `;
