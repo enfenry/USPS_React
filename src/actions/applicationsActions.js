@@ -165,7 +165,6 @@ const _updateApplicationFailed = (error) => {
 }
 
 const _deleteApplicationSuccess = (id) => {
-    console.log(id);
     return {
         type: DELETE_APPLICATION_SUCCESSFUL,
         data: id
