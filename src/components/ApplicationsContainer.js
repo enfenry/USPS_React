@@ -25,6 +25,7 @@ const ApplicationsContainer = (props) => {
         );
 
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
+        console.log("propsContainer, ", props);
         return (
             <div className="m-5">
                 <ApplicationsRender
