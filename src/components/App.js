@@ -10,7 +10,6 @@ import ApplicationsContainer from './ApplicationsContainer';
 import CustomersContainer from './CustomersContainer';
 import DynamicModal from '../modals/DynamicModal';
 
-
 export class App extends React.Component{
     render() {
         return(
