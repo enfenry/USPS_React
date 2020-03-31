@@ -8,7 +8,7 @@ import productsReducer from './productsReducer';
 import { reducer as modal } from 'redux-modal';
 import { reducer as formReducer } from 'redux-form';
 
- const rootReducer = combineReducers({
+const rootReducer = combineReducers({
   applicationsReducer,
   addressesReducer,
   productsReducer,
