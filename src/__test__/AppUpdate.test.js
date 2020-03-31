@@ -1,12 +1,12 @@
 import React from 'react';
-import AppUpdate from '../modals/AppUpdate';
+import AppCreateOrUpdate from '../modals/AppCreateOrUpdate';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore([]);
 
-test('AppUpdate renders correctly', () => {
+test('AppCreateOrUpdate renders correctly', () => {
 
     const store = mockStore({
         productsReducer: { products: [] },
@@ -32,7 +32,7 @@ test('AppUpdate renders correctly', () => {
 
     const component = renderer.create(
         <Provider store={store}>
-            <AppUpdate
+            <AppCreateOrUpdate
                 data={{
                     _ss_customer_value: "B"
                 }}

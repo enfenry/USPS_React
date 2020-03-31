@@ -32,9 +32,12 @@ const ApplicationsContainer = (props) => {
                     handleUpdate={(values, application) => {
                         props.actions.updateApplication(values, application.ss_applicationid)
                     }}
-                    handleDelete={x => {
-                        props.actions.deleteApplication(x.ss_applicationid)}}
-                    handleAdd={() => console.log("Add")}
+                    handleDelete={application => {
+                        props.actions.deleteApplication(application.ss_applicationid)}}
+                    handleCreate={(values) => {
+                        console.log(values);
+                        props.actions.createApplication(values)
+                    }}
                 />
             </div>
         );

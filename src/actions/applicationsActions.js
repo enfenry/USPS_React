@@ -7,7 +7,16 @@ import { READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_FAILURE, READ_APPLICATI
          DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE  
 } from '../constants/actionTypes';
 
-export const createApplication = (application) => {
+export const createApplication = (values) => {
+
+    let application = {}
+
+    if (values.ss_name) {application.ss_name = values.ss_name}
+    if (values.ss_applicationtype) {application.ss_applicationtype = parseInt(values.ss_applicationtype)}
+    if (values._ss_customer_value) {application["ss_Customer@odata.bind"] = `/contacts(${values._ss_customer_value})`}
+    if (values._ss_product_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_product_value})`}
+    if (values._ss_shippingspeed_value) {application["ss_ShippingSpeed@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
+    if (values._ss_destinationaddress_value) {application["ss_DestinationAddress@odata.bind"] = `/ss_customaddresses(${values._ss_destinationaddress_value})`}
 
     let config = {
         method: 'post',
