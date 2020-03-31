@@ -17,13 +17,13 @@ div.main {
     
 }
 
-body {
-    padding-left: 100px;
+/*body {
+    padding-left: 100px;        I dissent. -Charles
     padding-right: 100px;
     padding-top: 10px;
     padding-bottom: 10px;
     ;
-}
+}*/
 
 li.list-inline-item {
     padding-right: 20px;

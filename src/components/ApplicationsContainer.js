@@ -38,7 +38,11 @@ const ApplicationsContainer = (props) => {
             </div>
         );
     } else {
-        return null;
+        return (
+            <div className="alert alert-danger" role="alert">
+                Invalid state! This message should never appear.
+            </div>
+        );
     }
 }
 
@@ -68,7 +72,11 @@ function mapStateToProps(state) {
 
         addressesRequestPending: state.addressesReducer.addressesRequestPending,
         addressesRequestFailed: state.addressesReducer.addressesRequestFailed,
-        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess
+        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess,
+
+        customersRequestPending: state.customersReducer.customersRequestPending,
+        customersRequestFailed: state.customersReducer.customersRequestFailed,
+        customersRequestSuccess: state.customersReducer.customersRequestSuccess
     }
 }
 
