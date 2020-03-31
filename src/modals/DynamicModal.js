@@ -24,7 +24,7 @@ const MyModal = (props) => {
         switch (entity) {
           case 'Application':
             return (
-              <AppUpdate {...props} />
+              <AppUpdate {...props} initialValues={props.data}/>
             );
           default:
             return 'Invalid Entity';
@@ -59,6 +59,7 @@ MyModal.propTypes = {
   name: PropTypes.string,
   entity: PropTypes.string,
   label: PropTypes.string,
+  data: PropTypes.object,
   onSubmit: PropTypes.func,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,

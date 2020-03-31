@@ -3,11 +3,11 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {getApplicationTypeName} from '../components/ApplicationsRender';
-import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/applicationTypes';
+import { getApplicationTypeName } from '../components/ApplicationsRender';
+import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
 let AppUpdate = props => {
-  const { handleSubmit, handleHide, name, data, appTypeValue, customers, addresses, products } = props;
+  const { handleSubmit, handleHide, data, appTypeValue, customers, addresses, products } = props;
   const isPackageSubmission = (parseInt(appTypeValue) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
@@ -20,21 +20,21 @@ let AppUpdate = props => {
   }
 
   const filterProducts = () => {
-      return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)) || data.appTypeLabel)}`);
+    return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)) || data.appTypeLabel)}`);
   }
 
   return (
     <Form onSubmit={handleSubmit} className="form">
       <FormGroup className="field">
         <div className="control">
-          <Field name="ss_name" component={renderField} type="text" label="Name" defaultValue={name} />
+          <Field name="ss_name" component={renderField} type="text" label="Name" />
         </div>
       </FormGroup>
 
       <FormGroup className="field">
         <div className="control">
           <Field name="ss_applicationtype" component={renderField} type="select"
-            label="Application Type" defaultValue={data.ss_applicationtype}>
+            label="Application Type">
             <option value={ADDRESS_CHANGE}>Address Change</option>
             <option value={MAIL_FORWARDING}>Mail Forwarding</option>
             <option value={PACKAGE_SUBMISSION}>Package Submission</option>
@@ -45,7 +45,7 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="_ss_product_value" component={renderField} type="select"
-            label="Product" defaultValue={data._ss_product_value}>
+            label="Product">
             <option value={null}></option>
             {renderOptions(filterProducts(), "productid", "name")}
           </Field>
@@ -55,7 +55,7 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field show={isPackageSubmission} name="_ss_shippingspeed_value" component={renderField} type="select"
-            label="Shipping Speed" defaultValue={data._ss_shippingspeed_value}>
+            label="Shipping Speed">
             <option value={null}></option>
             {renderOptions(shippingSpeeds, "productid", "name")}
           </Field>
@@ -65,8 +65,8 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="_ss_customer_value" component={renderField} type="select"
-            label="Customer" defaultValue={data._ss_customer_value}>
-              <option value={null}></option>
+            label="Customer">
+            <option value={null}></option>
             {renderOptions(customers, "contactid", "fullname")}
           </Field>
         </div>
@@ -75,8 +75,8 @@ let AppUpdate = props => {
       <FormGroup className="field">
         <div className="control">
           <Field name="_ss_destinationaddress_value" component={renderField} type="select"
-            label="Destination Address" defaultValue={data._ss_destinationaddress_value}>
-              <option value={null}></option>
+            label="Destination Address" >
+            <option value={null}></option>
             {renderOptions(addresses, "ss_customaddressid", "ss_name")}
           </Field>
         </div>
@@ -93,52 +93,50 @@ let AppUpdate = props => {
   );
 };
 
-const validate = (values, props) => {
-  const { data } = props;
+
+const validate = (values) => {
   const errors = {};
 
-  const valueOrProp = (fieldName) => {
-    return values[fieldName] || data[fieldName];
+  const checkRequiredField = (fieldName) => {
+    const currentVal = values[fieldName];
+
+    if (!(currentVal) || currentVal === null) {
+      errors[fieldName] = 'Required';
+    }
+    else if (typeof currentVal === 'string') {
+
+      if (currentVal.trim() === '') {
+        errors[fieldName] = 'Cannot be empty';
+      }
+    }
   }
 
-  const isPackageSubmission = (parseInt(values.ss_applicationtype) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
+  const isPackageSubmission = (parseInt(values.ss_applicationtype)) === PACKAGE_SUBMISSION;
 
-  if (!(valueOrProp('ss_name'))) {
-    errors.ss_name = 'Required';
+  checkRequiredField('ss_name');
+  checkRequiredField('ss_applicationtype');
+  checkRequiredField('_ss_product_value');
+  if (isPackageSubmission) {
+    checkRequiredField('_ss_shippingspeed_value');
   }
-  if (!(valueOrProp('ss_applicationtype'))) {
-    errors.ss_applicationtype = 'Required';
-  }
-  if (!(valueOrProp('_ss_product_value'))) {
-    errors._ss_product_value = 'Required';
-  }
-  if (!(valueOrProp('_ss_shippingspeed_value')) && isPackageSubmission) {
-    errors._ss_shippingspeed_value = 'Required';
-  }
-  if (!(valueOrProp('_ss_customer_value'))) {
-    errors._ss_customer_value = 'Required';
-  }
-  if (!(valueOrProp('_ss_destinationaddress_value'))) {
-    errors._ss_destinationaddress_value = 'Required';
-  }
+  checkRequiredField('_ss_customer_value');
+  checkRequiredField('_ss_destinationaddress_value');
+
   return errors;
 };
 
 const renderField = (props) => {
 
-  const { input, label, type, defaultValue, show, meta: { touched, error, warning } } = props;
-
-  // Necessary due to Field component from redux-form (conflicts with defaultValue being set)
-  delete input.value;
+  const { input, label, type, show, meta: { touched, error, warning } } = props;
 
   return (
     <div style={{ display: show ? 'block' : 'none' }} >
       <div className="control">
         <Label className="field">{label}</Label>
-        <Input className="input" {...input} type={type} defaultValue={defaultValue}>
+        <Input className="input" {...input} type={type}>
           {props.children}
         </Input>
-        {touched && ((error && <span style={{color:'red'}}>{error}</span>) || (warning && <span style={{color:'orange'}}>{warning}</span>))}
+        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>) || (warning && <span style={{ color: 'orange' }}>{warning}</span>))}
       </div>
     </div>
   )
@@ -153,10 +151,6 @@ renderField.propTypes = {
   label: PropTypes.string,
   type: PropTypes.string,
   show: PropTypes.bool,
-  defaultValue: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
-  ]),
   meta: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
@@ -172,7 +166,10 @@ AppUpdate.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.object),
   addresses: PropTypes.arrayOf(PropTypes.object),
   products: PropTypes.arrayOf(PropTypes.object),
-  appTypeValue: PropTypes.number,
+  appTypeValue: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

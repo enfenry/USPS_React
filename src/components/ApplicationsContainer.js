@@ -23,6 +23,7 @@ const ApplicationsContainer = (props) => {
                 Error while loading entities!
             </div>
         );
+
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
         return (
             <div className="m-5">
@@ -42,6 +43,7 @@ const ApplicationsContainer = (props) => {
     }
 }
 
+
 ApplicationsContainer.propTypes = {
     actions: PropTypes.object
 };
@@ -57,6 +59,10 @@ function mapStateToProps(state) {
         applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
         applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
         applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess,
+
+        customersRequestPending: state.customersReducer.customersRequestPending,
+        customersRequestFailed: state.customersReducer.customersRequestFailed,
+        customersRequestSuccess: state.customersReducer.customersRequestSuccess,
 
         productsRequestPending: state.productsReducer.productsRequestPending,
         productsRequestFailed: state.productsReducer.productsRequestFailed,
