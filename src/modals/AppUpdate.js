@@ -7,8 +7,8 @@ import { getApplicationTypeName } from '../components/ApplicationsRender';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
 let AppUpdate = props => {
-  const { handleSubmit, handleHide, data, appTypeValue, customers, addresses, products } = props;
-  const isPackageSubmission = (parseInt(appTypeValue) || data.ss_applicationtype) === PACKAGE_SUBMISSION;
+  const { handleSubmit, handleHide, initialValues, appTypeValue, customers, addresses, products } = props;
+  const isPackageSubmission = (parseInt(appTypeValue) || initialValues.ss_applicationtype) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
   const renderOptions = (array, value, display) => {
@@ -20,7 +20,7 @@ let AppUpdate = props => {
   }
 
   const filterProducts = () => {
-    return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)) || data.appTypeLabel)}`);
+    return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)) || initialValues.appTypeLabel)}`);
   }
 
   return (
@@ -161,8 +161,7 @@ renderField.propTypes = {
 AppUpdate.propTypes = {
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
-  name: PropTypes.string,
-  data: PropTypes.object,
+  initialValues: PropTypes.object,
   customers: PropTypes.arrayOf(PropTypes.object),
   addresses: PropTypes.arrayOf(PropTypes.object),
   products: PropTypes.arrayOf(PropTypes.object),

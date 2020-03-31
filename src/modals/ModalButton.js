@@ -6,10 +6,10 @@ import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const ModalButton = (props) => {
+  const {label} = props;
 
-  function handleOpen (name) {
-    let newProps = {...props, name: props.data.ss_name};
-      props.show(name, newProps);
+  function handleOpen () {
+      props.show("dynamic", props);
   }
 
   function handleButtonStyle (label) {
@@ -30,8 +30,8 @@ const ModalButton = (props) => {
     return (
       <div>
         <p>
-          <Button className={'btn ' + handleButtonStyle(props.label)}
-           onClick={() => handleOpen("dynamic")}>{props.label}</Button>
+          <Button className={'btn ' + handleButtonStyle(label)}
+           onClick={() => handleOpen()}>{label}</Button>
         </p>
       </div>
     )
@@ -42,7 +42,7 @@ ModalButton.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
   entity: PropTypes.string,
-  data: PropTypes.object,
+  initialValues: PropTypes.object,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
