@@ -13,7 +13,7 @@ import DynamicModal from '../modals/DynamicModal';
 export class App extends React.Component{
     render() {
         return(
-            <div>
+            <React.Fragment>
                 <Header />
                 <DynamicModal name="dynamic"/>
                 <Switch>
@@ -21,7 +21,7 @@ export class App extends React.Component{
                     <Route path='/applications' component={ApplicationsContainer}/>
                     <Route path='/customers' component={CustomersContainer}/>
                 </Switch>
-            </div>
+            </React.Fragment>
         );
     }
 }

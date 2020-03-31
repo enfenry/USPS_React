@@ -31,12 +31,10 @@ runWithAdal(authContext, () => {
 
   ReactDom.render((
     <Provider store={store}>
-      <div>
       <HashRouter>
         <App />
         <DevTools />
       </HashRouter>
-      </div>
     </Provider>
   ), document.getElementById('app'));
 }, false);
