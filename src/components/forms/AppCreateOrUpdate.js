@@ -3,8 +3,9 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getApplicationTypeName } from '../components/ApplicationsRender';
-import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
+import { getApplicationTypeName } from '../ApplicationsRender';
+import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../constants/applicationTypes';
+import validate from './AppValidate';
 
 let AppCreateOrUpdate = props => {
   const { handleSubmit, handleHide, appTypeValue, customers, addresses, products } = props;
@@ -84,7 +85,6 @@ let AppCreateOrUpdate = props => {
         </div>
       </FormGroup>
 
-
       <div className="field">
         <div className="control">
           <Button className="button is-link" color="success" onClick={handleSubmit}>Submit</Button>{' '}
@@ -95,40 +95,7 @@ let AppCreateOrUpdate = props => {
   );
 };
 
-
-const validate = (values) => {
-  const errors = {};
-
-  const checkRequiredField = (fieldName) => {
-    const currentVal = values[fieldName];
-
-    if (!(currentVal) || currentVal === null) {
-      errors[fieldName] = 'Required';
-    }
-    else if (typeof currentVal === 'string') {
-
-      if (currentVal.trim() === '') {
-        errors[fieldName] = 'Cannot be empty';
-      }
-    }
-  }
-
-  const isPackageSubmission = (parseInt(values.ss_applicationtype)) === PACKAGE_SUBMISSION;
-
-  checkRequiredField('ss_name');
-  checkRequiredField('ss_applicationtype');
-  checkRequiredField('_ss_product_value');
-  if (isPackageSubmission) {
-    checkRequiredField('_ss_shippingspeed_value');
-  }
-  checkRequiredField('_ss_customer_value');
-  checkRequiredField('_ss_destinationaddress_value');
-
-  return errors;
-};
-
 const renderField = (props) => {
-
   const { input, label, type, show, meta: { touched, error, warning } } = props;
 
   return (

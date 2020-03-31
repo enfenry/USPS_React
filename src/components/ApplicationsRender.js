@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ModalButton from '../modals/ModalButton';
+import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 

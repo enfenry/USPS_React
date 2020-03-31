@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCreateOrUpdate from '../modals/AppCreateOrUpdate';
+import AppCreateOrUpdate from '../components/forms/AppCreateOrUpdate';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
