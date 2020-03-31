@@ -8,7 +8,7 @@ import Home from './Home.js';
 
 import ApplicationsContainer from './ApplicationsContainer';
 import CustomersContainer from './CustomersContainer';
-import DynamicModal from '../modals/DynamicModal';
+import DynamicModal from './modals/DynamicModal';
 
 export class App extends React.Component{
     render() {

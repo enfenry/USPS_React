@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connectModal } from 'redux-modal';
 
-import AppCreateOrUpdate from './AppCreateOrUpdate';
-import AppView from './AppView';
+import AppCreateOrUpdate from '../forms/AppCreateOrUpdate';
+import AppView from '../forms/AppView';
 
 const MyModal = (props) => {
   const {onSubmit, handleHide, show, name, CRUDOption, label, entity} = props;

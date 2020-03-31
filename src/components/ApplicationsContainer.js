@@ -25,7 +25,6 @@ const ApplicationsContainer = (props) => {
         );
 
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
-        console.log("propsContainer, ", props);
         return (
             <div className="m-5">
                 <ApplicationsRender
@@ -34,9 +33,9 @@ const ApplicationsContainer = (props) => {
                         props.actions.updateApplication(values, application.ss_applicationid)
                     }}
                     handleDelete={application => {
-                        props.actions.deleteApplication(application.ss_applicationid)}}
+                        props.actions.deleteApplication(application.ss_applicationid)
+                    }}
                     handleCreate={(values) => {
-                        console.log(values);
                         props.actions.createApplication(values)
                     }}
                 />
@@ -83,10 +82,6 @@ function mapStateToProps(state) {
         addressesRequestPending: state.addressesReducer.addressesRequestPending,
         addressesRequestFailed: state.addressesReducer.addressesRequestFailed,
         addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess,
-
-        customersRequestPending: state.customersReducer.customersRequestPending,
-        customersRequestFailed: state.customersReducer.customersRequestFailed,
-        customersRequestSuccess: state.customersReducer.customersRequestSuccess
     }
 }
 
