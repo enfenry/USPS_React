@@ -25,14 +25,15 @@ const ApplicationsContainer = (props) => {
         );
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
         return (
-            <div className="m-5">
+            <div className="reactive-margin">
                 <ApplicationsRender
                     applications={props.applications}
                     handleUpdate={(values, application) => {
                         props.actions.updateApplication(values, application.ss_applicationid)
                     }}
                     handleDelete={x => {
-                        props.actions.deleteApplication(x.ss_applicationid)}}
+                        props.actions.deleteApplication(x.ss_applicationid)
+                    }}
                     handleAdd={() => console.log("Add")}
                 />
             </div>
