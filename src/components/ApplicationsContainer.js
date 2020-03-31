@@ -25,7 +25,6 @@ const ApplicationsContainer = (props) => {
         );
 
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
-        console.log("propsContainer, ", props);
         return (
             <div className="m-5">
                 <ApplicationsRender
@@ -37,7 +36,6 @@ const ApplicationsContainer = (props) => {
                         props.actions.deleteApplication(application.ss_applicationid)
                     }}
                     handleCreate={(values) => {
-                        console.log(values);
                         props.actions.createApplication(values)
                     }}
                 />
