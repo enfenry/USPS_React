@@ -28,7 +28,7 @@ const CustomersContainer = (props) => {
     } else if (props.customersRequestSuccess) {
         console.log(props.customers);
         return (
-            <div className="m-5">
+            <div className="reactive-margin">
                 <CustomersRender
                     customers={props.customers}
                     handleView={x => console.log("View is fa sar work", x)}

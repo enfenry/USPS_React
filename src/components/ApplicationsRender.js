@@ -53,7 +53,6 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
         sort: 'asc',
         width: 150
       },
-
       {
         label: 'App Name',
         field: 'ss_name',
@@ -105,6 +104,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
         striped
         bordered
         small
+        responsive
         data={data}
       />
     </div>
@@ -116,7 +116,7 @@ ApplicationsRender.propTypes = {
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func,
+  handleDelete: PropTypes.func
 };
 
 export default ApplicationsRender;

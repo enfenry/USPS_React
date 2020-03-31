@@ -26,11 +26,11 @@ const Header = () => {
                 <NavbarBrand>
                     <img
                         alt=""
-                        src="/sslogosmall.png"
-                        width="35.5"
-                        height="30"
-                        className="d-inline-block align-top"
-                    />{' '}
+                        src="/images/sslogosmall.png"
+                        width="23.666"
+                        height="20"
+                        className="d-inline-block align-top mt-1 mr-2"
+                    />
                     USPS Dynamics Project
                 </NavbarBrand>
                 <NavbarToggler onClick={toggle} />

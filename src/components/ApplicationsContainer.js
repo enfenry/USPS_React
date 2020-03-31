@@ -26,7 +26,7 @@ const ApplicationsContainer = (props) => {
 
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
         return (
-            <div className="m-5">
+            <div className="reactive-margin">
                 <ApplicationsRender
                     applications={props.applications}
                     handleUpdate={(values, application) => {

@@ -83,27 +83,28 @@ const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, ha
 
   }
   return (
-    <div>
+    <React.Fragment>
       <h1>Customers</h1>
       <MDBDataTable
         striped
         bordered
         small
+        responsive
         data={data}
       />
       <Button color="primary" onClick={handleAdd}>Add</Button>
-    </div>
+    </React.Fragment>
   );
 }
 
 
 
 CustomersRender.propTypes = {
-    customers: PropTypes.array,
-    handleView: PropTypes.func,
-    handleUpdate: PropTypes.func,
-    handleDelete: PropTypes.func,
-    handleAdd: PropTypes.func,
+  customers: PropTypes.array,
+  handleView: PropTypes.func,
+  handleUpdate: PropTypes.func,
+  handleDelete: PropTypes.func,
+  handleAdd: PropTypes.func,
 
 };
 
