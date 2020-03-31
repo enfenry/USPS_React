@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 const AppView = props => {
-    const { handleHide, name, data, customers, addresses, products } = props;
+    const { handleHide, name, initialValues, customers, addresses, products } = props;
 
     const displayById = (array, key, value, display) => {
         let filtered = array.filter(el => el[key] === value);
@@ -18,25 +18,24 @@ const AppView = props => {
                     <span>Name: </span>
                     <p>{name}</p>
                 </div>
-
             </div>
             <div>
                 <div>
                     <span>Application Type: </span>
-                    <p>{data.appTypeLabel}</p>
+                    <p>{initialValues.appTypeLabel}</p>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Product: </span>
-                    <p>{displayById(products, "productid", data._ss_product_value, "name")}</p>
+                    <p>{displayById(products, "productid", initialValues._ss_product_value, "name")}</p>
                 </div>
             </div>
-            {data.appTypeLabel === 'Package Submission' ?
+            {initialValues.appTypeLabel === 'Package Submission' ?
                 <div>
                     <div>
                         <span>Shipping Speed: </span>
-                        <p>{displayById(products, "productid", data._ss_shippingspeed_value, "name")}</p>
+                        <p>{displayById(products, "productid", initialValues._ss_shippingspeed_value, "name")}</p>
                     </div>
                 </div>
                 : ""
@@ -44,13 +43,13 @@ const AppView = props => {
             <div>
                 <div>
                     <span>Customer: </span>
-                    <p>{displayById(customers, "contactid", data._ss_customer_value, "fullname")}</p>
+                    <p>{displayById(customers, "contactid", initialValues._ss_customer_value, "fullname")}</p>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Destination Address: </span>
-                    <p>{displayById(addresses, "ss_customaddressid", data._ss_destinationaddress_value, "ss_name")}</p>
+                    <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_destinationaddress_value, "ss_name")}</p>
                 </div>
             </div>
 
@@ -64,7 +63,7 @@ const AppView = props => {
 AppView.propTypes = {
     handleHide: PropTypes.func,
     name: PropTypes.string,
-    data: PropTypes.object,
+    initialValues: PropTypes.object,
     customers: PropTypes.arrayOf(PropTypes.object),
     addresses: PropTypes.arrayOf(PropTypes.object),
     products: PropTypes.arrayOf(PropTypes.object),

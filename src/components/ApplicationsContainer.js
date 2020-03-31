@@ -23,7 +23,9 @@ const ApplicationsContainer = (props) => {
                 Error while loading entities!
             </div>
         );
+
     } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
+        console.log("propsContainer, ", props);
         return (
             <div className="reactive-margin">
                 <ApplicationsRender
@@ -31,10 +33,12 @@ const ApplicationsContainer = (props) => {
                     handleUpdate={(values, application) => {
                         props.actions.updateApplication(values, application.ss_applicationid)
                     }}
-                    handleDelete={x => {
-                        props.actions.deleteApplication(x.ss_applicationid)
+                    handleDelete={application => {
+                        props.actions.deleteApplication(application.ss_applicationid)}}
+                    handleCreate={(values) => {
+                        console.log(values);
+                        props.actions.createApplication(values)
                     }}
-                    handleAdd={() => console.log("Add")}
                 />
             </div>
         );
@@ -46,6 +50,7 @@ const ApplicationsContainer = (props) => {
         );
     }
 }
+
 
 ApplicationsContainer.propTypes = {
     actions: PropTypes.object
@@ -62,6 +67,10 @@ function mapStateToProps(state) {
         applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
         applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
         applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess,
+
+        customersRequestPending: state.customersReducer.customersRequestPending,
+        customersRequestFailed: state.customersReducer.customersRequestFailed,
+        customersRequestSuccess: state.customersReducer.customersRequestSuccess,
 
         productsRequestPending: state.productsReducer.productsRequestPending,
         productsRequestFailed: state.productsReducer.productsRequestFailed,

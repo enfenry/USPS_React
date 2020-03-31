@@ -2,11 +2,9 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
 import ModalButton from '../modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
-
 
 export function getApplicationTypeName(applicationType) {
   switch (applicationType) {
@@ -21,33 +19,30 @@ export function getApplicationTypeName(applicationType) {
   }
 }
 
-
-const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAdd }) => {
+const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate }) => {
 
   function getAppBodyContent() {
-    let tableData = applications;
-
-    return tableData.map(obj => {
+    return applications.map(obj => {
       // Deep Clone object to avoid adding to it while mapping over it during map
       let newObj = JSON.parse(JSON.stringify(obj))
       const appTypeLabel = getApplicationTypeName(obj.ss_applicationtype);
 
       newObj["view"] = (
-        <ModalButton label="View" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" />
+        <ModalButton CRUDOption="View" label="View" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  />
       );
       newObj["delete"] = (
-        <ModalButton label="Update" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={(values) => handleUpdate(values, obj)} />
+        <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={(values) => handleUpdate(values, obj)} />
       );
       newObj["update"] = (
-        <ModalButton label="Delete" data={{ ...obj, appTypeLabel: appTypeLabel }} entity="Application" onSubmit={() => handleDelete(obj)} />
+        <ModalButton CRUDOption="Delete" label="Delete" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={() => handleDelete(obj)} />
       );
 
       newObj["appTypeLabel"] = appTypeLabel;
       return newObj;
     });
-
-
-    // return tableData;
   }
 
   let data = {
@@ -58,7 +53,6 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
         sort: 'asc',
         width: 150
       },
-
       {
         label: 'App Name',
         field: 'ss_name',
@@ -102,9 +96,10 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
 
   }
   return (
-    <React.Fragment>
+    <div>
       <h1>Applications</h1>
-      <Button color="primary" onClick={handleAdd}>Create New Application</Button>
+      <ModalButton CRUDOption="Create" label="Create New Application" name={`Application ${applications.length}`} entity="Application" 
+      initialValues={{ ss_name: `Application ${applications.length}` }} onSubmit={(values) => handleCreate(values)} />
       <MDBDataTable
         striped
         bordered
@@ -112,16 +107,16 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleAd
         responsive
         data={data}
       />
-    </React.Fragment>
+    </div>
   );
 }
 
 ApplicationsRender.propTypes = {
   applications: PropTypes.array,
+  handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func,
-  handleAdd: PropTypes.func,
+  handleDelete: PropTypes.func
 };
 
 export default ApplicationsRender;

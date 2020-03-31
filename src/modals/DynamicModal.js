@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connectModal } from 'redux-modal';
 
-import AppUpdate from './AppUpdate';
+import AppCreateOrUpdate from './AppCreateOrUpdate';
 import AppView from './AppView';
 
 const MyModal = (props) => {
+  const {onSubmit, handleHide, show, name, CRUDOption, label, entity} = props;
 
-  const {onSubmit, handleHide, show, name, label, entity} = props;
+  const renderBody = () => {
 
-  const renderBody = (label, entity) => {
-
-    switch (label) {
+    switch (CRUDOption) {
       case 'Delete':
         return (
           <div>
@@ -20,11 +19,12 @@ const MyModal = (props) => {
             <Button color="danger" onClick={onSubmit}>{label}</Button>
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
+      case 'Create':
       case 'Update':
         switch (entity) {
           case 'Application':
             return (
-              <AppUpdate {...props} />
+              <AppCreateOrUpdate {...props}/>
             );
           default:
             return 'Invalid Entity';
@@ -47,9 +47,9 @@ const MyModal = (props) => {
     <Modal isOpen={show} size="lg"
     // backdrop={true}
     >
-      <ModalHeader>{label} {name}</ModalHeader>
+      <ModalHeader>{CRUDOption} {name}</ModalHeader>
       <ModalBody>
-        {renderBody(label, entity)}
+        {renderBody()}
       </ModalBody>
     </Modal>
   );
@@ -59,6 +59,7 @@ MyModal.propTypes = {
   name: PropTypes.string,
   entity: PropTypes.string,
   label: PropTypes.string,
+  CRUDOption: PropTypes.string,
   onSubmit: PropTypes.func,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
@@ -80,6 +81,7 @@ const DynamicModal = (props) => {
 DynamicModal.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
+  CRUDOption: PropTypes.string,
   entity: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
