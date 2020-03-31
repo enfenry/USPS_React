@@ -6,9 +6,10 @@ import { connect } from 'react-redux';
 import { getApplicationTypeName } from '../components/ApplicationsRender';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
-let AppUpdate = props => {
-  const { handleSubmit, handleHide, initialValues, appTypeValue, customers, addresses, products } = props;
-  const isPackageSubmission = (parseInt(appTypeValue) || initialValues.ss_applicationtype) === PACKAGE_SUBMISSION;
+let AppCreateOrUpdate = props => {
+  const { handleSubmit, handleHide, appTypeValue, customers, addresses, products } = props;
+
+  const isPackageSubmission = parseInt(appTypeValue) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
 
   const renderOptions = (array, value, display) => {
@@ -20,7 +21,7 @@ let AppUpdate = props => {
   }
 
   const filterProducts = () => {
-    return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)) || initialValues.appTypeLabel)}`);
+    return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)))}`);
   }
 
   return (
@@ -35,6 +36,7 @@ let AppUpdate = props => {
         <div className="control">
           <Field name="ss_applicationtype" component={renderField} type="select"
             label="Application Type">
+            <option value={null}></option>
             <option value={ADDRESS_CHANGE}>Address Change</option>
             <option value={MAIL_FORWARDING}>Mail Forwarding</option>
             <option value={PACKAGE_SUBMISSION}>Package Submission</option>
@@ -158,7 +160,7 @@ renderField.propTypes = {
   ])
 }
 
-AppUpdate.propTypes = {
+AppCreateOrUpdate.propTypes = {
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
   initialValues: PropTypes.object,
@@ -175,16 +177,16 @@ AppUpdate.propTypes = {
   ])
 }
 
-AppUpdate = reduxForm({
-  form: 'appUpdate',
+AppCreateOrUpdate = reduxForm({
+  form: 'AppCreateOrUpdate',
   validate,
   onSubmitSuccess: (result, dispatch, props) => {
     props.handleHide();
   }
-})(AppUpdate);
+})(AppCreateOrUpdate);
 
 function mapStateToProps(state) {
-  const selector = formValueSelector('appUpdate');
+  const selector = formValueSelector('AppCreateOrUpdate');
   const appTypeValue = selector(state, 'ss_applicationtype')
 
   return {
@@ -197,4 +199,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps
-)(AppUpdate);
+)(AppCreateOrUpdate);

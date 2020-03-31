@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppUpdate renders correctly 1`] = `
+exports[`AppCreateOrUpdate renders correctly 1`] = `
 <form
   className="form"
   onSubmit={[Function]}
