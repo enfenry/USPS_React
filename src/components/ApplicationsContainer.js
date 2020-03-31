@@ -17,13 +17,13 @@ const ApplicationsContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.applicationsRequestFailed) {
+    } else if (props.applicationsRequestFailed || props.ordersRequestFailed || props.productsRequestFailed || props.customersRequestFailed || props.addressesRequestFailed) {
         return (
             <div className="alert alert-danger" role="alert">
-                Error while loading applications!
+                Error while loading entities!
             </div>
         );
-    } else if (props.applicationsRequestSuccess) {
+    } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
         return (
             <div className="m-5">
                 <ApplicationsRender
