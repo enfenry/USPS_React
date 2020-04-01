@@ -3,7 +3,6 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 let AppUpdate = props => {
   const { handleSubmit, handleHide, name, data, appTypeValue, customers } = props;
   const showPackageFields = (appTypeValue || data.appTypeLabel) === 'Package Submission';
@@ -74,6 +73,8 @@ let AppUpdate = props => {
             label="Customer" defaultValue={data._ss_customer_value}>
             {renderCustomerOptions(customers)}
           </Field>
+          
+          
         </div>
       </FormGroup>
 
