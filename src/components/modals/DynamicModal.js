@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connectModal } from 'redux-modal';
 
-import AppCreateOrUpdate from '../forms/AppCreateOrUpdate';
-import AppView from '../forms/AppView';
+import AppCreateOrUpdate from '../forms/applications/AppCreateOrUpdate';
+import AppView from '../forms/applications/AppView';
+import CustomerCreateOrUpdate from '../forms/customers/CustomerCreateOrUpdate';
+import CustomerView from '../forms/customers/CustomerView';
 
 const MyModal = (props) => {
-  const {onSubmit, handleHide, show, name, CRUDOption, label, entity} = props;
+  const { onSubmit, handleHide, show, name, CRUDOption, label, entity } = props;
 
   const renderBody = () => {
 
@@ -16,7 +18,7 @@ const MyModal = (props) => {
         return (
           <div>
             <p>{'Are you sure?'}</p>
-            <Button color="danger" onClick={onSubmit}>{label}</Button>
+            <Button color="danger" onClick={onSubmit}>{label}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
       case 'Create':
@@ -24,7 +26,11 @@ const MyModal = (props) => {
         switch (entity) {
           case 'Application':
             return (
-              <AppCreateOrUpdate {...props}/>
+              <AppCreateOrUpdate {...props} />
+            );
+          case 'Customer':
+            return (
+              <CustomerCreateOrUpdate {...props} />
             );
           default:
             return 'Invalid Entity';
@@ -36,8 +42,16 @@ const MyModal = (props) => {
             return (
               <AppView {...props} />
             );
+          case 'Customer':
+            return (
+              <CustomerView {...props} />
+            );
           default:
-            return 'Invalid Entity';
+            return (
+              <div>
+                <p>{'Invalid Entity'}</p>
+                <Button color="secondary" onClick={handleHide}>Cancel</Button>
+              </div>)
         }
     }
   }

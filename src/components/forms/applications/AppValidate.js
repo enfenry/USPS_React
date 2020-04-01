@@ -1,4 +1,4 @@
-import { PACKAGE_SUBMISSION } from '../../constants/applicationTypes';
+import { PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 
 const validate = (values) => {
     const errors = {};
