@@ -18,7 +18,8 @@
     "browser": true,
     "node": true,
     "jquery": true,
-    "jest/globals": true
+    "jest/globals": true,
+    "es6":true
   },
   "rules": {
     "quotes": 0,

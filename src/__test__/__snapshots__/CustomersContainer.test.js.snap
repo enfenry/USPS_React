@@ -8,59 +8,270 @@ exports[`CustomersContainer renders correctly 1`] = `
     <h1>
       Customers
     </h1>
-    <table
-      className="table"
+    <div
+      className="dataTables_wrapper dt-bootstrap4"
+      data-test="datatable"
     >
-      <thead>
-        <tr>
-          <th
-            scope="col"
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12 col-md-6"
+          data-test="datatable-entries"
+        >
+          <div
+            className="dataTables_length bs-select"
+            data-test="datatable-select"
           >
-            Name
-          </th>
-          <th
-            scope="col"
+            <label>
+              Show entries
+              <select
+                className="custom-select custom-select-sm form-control form-control-sm"
+                onChange={[Function]}
+                style={
+                  Object {
+                    "marginLeft": ".5rem",
+                  }
+                }
+                value={10}
+              >
+                <option
+                  value={10}
+                >
+                  10
+                </option>
+                <option
+                  value={20}
+                >
+                  20
+                </option>
+                <option
+                  value={50}
+                >
+                  50
+                </option>
+                <option
+                  value={100}
+                >
+                  100
+                </option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <div
+          className="col-sm-12 col-md-6"
+          data-test="datatable-search"
+        >
+          <div
+            className="dataTables_filter"
+            data-test="datatable-input"
           >
-            ID
-          </th>
-          <th
-            scope="col"
-          />
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            example name
-          </td>
-          <td>
-            example id
-          </td>
-          <td
-            align="right"
+            <label>
+              Search
+              <input
+                className="form-control form-control-sm"
+                onChange={[Function]}
+                placeholder="Search"
+                type="search"
+                value=""
+              />
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12"
+          data-test="datatable-table"
+        >
+          <div
+            className=""
+            data-test="table"
+            style={
+              Object {
+                "maxHeight": undefined,
+              }
+            }
           >
-            <button
-              className="btn btn-success mr-1"
-              onClick={[Function]}
+            <table
+              className="table table-bordered table-sm table-striped dataTable"
+              entries={10}
             >
-              Select
-            </button>
-            <button
-              className="btn btn-secondary mr-1"
-              onClick={[Function]}
+              <thead
+                data-test="datatable-head"
+              >
+                <tr>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    ID
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    Name
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    
+                  </th>
+                  <th
+                    className="sorting"
+                    onClick={[Function]}
+                  >
+                    
+                  </th>
+                </tr>
+              </thead>
+              <tbody
+                data-test="table-body"
+              >
+                <tr>
+                  <td>
+                    example id
+                  </td>
+                  <td>
+                    example name
+                  </td>
+                  <td>
+                    <input
+                      onClick={[Function]}
+                      type="button"
+                      value="view"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      onClick={[Function]}
+                      type="button"
+                      value="delete"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      onClick={[Function]}
+                      type="button"
+                      value="update"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+              <thead
+                data-test="table-foot"
+              >
+                <tr>
+                  <th>
+                    ID
+                  </th>
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    
+                  </th>
+                  <th>
+                    
+                  </th>
+                  <th>
+                    
+                  </th>
+                </tr>
+              </thead>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div
+        className="row"
+      >
+        <div
+          className="col-sm-12 col-md-5"
+          data-test="datatable-info"
+        >
+          <div
+            aria-live="polite"
+            className="dataTables_info"
+            role="status"
+          >
+            Showing 1 to 1 of 1 entries
+          </div>
+        </div>
+        <div
+          className="col-sm-12 col-md-7"
+          data-test="datatable-pagination"
+        >
+          <div
+            className="dataTables_paginate"
+          >
+            <ul
+              className="pagination"
+              data-test="pagination"
             >
-              Update
-            </button>
-            <button
-              className="btn btn-danger"
-              onClick={[Function]}
-            >
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+              <li
+                className="disabled page-item"
+                data-test="page-item"
+              >
+                <a
+                  aria-label="Previous"
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  <span>
+                    Previous
+                  </span>
+                </a>
+              </li>
+              <li
+                className="active page-item"
+                data-test="page-item"
+              >
+                <a
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  1
+                  <span
+                    className="sr-only"
+                  >
+                    (current)
+                  </span>
+                </a>
+              </li>
+              <li
+                className="disabled page-item"
+                data-test="page-item"
+              >
+                <a
+                  aria-label="Next"
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  <span>
+                    Next
+                  </span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
     <button
       aria-label={null}
       className="btn btn-primary"

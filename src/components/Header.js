@@ -1,27 +1,54 @@
 "use strict"
 
-import React from 'react';
+import React, { useState } from 'react';
+import { authContext } from '../adalConfig.js';
 import { Link } from 'react-router-dom';
 
-import { Button } from 'reactstrap';
-import { authContext } from '../adalConfig.js';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    Button
+} from 'reactstrap';
 
 const Header = () => {
-    return (
 
-        <div className="jumbotron">
-            <div className="main">
-                <img width="200px" height="30px" src="images/sslogo.png" />
-                <h1 align="center"> USPS Dynamics Project</h1>
-            </div>
-            <ul className="list-inline">
-                <h5 align="center">
-                    <li className="list-inline-item"><Link to="/" replace>Home</Link></li>
-                    <li className="list-inline-item"><Link to="/applications" replace>Applications</Link></li>
-                    <li className="list-inline-item"><Link to="/customers" replace>Customers</Link></li>
-                    <li className="list-inline-item"><Button color="primary" onClick={() => authContext.logOut()}>Log out</Button></li>
-                </h5>
-            </ul>
+    const [isOpen, setIsOpen] = useState(false);
+    const toggle = () => setIsOpen(!isOpen);
+
+    return (
+        <div>
+            <Navbar color="light" light expand="md">
+                <NavbarBrand>
+                    <img
+                        alt=""
+                        src="/images/sslogosmall.png"
+                        width="23.666"
+                        height="20"
+                        className="d-inline-block align-top mt-1 mr-2"
+                    />
+                    USPS Dynamics Project
+                </NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className="mr-auto" navbar>
+                        <NavItem>
+                            <NavLink tag={Link} to="/" replace>Home</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} to="/applications" replace>Applications</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} to="/customers" replace>Customers</NavLink>
+                        </NavItem>
+                    </Nav>
+                    <Button onClick={() => authContext.logOut()}>Log out</Button>
+                </Collapse>
+            </Navbar>
         </div>
     );
 }

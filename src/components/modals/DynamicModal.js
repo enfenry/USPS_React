@@ -3,51 +3,74 @@ import PropTypes from 'prop-types';
 import { Button, Modal, ModalHeader, ModalBody } from 'reactstrap';
 import { connectModal } from 'redux-modal';
 
-import AppUpdate from './AppUpdate';
-import AppSelect from './AppSelect';
+import AppCreateOrUpdate from '../forms/applications/AppCreateOrUpdate';
+import AppView from '../forms/applications/AppView';
+import CustomerCreateOrUpdate from '../forms/customers/CustomerCreateOrUpdate';
+import CustomerView from '../forms/customers/CustomerView';
 
 const MyModal = (props) => {
+  const { onSubmit, handleHide, show, name, CRUDOption, label, entity } = props;
 
-  function renderBody(label, entity) {
+  const renderBody = () => {
 
-    switch (label) {
+    switch (CRUDOption) {
       case 'Delete':
         return (
           <div>
             <p>{'Are you sure?'}</p>
-            <Button color="danger" onClick={props.onSubmit}>{props.label}</Button>
-            <Button color="secondary" onClick={props.handleHide}>Cancel</Button>
+            <Button color="danger" onClick={() => {
+              new Promise(() => {
+                onSubmit();
+              })
+                .then(
+                  handleHide()
+                )
+            }}>{label}</Button>{' '}
+            <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
+      case 'Create':
       case 'Update':
         switch (entity) {
           case 'Application':
             return (
-              <AppUpdate {...props} />
+              <AppCreateOrUpdate {...props} />
+            );
+          case 'Customer':
+            return (
+              <CustomerCreateOrUpdate {...props} />
             );
           default:
             return 'Invalid Entity';
         }
-      case 'Select':
+      case 'View':
       default:
         switch (entity) {
           case 'Application':
             return (
-              <AppSelect {...props} />
+              <AppView {...props} />
+            );
+          case 'Customer':
+            return (
+              <CustomerView {...props} />
             );
           default:
-            return 'Invalid Entity';
+            return (
+              <div>
+                <p>{'Invalid Entity'}</p>
+                <Button color="secondary" onClick={handleHide}>Cancel</Button>
+              </div>)
         }
     }
   }
 
 
   return (
-    <Modal isOpen={props.show} size="lg"
+    <Modal isOpen={show} size="lg"
     // backdrop={true}
     >
-      <ModalHeader>{props.label} {props.name}</ModalHeader>
+      <ModalHeader>{CRUDOption} {name}</ModalHeader>
       <ModalBody>
-        {renderBody(props.label, props.entity)}
+        {renderBody()}
       </ModalBody>
     </Modal>
   );
@@ -57,6 +80,7 @@ MyModal.propTypes = {
   name: PropTypes.string,
   entity: PropTypes.string,
   label: PropTypes.string,
+  CRUDOption: PropTypes.string,
   onSubmit: PropTypes.func,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
@@ -78,6 +102,7 @@ const DynamicModal = (props) => {
 DynamicModal.propTypes = {
   name: PropTypes.string,
   label: PropTypes.string,
+  CRUDOption: PropTypes.string,
   entity: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
