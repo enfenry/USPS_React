@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomerView renders correctly 1`] = `
+<div>
+  <div>
+    <div>
+      <span>
+        First Name: 
+      </span>
+      <p>
+        example first name
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>
+        Last Name: 
+      </span>
+      <p>
+        example last name
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>
+        Email: 
+      </span>
+      <p>
+        example email address
+      </p>
+    </div>
+  </div>
+  <div
+    className="control"
+  >
+    <button
+      aria-label={null}
+      className="btn btn-secondary"
+      onClick={[Function]}
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+`;

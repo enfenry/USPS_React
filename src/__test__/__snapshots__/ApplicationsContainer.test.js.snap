@@ -2,20 +2,24 @@
 
 exports[`ApplicationsContainer renders correctly 1`] = `
 <div
-  className="m-5"
+  className="reactive-margin"
 >
   <div>
     <h1>
       Applications
     </h1>
-    <button
-      aria-label={null}
-      className="btn btn-primary"
-      onClick={[Function]}
-      type="button"
-    >
-      Create New Application
-    </button>
+    <div>
+      <p>
+        <button
+          aria-label={null}
+          className="btn btn-primary"
+          onClick={[Function]}
+          type="button"
+        >
+          Create New Application
+        </button>
+      </p>
+    </div>
     <div
       className="dataTables_wrapper dt-bootstrap4"
       data-test="datatable"
@@ -96,7 +100,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
           data-test="datatable-table"
         >
           <div
-            className=""
+            className="table-responsive"
             data-test="table"
             style={
               Object {
@@ -177,7 +181,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                       <p>
                         <button
                           aria-label={null}
-                          className="btn btn-secondary btn btn-secondary"
+                          className="btn btn-secondary"
                           onClick={[Function]}
                           type="button"
                         >
@@ -191,7 +195,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                       <p>
                         <button
                           aria-label={null}
-                          className="btn btn-success btn btn-secondary"
+                          className="btn btn-success"
                           onClick={[Function]}
                           type="button"
                         >
@@ -205,7 +209,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                       <p>
                         <button
                           aria-label={null}
-                          className="btn btn-danger btn btn-secondary"
+                          className="btn btn-danger"
                           onClick={[Function]}
                           type="button"
                         >

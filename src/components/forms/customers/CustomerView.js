@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 const CustomerView = props => {
     const { handleHide, initialValues } = props;
@@ -44,4 +43,4 @@ CustomerView.propTypes = {
     ])
 }
 
-export default connect()(CustomerView);
+export default CustomerView;

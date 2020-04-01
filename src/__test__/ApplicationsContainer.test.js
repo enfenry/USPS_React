@@ -18,10 +18,10 @@ test('ApplicationsContainer renders correctly', () => {
       }],
       applicationsRequestSuccess: true
     },
-    productsReducer: {products: []},
-    ordersReducer: {orders: []},
-    customersReducer: {customers: []},
-    addressesReducer: {addresses: []},
+    productsReducer: {products: [], productsRequestSuccess: true},
+    ordersReducer: {orders: [], ordersRequestSuccess: true},
+    customersReducer: {customers: [], customersRequestSuccess: true},
+    addressesReducer: {addresses: [], addressesRequestSuccess: true}
   });
   const component = renderer.create(
     <Provider store={store}>
