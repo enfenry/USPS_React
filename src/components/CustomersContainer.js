@@ -9,8 +9,6 @@ import { bindActionCreators } from 'redux';
 
 const CustomersContainer = (props) => {
 
-    console.log(props);
-
     if (props.customersRequestPending) {
         return (
             <div className="d-flex justify-content-center">
@@ -26,7 +24,6 @@ const CustomersContainer = (props) => {
             </div>
         );
     } else if (props.customersRequestSuccess) {
-        console.log(props.customers);
         return (
             <div className="reactive-margin">
                 <CustomersRender
