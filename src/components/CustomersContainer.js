@@ -31,10 +31,15 @@ const CustomersContainer = (props) => {
             <div className="reactive-margin">
                 <CustomersRender
                     customers={props.customers}
-                    handleView={x => console.log("View is fa sar work", x)}
-                    handleUpdate={x => console.log("Update", x)}
-                    handleDelete={x => props.actions.deleteCustomer(x.contactid)}
-                    handleAdd={() => console.log("Add")}
+                    handleUpdate={(values, customer) => {
+                        props.actions.updateCustomer(values, customer.contactid)
+                    }}
+                    handleDelete={customer => {
+                        props.actions.deleteCustomer(customer.contactid)
+                    }}
+                    handleCreate={(values) => {
+                        props.actions.createCustomer(values)
+                    }}
                 />
             </div>
         );

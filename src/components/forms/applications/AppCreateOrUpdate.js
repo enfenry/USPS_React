@@ -3,8 +3,8 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getApplicationTypeName } from '../ApplicationsRender';
-import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../constants/applicationTypes';
+import { getApplicationTypeName } from '../../ApplicationsRender';
+import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './AppValidate';
 
 let AppCreateOrUpdate = props => {

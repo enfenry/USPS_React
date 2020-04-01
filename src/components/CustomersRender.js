@@ -2,43 +2,33 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button } from 'reactstrap';
+import ModalButton from './modals/ModalButton';
 //import InfiniteScroll from 'react-infinite-scroll-component';
 import { MDBDataTable } from 'mdbreact';
 //import {CustomersContainer} from './CustomersContainer';
 
 
-const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, handleAdd }) => {
+const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }) => {
 
   function getTableBodyContent() {
-    let tableData = customers;
-
-    return tableData.map(obj => {
+    return customers.map(obj => {
 
       // Deep Clone object to avoid adding to it while mapping over it during map
       let newObj = JSON.parse(JSON.stringify(obj))
 
       newObj["view"] = (
-        <input
-          type="button"
-          value="view"
-          onClick={() => handleView(obj)}
-        />
+        <ModalButton CRUDOption="View" label="View" name={obj.fullname} entity="Customer" 
+        initialValues={{ ...obj}}  />
       );
       newObj["delete"] = (
-        <input
-          type="button"
-          value="delete"
-          onClick={() => handleDelete(obj)}
-        />
+        <ModalButton CRUDOption="Update" label="Update" name={obj.fullname} entity="Customer" 
+        initialValues={{ ...obj}}  onSubmit={(values) => handleUpdate(values, obj)} />
       );
       newObj["update"] = (
-        <input
-          type="button"
-          value="update"
-          onClick={() => handleUpdate(obj)}
-        />
+        <ModalButton CRUDOption="Delete" label="Delete" name={obj.fullname} entity="Customer" 
+        initialValues={{ ...obj}}  onSubmit={() => handleDelete(obj)} />
       );
+
       return newObj;
     });
 
@@ -85,6 +75,8 @@ const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, ha
   return (
     <React.Fragment>
       <h1>Customers</h1>
+      <ModalButton CRUDOption="Create" label="Create New Customer" name={`Customer ${customers.length}`} entity="Customer" 
+      initialValues={{ name: `Customer ${customers.length}` }} onSubmit={(values) => handleCreate(values)} />
       <MDBDataTable
         striped
         bordered
@@ -92,20 +84,16 @@ const CustomersRender = ({ customers, handleView, handleUpdate, handleDelete, ha
         responsive
         data={data}
       />
-      <Button color="primary" onClick={handleAdd}>Add</Button>
     </React.Fragment>
   );
 }
 
-
-
 CustomersRender.propTypes = {
   customers: PropTypes.array,
+  handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func,
-  handleAdd: PropTypes.func,
-
+  handleDelete: PropTypes.func
 };
 
 export default CustomersRender;
