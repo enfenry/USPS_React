@@ -18,7 +18,14 @@ const MyModal = (props) => {
         return (
           <div>
             <p>{'Are you sure?'}</p>
-            <Button color="danger" onClick={onSubmit}>{label}</Button>{' '}
+            <Button color="danger" onClick={() => {
+              new Promise(() => {
+                onSubmit();
+              })
+                .then(
+                  handleHide()
+                )
+            }}>{label}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
       case 'Create':
