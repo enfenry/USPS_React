@@ -1,7 +1,7 @@
 {
-  "name": "LMS",
+  "name": "usps-dynamics-project",
   "version": "1.0.0",
-  "description": "LMS - Redux",
+  "description": "USPS Dynamics Project",
   "main": "main.js",
   "scripts": {
     "start": "gulp",
