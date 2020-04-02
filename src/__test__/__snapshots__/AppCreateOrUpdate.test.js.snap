@@ -168,6 +168,21 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
             <option
               value={null}
             />
+            <option
+              value="5c400943-dc6e-ea11-a811-000d3a3682ac"
+            >
+              Standard Shipping
+            </option>
+            <option
+              value="6483bb61-dc6e-ea11-a811-000d3a3682ac"
+            >
+              Priority Mail
+            </option>
+            <option
+              value="d3ecea74-dc6e-ea11-a811-000d3a3682ac"
+            >
+              Priority Mail Express
+            </option>
           </select>
         </div>
       </div>
@@ -208,19 +223,44 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
               value={null}
             />
             <option
-              value="A"
+              value="68c94622-e058-ea11-a811-000d3a36880e"
             >
-              Alice Astronaut
+              Barack Obama
             </option>
             <option
-              value="B"
+              value="560ba0e7-e058-ea11-a811-000d3a36880e"
             >
-              Bobby Butcher
+              Cliff Didcock
             </option>
             <option
-              value="C"
+              value="4ec465f8-176a-ea11-a811-000d3a36880e"
             >
-              Charlie Cobbler
+              Rufat Aghay
+            </option>
+            <option
+              value="ad3fff7e-1f6a-ea11-a811-000d3a36880e"
+            >
+              Mojo Jojo
+            </option>
+            <option
+              value="cdb5fa76-b407-ea11-a811-000d3a368be7"
+            >
+              Smit Wilson
+            </option>
+            <option
+              value="21625e66-b507-ea11-a811-000d3a368be7"
+            >
+              Ta Tottemham
+            </option>
+            <option
+              value="19ea5a35-7d10-ea11-a811-000d3a368e62"
+            >
+              Rufat Aghayev
+            </option>
+            <option
+              value="769d8b04-b8db-e911-a982-000d3a37870e"
+            >
+              Manny Jurgenson
             </option>
           </select>
         </div>
@@ -261,6 +301,21 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
             <option
               value={null}
             />
+            <option
+              value="a6bd4ce5-d059-ea11-a811-000d3a36880e"
+            >
+              Work Apartments
+            </option>
+            <option
+              value="c35d360b-9074-ea11-a811-000d3a36880e"
+            >
+              The College of St. Scholastica
+            </option>
+            <option
+              value="64681c6b-9074-ea11-a811-000d3a36880e"
+            >
+              Matt's Apartment
+            </option>
           </select>
         </div>
       </div>

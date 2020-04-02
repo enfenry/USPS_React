@@ -3,40 +3,19 @@ import AppCreateOrUpdate from '../components/forms/applications/AppCreateOrUpdat
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
+import basicState from "./basicState";
+
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore([]);
 
 test('AppCreateOrUpdate renders correctly', () => {
 
-    const store = mockStore({
-        productsReducer: { products: [] },
-        ordersReducer: { orders: [] },
-        customersReducer: {
-            customers: [
-                {
-                    contactid: "A",
-                    fullname: "Alice Astronaut"
-                },
-                {
-                    contactid: "B",
-                    fullname: "Bobby Butcher"
-                },
-                {
-                    contactid: "C",
-                    fullname: "Charlie Cobbler"
-                }
-            ],
-        },
-        addressesReducer: { addresses: [] },
-    });
+    const store = mockStore(basicState);
+    const initialValues = basicState.applicationsReducer.applications[0];
 
     const component = renderer.create(
         <Provider store={store}>
-            <AppCreateOrUpdate
-                data={{
-                    _ss_customer_value: "B"
-                }}
-            />
+            <AppCreateOrUpdate initialValues={initialValues} />
         </Provider>
     );
 
