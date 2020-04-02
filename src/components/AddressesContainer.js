@@ -1,15 +1,15 @@
 "use strict"
 
-import * as applicationsActions from '../actions/applicationsActions';
-import ApplicationsRender from './ApplicationsRender';
+import * as addressesActions from '../actions/addressesActions';
+import AddressesRender from './AddressesRender';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-const ApplicationsContainer = (props) => {
+const AddressesContainer = (props) => {
 
-    if (props.applicationsRequestPending || props.ordersRequestPending || props.productsRequestPending || props.customersRequestPending || props.addressesRequestPending) {
+    if (props.addressesRequestPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -17,81 +17,56 @@ const ApplicationsContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.applicationsRequestFailed || props.ordersRequestFailed || props.productsRequestFailed || props.customersRequestFailed || props.addressesRequestFailed) {
+    } else if (props.addressesRequestFailed) {
         return (
             <div className="alert alert-danger" role="alert">
-                Error while loading entities!
+                Error while loading customers!
             </div>
         );
-
-    } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
+    } else if (props.addressesRequestSuccess) {
         return (
             <div className="reactive-margin">
-                <ApplicationsRender
-                    applications={props.applications}
-                    handleUpdate={(values, application) => {
-                        props.actions.updateApplication(values, application.ss_applicationid)
+                <AddressesRender
+                    addresses={props.addresses}
+                    handleUpdate={(values, address) => {
+                        props.actions.updateAddress(values, address.ss_customaddressid)
                     }}
-                    handleDelete={application => {
-                        props.actions.deleteApplication(application.ss_applicationid)
+                    handleDelete={address => {
+                        props.actions.deleteAddress(address.ss_customaddressid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createApplication(values)
+                        props.actions.createAddress(values)
                     }}
                 />
             </div>
         );
     } else {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Invalid state! This message should never appear.
-            </div>
-        );
+        return null;
     }
 }
 
-
-ApplicationsContainer.propTypes = {
+AddressesContainer.propTypes = {
     actions: PropTypes.object
 };
 
 function mapStateToProps(state) {
     return {
-        applications: state.applicationsReducer.applications,
-        products: state.productsReducer.products,
-        orders: state.ordersReducer.orders,
-        customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
-
-        applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
-        applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
-        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess,
-
-        customersRequestPending: state.customersReducer.customersRequestPending,
-        customersRequestFailed: state.customersReducer.customersRequestFailed,
-        customersRequestSuccess: state.customersReducer.customersRequestSuccess,
-
-        productsRequestPending: state.productsReducer.productsRequestPending,
-        productsRequestFailed: state.productsReducer.productsRequestFailed,
-        productsRequestSuccess: state.productsReducer.productsRequestSuccess,
-
-        ordersRequestPending: state.ordersReducer.ordersRequestPending,
-        ordersRequestFailed: state.ordersReducer.ordersRequestFailed,
-        ordersRequestSuccess: state.ordersReducer.ordersRequestSuccess,
-
         addressesRequestPending: state.addressesReducer.addressesRequestPending,
         addressesRequestFailed: state.addressesReducer.addressesRequestFailed,
-        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess,
+        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess
+
+
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(applicationsActions, dispatch)
+        actions: bindActionCreators(addressesActions, dispatch)
     }
 }
 
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(ApplicationsContainer);
+)(AddressesContainer);
