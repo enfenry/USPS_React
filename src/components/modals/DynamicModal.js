@@ -7,6 +7,9 @@ import AppCreateOrUpdate from '../forms/applications/AppCreateOrUpdate';
 import AppView from '../forms/applications/AppView';
 import CustomerCreateOrUpdate from '../forms/customers/CustomerCreateOrUpdate';
 import CustomerView from '../forms/customers/CustomerView';
+import AddressCreateOrUpdate from '../forms/addresses/AddressCreateOrUpdate';
+import AddressView from '../forms/addresses/AddressView';
+
 
 const MyModal = (props) => {
   const { onSubmit, handleHide, show, name, CRUDOption, label, entity } = props;
@@ -39,6 +42,10 @@ const MyModal = (props) => {
             return (
               <CustomerCreateOrUpdate {...props} />
             );
+            case 'Address':
+            return (
+              <AddressCreateOrUpdate {...props} />
+            );
           default:
             return 'Invalid Entity';
         }
@@ -52,6 +59,10 @@ const MyModal = (props) => {
           case 'Customer':
             return (
               <CustomerView {...props} />
+            );
+            case 'Address':
+            return (
+              <AddressView {...props} />
             );
           default:
             return (
