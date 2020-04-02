@@ -8,7 +8,9 @@ import Home from './Home.js';
 
 import ApplicationsContainer from './ApplicationsContainer';
 import CustomersContainer from './CustomersContainer';
+import OrdersContainer from './OrdersContainer';
 import DynamicModal from './modals/DynamicModal';
+
 
 export class App extends React.Component{
     render() {
@@ -20,6 +22,7 @@ export class App extends React.Component{
                     <Route exact path='/' component={Home}/>
                     <Route path='/applications' component={ApplicationsContainer}/>
                     <Route path='/customers' component={CustomersContainer}/>
+                    <Route path='/orders' component={OrdersContainer}/>
                 </Switch>
             </React.Fragment>
         );
