@@ -1,0 +1,321 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddressCreateOrUpdate renders correctly 1`] = `
+<form
+  className="form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Name
+          </label>
+          <input
+            className="input form-control"
+            name="ss_name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Line 1
+          </label>
+          <input
+            className="input form-control"
+            name="ss_line1"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Line 2
+          </label>
+          <input
+            className="input form-control"
+            name="ss_line2"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Line 3
+          </label>
+          <input
+            className="input form-control"
+            name="ss_line3"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            City
+          </label>
+          <input
+            className="input form-control"
+            name="ss_city"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            State
+          </label>
+          <input
+            className="input form-control"
+            name="ss_state"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Country
+          </label>
+          <input
+            className="input form-control"
+            name="ss_country"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Postal Code
+          </label>
+          <input
+            className="input form-control"
+            name="ss_postalcode"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+    >
+      <button
+        aria-label={null}
+        className="button is-link btn btn-success"
+        onClick={[Function]}
+        type="button"
+      >
+        Submit
+      </button>
+       
+      <button
+        aria-label={null}
+        className="btn btn-secondary"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+`;
