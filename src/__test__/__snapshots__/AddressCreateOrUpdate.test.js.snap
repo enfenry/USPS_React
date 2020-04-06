@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AppCreateOrUpdate renders correctly 1`] = `
+exports[`AddressCreateOrUpdate renders correctly 1`] = `
 <form
   className="form"
   onSubmit={[Function]}
@@ -60,37 +60,19 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
           <label
             className="field"
           >
-            Application Type
+            Line 1
           </label>
-          <select
+          <input
             className="input form-control"
-            name="ss_applicationtype"
+            name="ss_line1"
             onBlur={[Function]}
             onChange={[Function]}
             onDragStart={[Function]}
             onDrop={[Function]}
             onFocus={[Function]}
+            type="text"
             value=""
-          >
-            <option
-              value={null}
-            />
-            <option
-              value={717800000}
-            >
-              Address Change
-            </option>
-            <option
-              value={717800001}
-            >
-              Mail Forwarding
-            </option>
-            <option
-              value={717800002}
-            >
-              Package Submission
-            </option>
-          </select>
+          />
         </div>
       </div>
     </div>
@@ -114,76 +96,19 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
           <label
             className="field"
           >
-            Product
+            Line 2
           </label>
-          <select
+          <input
             className="input form-control"
-            name="_ss_product_value"
+            name="ss_line2"
             onBlur={[Function]}
             onChange={[Function]}
             onDragStart={[Function]}
             onDrop={[Function]}
             onFocus={[Function]}
+            type="text"
             value=""
-          >
-            <option
-              value={null}
-            />
-          </select>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div
-    className="field form-group"
-  >
-    <div
-      className="control"
-    >
-      <div
-        style={
-          Object {
-            "display": "none",
-          }
-        }
-      >
-        <div
-          className="control"
-        >
-          <label
-            className="field"
-          >
-            Shipping Speed
-          </label>
-          <select
-            className="input form-control"
-            name="_ss_shippingspeed_value"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onDragStart={[Function]}
-            onDrop={[Function]}
-            onFocus={[Function]}
-            value=""
-          >
-            <option
-              value={null}
-            />
-            <option
-              value="5c400943-dc6e-ea11-a811-000d3a3682ac"
-            >
-              Standard Shipping
-            </option>
-            <option
-              value="6483bb61-dc6e-ea11-a811-000d3a3682ac"
-            >
-              Priority Mail
-            </option>
-            <option
-              value="d3ecea74-dc6e-ea11-a811-000d3a3682ac"
-            >
-              Priority Mail Express
-            </option>
-          </select>
+          />
         </div>
       </div>
     </div>
@@ -207,62 +132,19 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
           <label
             className="field"
           >
-            Customer
+            Line 3
           </label>
-          <select
+          <input
             className="input form-control"
-            name="_ss_customer_value"
+            name="ss_line3"
             onBlur={[Function]}
             onChange={[Function]}
             onDragStart={[Function]}
             onDrop={[Function]}
             onFocus={[Function]}
+            type="text"
             value=""
-          >
-            <option
-              value={null}
-            />
-            <option
-              value="68c94622-e058-ea11-a811-000d3a36880e"
-            >
-              Barack Obama
-            </option>
-            <option
-              value="560ba0e7-e058-ea11-a811-000d3a36880e"
-            >
-              Cliff Didcock
-            </option>
-            <option
-              value="4ec465f8-176a-ea11-a811-000d3a36880e"
-            >
-              Rufat Aghay
-            </option>
-            <option
-              value="ad3fff7e-1f6a-ea11-a811-000d3a36880e"
-            >
-              Mojo Jojo
-            </option>
-            <option
-              value="cdb5fa76-b407-ea11-a811-000d3a368be7"
-            >
-              Smit Wilson
-            </option>
-            <option
-              value="21625e66-b507-ea11-a811-000d3a368be7"
-            >
-              Ta Tottemham
-            </option>
-            <option
-              value="19ea5a35-7d10-ea11-a811-000d3a368e62"
-            >
-              Rufat Aghayev
-            </option>
-            <option
-              value="769d8b04-b8db-e911-a982-000d3a37870e"
-            >
-              Manny Jurgenson
-            </option>
-          </select>
+          />
         </div>
       </div>
     </div>
@@ -286,37 +168,127 @@ exports[`AppCreateOrUpdate renders correctly 1`] = `
           <label
             className="field"
           >
-            Destination Address
+            City
           </label>
-          <select
+          <input
             className="input form-control"
-            name="_ss_destinationaddress_value"
+            name="ss_city"
             onBlur={[Function]}
             onChange={[Function]}
             onDragStart={[Function]}
             onDrop={[Function]}
             onFocus={[Function]}
+            type="text"
             value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
           >
-            <option
-              value={null}
-            />
-            <option
-              value="a6bd4ce5-d059-ea11-a811-000d3a36880e"
-            >
-              Work Apartments
-            </option>
-            <option
-              value="c35d360b-9074-ea11-a811-000d3a36880e"
-            >
-              The College of St. Scholastica
-            </option>
-            <option
-              value="64681c6b-9074-ea11-a811-000d3a36880e"
-            >
-              Matt's Apartment
-            </option>
-          </select>
+            State
+          </label>
+          <input
+            className="input form-control"
+            name="ss_state"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Country
+          </label>
+          <input
+            className="input form-control"
+            name="ss_country"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Postal Code
+          </label>
+          <input
+            className="input form-control"
+            name="ss_postalcode"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
         </div>
       </div>
     </div>

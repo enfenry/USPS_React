@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCreateOrUpdate from '../components/forms/applications/AppCreateOrUpdate';
+import CustomerCreateOrUpdate from '../components/forms/customers/CustomerCreateOrUpdate';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
@@ -8,14 +8,14 @@ import basicState from "./basicState";
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore([]);
 
-test('AppCreateOrUpdate renders correctly', () => {
+test('CustomerCreateOrUpdate renders correctly', () => {
 
     const store = mockStore(basicState);
-    const initialValues = basicState.applicationsReducer.applications[0];
+    const initialValues = basicState.customersReducer.customers[0];
 
     const component = renderer.create(
         <Provider store={store}>
-            <AppCreateOrUpdate initialValues={initialValues} />
+            <CustomerCreateOrUpdate initialValues={initialValues} />
         </Provider>
     );
 

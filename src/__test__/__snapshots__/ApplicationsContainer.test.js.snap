@@ -165,16 +165,520 @@ exports[`ApplicationsContainer renders correctly 1`] = `
               >
                 <tr>
                   <td>
-                    example id
+                    05a3369d-e158-ea11-a811-000d3a3780df
                   </td>
                   <td>
-                    example name
+                    Application 14
                   </td>
                   <td>
-                    example application type
+                    Mail Forwarding
                   </td>
                   <td>
-                    example date
+                    2020-02-09T02:05:29Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    23a21a57-954f-4966-93bc-fba1ea090c67
+                  </td>
+                  <td>
+                    UpdatableTest155
+                  </td>
+                  <td>
+                    Address Change
+                  </td>
+                  <td>
+                    2020-03-27T02:20:07Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    07a3369d-e158-ea11-a811-000d3a3780df
+                  </td>
+                  <td>
+                    Application 15
+                  </td>
+                  <td>
+                    Mail Forwarding
+                  </td>
+                  <td>
+                    2020-02-09T20:36:16Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    bfbbe653-9c73-ea11-a811-000d3a3682ac
+                  </td>
+                  <td>
+                    Joeeee
+                  </td>
+                  <td>
+                    Mail Forwarding
+                  </td>
+                  <td>
+                    2020-03-31T22:09:47Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    09a3369d-e158-ea11-a811-000d3a3780df
+                  </td>
+                  <td>
+                    Application 16
+                  </td>
+                  <td>
+                    Package Submission
+                  </td>
+                  <td>
+                    2020-02-10T15:07:03Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    6e86c7e1-9d73-ea11-a811-000d3a3682ac
+                  </td>
+                  <td>
+                    Joetest2
+                  </td>
+                  <td>
+                    Address Change
+                  </td>
+                  <td>
+                    2020-03-31T22:21:02Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    0ba3369d-e158-ea11-a811-000d3a3780df
+                  </td>
+                  <td>
+                    Application 17
+                  </td>
+                  <td>
+                    Address Change
+                  </td>
+                  <td>
+                    2020-02-11T09:37:50Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    017e6847-a273-ea11-a811-000d3a3682ac
+                  </td>
+                  <td>
+                    Application Nolan
+                  </td>
+                  <td>
+                    Mail Forwarding
+                  </td>
+                  <td>
+                    2020-03-31T22:52:23Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    0da3369d-e158-ea11-a811-000d3a3780df
+                  </td>
+                  <td>
+                    Application 18
+                  </td>
+                  <td>
+                    Mail Forwarding
+                  </td>
+                  <td>
+                    2020-02-12T04:08:37Z
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-secondary"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          View
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-success"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Update
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <p>
+                        <button
+                          aria-label={null}
+                          className="btn btn-danger"
+                          onClick={[Function]}
+                          type="button"
+                        >
+                          Delete
+                        </button>
+                      </p>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    00a88adb-d873-ea11-a811-000d3a3682ac
+                  </td>
+                  <td>
+                    Tester4
+                  </td>
+                  <td>
+                    Address Change
+                  </td>
+                  <td>
+                    2020-04-01T05:23:12Z
                   </td>
                   <td>
                     <div>
@@ -263,7 +767,7 @@ exports[`ApplicationsContainer renders correctly 1`] = `
             className="dataTables_info"
             role="status"
           >
-            Showing 1 to 1 of 1 entries
+            Showing 1 to 10 of 43 entries
           </div>
         </div>
         <div
@@ -310,7 +814,55 @@ exports[`ApplicationsContainer renders correctly 1`] = `
                 </a>
               </li>
               <li
-                className="disabled page-item"
+                className="page-item"
+                data-test="page-item"
+              >
+                <a
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  2
+                </a>
+              </li>
+              <li
+                className="page-item"
+                data-test="page-item"
+              >
+                <a
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  3
+                </a>
+              </li>
+              <li
+                className="page-item"
+                data-test="page-item"
+              >
+                <a
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  4
+                </a>
+              </li>
+              <li
+                className="page-item"
+                data-test="page-item"
+              >
+                <a
+                  className="page-link page-link"
+                  data-test="page-link"
+                  onClick={[Function]}
+                >
+                  5
+                </a>
+              </li>
+              <li
+                className="page-item"
                 data-test="page-item"
               >
                 <a
@@ -330,5 +882,14 @@ exports[`ApplicationsContainer renders correctly 1`] = `
       </div>
     </div>
   </div>
+</div>
+`;
+
+exports[`ApplicationsContainer shows error when orders have an error 1`] = `
+<div
+  className="alert alert-danger"
+  role="alert"
+>
+  Error while loading entities!
 </div>
 `;
