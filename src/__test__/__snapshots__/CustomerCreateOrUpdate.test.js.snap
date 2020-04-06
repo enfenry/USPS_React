@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CustomerCreateOrUpdate renders correctly 1`] = `
+<form
+  className="form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            First Name
+          </label>
+          <input
+            className="input form-control"
+            name="firstname"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Last Name
+          </label>
+          <input
+            className="input form-control"
+            name="lastname"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field form-group"
+  >
+    <div
+      className="control"
+    >
+      <div
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <div
+          className="control"
+        >
+          <label
+            className="field"
+          >
+            Email
+          </label>
+          <input
+            className="input form-control"
+            name="emailaddress1"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <div
+      className="control"
+    >
+      <button
+        aria-label={null}
+        className="button is-link btn btn-success"
+        onClick={[Function]}
+        type="button"
+      >
+        Submit
+      </button>
+       
+      <button
+        aria-label={null}
+        className="btn btn-secondary"
+        onClick={[Function]}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+</form>
+`;

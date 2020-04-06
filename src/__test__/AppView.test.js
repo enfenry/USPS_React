@@ -1,5 +1,5 @@
 import React from 'react';
-import AppCreateOrUpdate from '../components/forms/applications/AppCreateOrUpdate';
+import AppView from '../components/forms/applications/AppView';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
@@ -8,14 +8,17 @@ import basicState from "./basicState";
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore([]);
 
-test('AppCreateOrUpdate renders correctly', () => {
+test('AppView renders correctly', () => {
 
     const store = mockStore(basicState);
     const initialValues = basicState.applicationsReducer.applications[0];
 
     const component = renderer.create(
         <Provider store={store}>
-            <AppCreateOrUpdate initialValues={initialValues} />
+            <AppView
+                name="example name"
+                initialValues={{ ...initialValues, appTypeLabel: "example app type" }}
+            />
         </Provider>
     );
 

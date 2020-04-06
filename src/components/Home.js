@@ -35,6 +35,10 @@ const Home = (props) => {
     } else if (props.applicationsRequestSuccess) {
 
         var distribution0 = [0, 0, 0];
+        var distribution1 = [0, 0];
+        var appsThisMonth=0;
+        var currentMonth=new Date().getMonth()+1;
+        console.log(currentMonth);
         props.applications.forEach((application) => {
             switch (application.ss_applicationtype) {
                 case ADDRESS_CHANGE:
@@ -48,13 +52,14 @@ const Home = (props) => {
 
                     break;
             }
-        });
-
-
-        var distribution1 = [0, 0];
-        props.applications.forEach((application) => {
             distribution1[application.statecode]++;
+            var date1 = application.createdon.slice(5,7);
+            var dateStripped=date1.replace(/\b0+/, '');
+            if(currentMonth==dateStripped) 
+                appsThisMonth++;
         });
+
+
 
         const data0 = {
 
@@ -100,6 +105,9 @@ const Home = (props) => {
 
         return (
             <React.Fragment>
+                <div>
+                    <h2>Applications this month:{appsThisMonth}</h2>
+                </div>
                 <div>
                     <Doughnut
                         data={data0}

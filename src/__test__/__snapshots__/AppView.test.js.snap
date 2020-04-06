@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppView renders correctly 1`] = `
+<div>
+  <div>
+    <div>
+      <span>
+        Name: 
+      </span>
+      <p>
+        example name
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>
+        Application Type: 
+      </span>
+      <p>
+        example app type
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>
+        Product: 
+      </span>
+      <p>
+        1 Year
+      </p>
+    </div>
+  </div>
+  
+  <div>
+    <div>
+      <span>
+        Customer: 
+      </span>
+      <p>
+        Mojo Jojo
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>
+        Destination Address: 
+      </span>
+      <p>
+        Work Apartments
+      </p>
+    </div>
+  </div>
+  <div
+    className="control"
+  >
+    <button
+      aria-label={null}
+      className="btn btn-secondary"
+      onClick={[Function]}
+    >
+      Cancel
+    </button>
+  </div>
+</div>
+`;
