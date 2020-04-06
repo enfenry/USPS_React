@@ -4,7 +4,8 @@ import { adalApiFetch } from '../adalConfig.js';
 import { READ_APPLICATIONS_SUCCESSFUL, READ_APPLICATIONS_FAILURE, READ_APPLICATIONS_PENDING, 
          CREATE_APPLICATION_SUCCESSFUL, CREATE_APPLICATION_FAILURE,
          UPDATE_APPLICATION_SUCCESSFUL, UPDATE_APPLICATION_FAILURE,
-         DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE  
+         DELETE_APPLICATION_SUCCESSFUL, DELETE_APPLICATION_FAILURE,
+         APP_TO_ORDER_SUCCESSFUL, APP_TO_ORDER_FAILURE 
 } from '../constants/actionTypes';
 
 export const createApplication = (values) => {
@@ -124,6 +125,30 @@ export const deleteApplication = (id) => {
     };
 }
 
+export const applicationToOrder = (id) => {
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications(" + id + ")/Microsoft.Dynamics.CRM.ss_ConverttoOrder";
+    let config = {
+        method: 'post',
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+    };
+
+    return dispatch => {
+
+        return adalApiFetch(axios, uri, config)
+            .then(() => {
+                dispatch(_applicationToOrderSuccess());
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(_applicationToOrderFailed(error));
+            });
+    };
+}
+
+
 const _createApplicationSuccess = (res) => {
     return {
         type: CREATE_APPLICATION_SUCCESSFUL,
@@ -183,6 +208,20 @@ const _deleteApplicationSuccess = (id) => {
 const _deleteApplicationFailed = (error) => {
     return {
         type: DELETE_APPLICATION_FAILURE,
+        error
+    };
+}
+
+const _applicationToOrderSuccess = (res) => {
+    return {
+        type: APP_TO_ORDER_SUCCESSFUL,
+        data: res.data
+    };
+}
+
+const _applicationToOrderFailed = (error) => {
+    return {
+        type: APP_TO_ORDER_FAILURE,
         error
     };
 }

@@ -3,11 +3,17 @@
 import * as applicationsActions from '../actions/applicationsActions';
 import ApplicationsRender from './ApplicationsRender';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const ApplicationsContainer = (props) => {
+    
+    console.log("aps",props);
+
+    useEffect(() => {
+        const { actions } = props;
+    }, [] );
 
     if (props.applicationsRequestPending || props.ordersRequestPending || props.productsRequestPending || props.customersRequestPending || props.addressesRequestPending) {
         return (
@@ -17,14 +23,16 @@ const ApplicationsContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.applicationsRequestFailed || props.ordersRequestFailed || props.productsRequestFailed || props.customersRequestFailed || props.addressesRequestFailed) {
+    }
+    if (props.applicationsRequestFailed || props.ordersRequestFailed || props.productsRequestFailed || props.customersRequestFailed || props.addressesRequestFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading entities!
             </div>
         );
 
-    } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
+    }
+    if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
         return (
             <div className="reactive-margin">
                 <ApplicationsRender
@@ -41,13 +49,14 @@ const ApplicationsContainer = (props) => {
                 />
             </div>
         );
-    } else {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Invalid state! This message should never appear.
-            </div>
-        );
-    }
+    } 
+    // else {
+    //     return (
+    //         <div className="alert alert-danger" role="alert">
+    //             Invalid state! This message should never appear.
+    //         </div>
+    //     );
+    // }
 }
 
 
