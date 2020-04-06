@@ -3,29 +3,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './modals/ModalButton';
-//import InfiniteScroll from 'react-infinite-scroll-component'; 
+//import InfiniteScroll from 'react-infinite-scroll-component';
 import { MDBDataTable } from 'mdbreact';
 //import {CustomersContainer} from './CustomersContainer';
 
 
-const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }) => {
+const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate }) => {
 
   function getTableBodyContent() {
-    return customers.map(obj => {
+    return addresses.map(obj => {
 
       // Deep Clone object to avoid adding to it while mapping over it during map
       let newObj = JSON.parse(JSON.stringify(obj))
 
       newObj["view"] = (
-        <ModalButton CRUDOption="View" label="View" name={obj.fullname} entity="Customer"
+        <ModalButton CRUDOption="View" label="View" name={obj.fullname} entity="Address"
           initialValues={{ ...obj }} />
       );
       newObj["delete"] = (
-        <ModalButton CRUDOption="Update" label="Update" name={obj.fullname} entity="Customer"
+        <ModalButton CRUDOption="Update" label="Update" name={obj.fullname} entity="Address"
           initialValues={{ ...obj }} onSubmit={(values) => handleUpdate(values, obj)} />
       );
       newObj["update"] = (
-        <ModalButton CRUDOption="Delete" label="Delete" name={obj.fullname} entity="Customer"
+        <ModalButton CRUDOption="Delete" label="Delete" name={obj.fullname} entity="Address"
           initialValues={{ ...obj }} onSubmit={() => handleDelete(obj)} />
       );
 
@@ -36,15 +36,50 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
   let data = {
     columns: [
       {
-        label: 'ID',
-        field: 'contactid',
+        label: 'Name',
+        field: 'ss_name',
         sort: 'asc',
         width: 150
       },
-
       {
-        label: 'Name',
-        field: 'fullname',
+        label: 'Line 1',
+        field: 'ss_line1',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Line 2',
+        field: 'ss_line2',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Line 3',
+        field: 'ss_line3',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'City',
+        field: 'ss_city',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'State',
+        field: 'ss_state',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Country',
+        field: 'ss_country',
+        sort: 'asc',
+        width: 150
+      },
+      {
+        label: 'Postal Code',
+        field: 'ss_postalcode',
         sort: 'asc',
         width: 150
       },
@@ -74,8 +109,8 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
   }
   return (
     <React.Fragment>
-      <h1>Customers</h1>
-      <ModalButton CRUDOption="Create" label="Create New Customer" name={`Customer ${customers.length}`} entity="Customer"
+      <h1>Addresses</h1>
+      <ModalButton CRUDOption="Create" label="Create New Address" name={`Address ${addresses.length}`} entity="Address"
         onSubmit={(values) => handleCreate(values)} />
       <MDBDataTable
         striped
@@ -88,12 +123,12 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
   );
 }
 
-CustomersRender.propTypes = {
-  customers: PropTypes.array,
+AddressesRender.propTypes = {
+  addresses: PropTypes.array,
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func
 };
 
-export default CustomersRender;
+export default AddressesRender;

@@ -45,6 +45,12 @@ const Header = () => {
                         <NavItem>
                             <NavLink tag={Link} to="/customers" replace>Customers</NavLink>
                         </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} to="/orders" replace>Orders</NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink tag={Link} to="/addresses" replace>Addresses</NavLink>
+                        </NavItem>
                     </Nav>
                     <Button onClick={() => authContext.logOut()}>Log out</Button>
                 </Collapse>

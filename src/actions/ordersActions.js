@@ -1,7 +1,10 @@
 import axios from 'axios'
 import { adalApiFetch } from '../adalConfig.js';
 
-import { READ_ORDERS_SUCCESSFUL, READ_ORDERS_FAILURE, READ_ORDERS_PENDING} from '../constants/actionTypes';
+import { READ_ORDERS_SUCCESSFUL, READ_ORDERS_FAILURE, READ_ORDERS_PENDING,
+        UPDATE_ORDER_SUCCESSFUL, UPDATE_ORDER_FAILURE,
+        DELETE_ORDER_SUCCESSFUL, DELETE_ORDER_FAILURE
+} from '../constants/actionTypes';
 
 export const readOrders = () => {
 
@@ -27,6 +30,29 @@ export const readOrders = () => {
     };
 }
 
+export const deleteOrder = (id) => {
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/saleorders(" + id + ")";
+    let config = {
+        method: 'delete',
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        Accept: 'order/json',
+        'Content-Type': 'order/json; charset=utf-8',
+    };
+
+    return dispatch => {
+
+        return adalApiFetch(axios, uri, config)
+            .then(() => {
+                dispatch(_deleteOrderSuccess(id));
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(_deleteOrderFailed(error));
+            });
+    };
+}
+
 const _readOrdersSuccess = (res) => {
     return {
         type: READ_ORDERS_SUCCESSFUL,
@@ -44,6 +70,20 @@ const _readOrdersFailed = (error) => {
 const _readOrdersStarted = () => {
     return {
         type: READ_ORDERS_PENDING
+    };
+}
+
+const _deleteOrderSuccess = (id) => {
+    return {
+        type: DELETE_ORDER_SUCCESSFUL,
+        data: id
+    };
+}
+
+const _deleteOrderFailed = (error) => {
+    return {
+        type: DELETE_ORDER_FAILURE,
+        error
     };
 }
 
