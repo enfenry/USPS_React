@@ -28,21 +28,21 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
       const appTypeLabel = getApplicationTypeName(obj.ss_applicationtype);
 
       newObj["view"] = (
-        <ModalButton CRUDOption="View" label="View" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  />
+        <ModalButton CRUDOption="View" label="View" name={obj.ss_name} entity="Application"
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} />
       );
       newObj["update"] = (
-        <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={(values) => handleUpdate(values, obj)} />
+        <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application"
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} onSubmit={(values) => handleUpdate(values, obj)} />
       );
       newObj["delete"] = (
-        <ModalButton CRUDOption="Delete" label="Delete" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={() => handleDelete(obj)} />
+        <ModalButton CRUDOption="Delete" label="Delete" name={obj.ss_name} entity="Application"
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} onSubmit={() => handleDelete(obj)} />
       );
 
       newObj["toOrder"] = (
-        <ModalButton CRUDOption="Place Order" label="Place Order" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={() => handleAppToOrder(obj)} />
+        <ModalButton CRUDOption="Place Order" label="Place Order" name={obj.ss_name} entity="Application"
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} onSubmit={() => handleAppToOrder(obj)} />
       );
 
       newObj["appTypeLabel"] = appTypeLabel;
@@ -53,52 +53,39 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
   let data = {
     columns: [
       {
-        label: 'ID',
-        field: 'ss_applicationid',
-        sort: 'asc',
-        width: 150
-      },
-      {
         label: 'App Name',
         field: 'ss_name',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Type',
         field: 'appTypeLabel',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Created On',
         field: 'createdon',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'view',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'toOrder',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'update',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'delete',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       }
 
     ],
@@ -109,9 +96,9 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
   return (
     <div>
       <h1>Applications</h1>
-      <ModalButton CRUDOption="Create" label="Create New Application" name={`Application ${applications.length}`} entity="Application" 
-      initialValues={{ ss_name: `Application ${applications.length}` }} onSubmit={(values) => handleCreate(values)} />
-      <MDBDataTable
+      <ModalButton CRUDOption="Create" label="Create New Application" name={`Application ${applications.length}`} entity="Application"
+        initialValues={{ ss_name: `Application ${applications.length}` }} onSubmit={(values) => handleCreate(values)} />
+      <MDBDataTable  
         striped
         bordered
         small

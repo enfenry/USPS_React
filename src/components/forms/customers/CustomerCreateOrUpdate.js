@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 import validate from './CustomerValidate';
 
 let CustomerCreateOrUpdate = props => {
-  const { handleSubmit, handleHide } = props;
+  const { handleSubmit, handleHide, addresses, initialValues } = props;
+
+  const displayById = (array, key, value, display) => {
+    let filtered = array.filter(el => el[key] === value);
+    return filtered.length ? filtered[0][display] : 'None';
+  }
 
   return (
     <Form onSubmit={handleSubmit} className="form">
@@ -27,6 +32,13 @@ let CustomerCreateOrUpdate = props => {
           <Field name="emailaddress1" component={renderField} type="text" label="Email" />
         </div>
       </FormGroup>
+
+      <div>
+        <div>
+          <span>Address Name: </span>
+          <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_contactcustomaddress_value, "ss_name")}</p>
+        </div>
+      </div>
 
       <div className="field">
         <div className="control">
@@ -74,9 +86,7 @@ CustomerCreateOrUpdate.propTypes = {
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
   initialValues: PropTypes.object,
-  customers: PropTypes.arrayOf(PropTypes.object),
   addresses: PropTypes.arrayOf(PropTypes.object),
-  products: PropTypes.arrayOf(PropTypes.object),
   appTypeValue: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -95,4 +105,13 @@ CustomerCreateOrUpdate = reduxForm({
   }
 })(CustomerCreateOrUpdate);
 
-export default connect()(CustomerCreateOrUpdate);
+
+function mapStateToProps(state) {
+  return {
+    addresses: state.addressesReducer.addresses
+  }
+}
+
+export default connect(
+  mapStateToProps
+)(CustomerCreateOrUpdate);

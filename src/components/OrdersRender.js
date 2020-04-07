@@ -7,7 +7,7 @@ import { MDBDataTable } from 'mdbreact';
 
 const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
 
-  console.log("orders", orders);
+  // console.log("orders", orders);
 
   function getAppBodyContent() {
     return orders.map(obj => {
@@ -36,44 +36,37 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
       {
         label: 'Order Number',
         field: 'ordernumber',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Destination',
         field: '_ss_destinationaddress_value',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Parent Application',
         field: '_ss_application_value',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Created On',
         field: 'createdon',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'view',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'delete',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'update',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
 
     ],

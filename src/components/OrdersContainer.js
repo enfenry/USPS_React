@@ -9,8 +9,6 @@ import { bindActionCreators } from 'redux';
 
 const OrdersContainer = (props) => {
 
-    console.log("orders container: ", props);
-
     if (props.applicationsReadPending || props.ordersReadPending || props.productsReadPending || props.customersReadPending || props.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
