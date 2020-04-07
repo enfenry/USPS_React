@@ -1,6 +1,7 @@
 "use strict"
 
 import * as applicationsActions from '../actions/applicationsActions';
+import * as ordersActions from '../actions/ordersActions';
 import ApplicationsRender from './ApplicationsRender';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -47,7 +48,10 @@ const ApplicationsContainer = (props) => {
                         props.actions.createApplication(values)
                     }}
                     handleAppToOrder={(application) => {
-                        props.actions.applicationToOrder(application.ss_applicationid)
+                        new Promise(() => {
+                            props.actions.applicationToOrder(application.ss_applicationid); // How to launch only after state change
+                        })
+                            .then(props.orderActions.readOrders());// Add output params to action? setTimeout?
                     }}
                 />
             </div>
@@ -74,6 +78,7 @@ function mapStateToProps(state) {
         orders: state.ordersReducer.orders,
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
+        error: state.error,
 
         applicationsReadPending: state.applicationsReducer.applicationsReadPending,
         applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
@@ -111,7 +116,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(applicationsActions, dispatch)
+        actions: bindActionCreators(applicationsActions, dispatch),
+        orderActions: bindActionCreators(ordersActions, dispatch)
     }
 }
 

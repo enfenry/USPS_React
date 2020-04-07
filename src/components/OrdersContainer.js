@@ -64,6 +64,7 @@ function mapStateToProps(state) {
         orders: state.ordersReducer.orders,
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
+        error: state.error,
 
         ordersReadPending: state.ordersReducer.ordersReadPending,
         ordersReadFailed: state.ordersReducer.ordersReadFailed,

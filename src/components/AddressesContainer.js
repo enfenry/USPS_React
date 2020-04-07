@@ -52,6 +52,8 @@ AddressesContainer.propTypes = {
 function mapStateToProps(state) {
     return {
         addresses: state.addressesReducer.addresses,
+        error: state.error,
+        
         addressesReadPending: state.addressesReducer.addressesReadPending,
         addressesReadFailed: state.addressesReducer.addressesReadFailed,
         addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
