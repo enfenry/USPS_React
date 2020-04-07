@@ -30,8 +30,45 @@ export const readOrders = () => {
     };
 }
 
+export const updateOrder = (values, id) => {
+
+    let order = {}
+
+    // if (values.ss_name) {application.ss_name = values.ss_name}
+    // if (values.ss_applicationtype) {application.ss_applicationtype = parseInt(values.ss_applicationtype)}
+    // if (values._ss_customer_value) {application["ss_Customer@odata.bind"] = `/contacts(${values._ss_customer_value})`}
+    // if (values._ss_product_value) {application["ss_Product@odata.bind"] = `/products(${values._ss_product_value})`}
+    // if (values._ss_shippingspeed_value) {application["ss_ShippingSpeed@odata.bind"] = `/products(${values._ss_shippingspeed_value})`}
+    // if (values._ss_destinationaddress_value) {application["ss_DestinationAddress@odata.bind"] = `/ss_customaddresses(${values._ss_destinationaddress_value})`}
+
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/ss_applications(" + id + ")";
+    let config = {
+        method: 'patch',
+        'OData-MaxVersion': 4.0,
+        'OData-Version': 4.0,
+        Accept: 'application/json',
+        'Content-Type': 'application/json; charset=utf-8',
+        headers: {
+           'Prefer': 'return=representation'
+        },
+        data: order
+    };
+
+    return dispatch => {
+
+        return adalApiFetch(axios, uri, config)
+            .then((res) => {
+                dispatch(_updateOrderSuccess(res, id));
+            })
+            .catch((error) => {
+                console.log(error);
+                dispatch(_updateOrderFailed(error));
+            });
+    }
+}
+
 export const deleteOrder = (id) => {
-    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/saleorders(" + id + ")";
+    let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/salesorders(" + id + ")";
     let config = {
         method: 'delete',
         'OData-MaxVersion': 4.0,
@@ -70,6 +107,21 @@ const _readOrdersFailed = (error) => {
 const _readOrdersStarted = () => {
     return {
         type: READ_ORDERS_PENDING
+    };
+}
+
+const _updateOrderSuccess = (res, id) => {
+    return {
+        type: UPDATE_ORDER_SUCCESSFUL,
+        data: res.data,
+        id: id
+    };
+}
+
+const _updateOrderFailed = (error) => {
+    return {
+        type: UPDATE_ORDER_FAILURE,
+        error
     };
 }
 

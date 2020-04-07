@@ -34,20 +34,20 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
   let data = {
     columns: [
       {
-        label: 'ID',
-        field: 'salesorderid',
+        label: 'Order Number',
+        field: 'ordernumber',
         sort: 'asc',
         width: 150
       },
       {
-        label: 'destination',
-        field: 'shipto_composite',
+        label: 'Destination',
+        field: '_ss_destinationaddress_value',
         sort: 'asc',
         width: 150
       },
       {
         label: 'Parent Application',
-        field: 'ss_application',
+        field: '_ss_application_value',
         sort: 'asc',
         width: 150
       },

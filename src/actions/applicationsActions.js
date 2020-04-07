@@ -212,10 +212,9 @@ const _deleteApplicationFailed = (error) => {
     };
 }
 
-const _applicationToOrderSuccess = (res) => {
+const _applicationToOrderSuccess = () => {
     return {
         type: APP_TO_ORDER_SUCCESSFUL,
-        data: res.data
     };
 }
 

@@ -22,6 +22,8 @@ const ModalButton = (props) => {
         return 'success';
       case 'Delete':
         return 'danger';
+      case 'Place Order':
+        return 'primary';
       default:
         break;
     }

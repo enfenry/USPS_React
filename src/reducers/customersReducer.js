@@ -6,30 +6,30 @@ export default function customersReducer(state = {}, action) {
         case CREATE_CUSTOMER_SUCCESSFUL: {
             let newCustomers = [...state.customers];
             newCustomers.push(action.data);
-            return { ...state, customers: newCustomers, customersRequestSuccess: true, customersRequestPending: false, customersRequestFailed: false };
+            return { ...state, customers: newCustomers, customersCreateSuccess: true, customersCreateFailed: false };
         }
         case CREATE_CUSTOMER_FAILURE:
-            return { ...state, customers: state.customers, customersRequestSuccess: false, customersRequestPending: false, customersRequestFailed: true };
+            return { ...state, customers: state.customers, customersCreateSuccess: false, customersCreateailed: true };
 
         case READ_CUSTOMERS_SUCCESSFUL:
-            return { ...state, customers: action.data.value, customersRequestSuccess: true, customersRequestPending: false, customersRequestFailed: false };
+            return { ...state, customers: action.data.value, customersReadSuccess: true, customersReadPending: false, customersReadFailed: false };
         case READ_CUSTOMERS_PENDING:
-            return { ...state, customersRequestSuccess: false, customersRequestPending: true, customersRequestFailed: false };
+            return { ...state, customersReadSuccess: false, customersReadPending: true, customersReadFailed: false };
         case READ_CUSTOMERS_FAILURE:
-            return { ...state, customersRequestSuccess: false, customersRequestPending: false, customersRequestFailed: true };
+            return { ...state, customersReadSuccess: false, customersReadPending: false, customersReadFailed: true };
 
         case UPDATE_CUSTOMER_SUCCESSFUL: {
             const itemIndex = state.customers.findIndex((e) => (e.contactid === action.id));
             let apps = [...state.customers];
             apps[itemIndex] = action.data;
-            return { ...state, customers: apps, customersRequestSuccess: true, customersRequestPending: false, customersRequestFailed: false };
+            return { ...state, customers: apps, customersUpdateSuccess: true, customersUpdateFailed: false };
         }
         case UPDATE_CUSTOMER_FAILURE:
-            return { ...state, customers: state.customers, customersRequestSuccess: false, customersRequestPending: false, customersRequestFailed: true };
+            return { ...state, customers: state.customers, customersUpdateSuccess: false, customersUpdateFailed: true };
         case DELETE_CUSTOMER_SUCCESSFUL:
-            return { ...state, customers: state.customers.filter((e) => e.contactid !== action.data), customersRequestSuccess: true, customersRequestPending: false, customersRequestFailed: false };
+            return { ...state, customers: state.customers.filter((e) => e.contactid !== action.data), customersDeleteSuccess: true, customersDeleteFailed: false };
         case DELETE_CUSTOMER_FAILURE:
-            return { ...state, customersRequestSuccess: false, customersRequestPending: false, customersRequestFailed: true };
+            return { ...state, customersDeleteSuccess: false, customersDeleteFailed: true };
 
         default:
             return state;
