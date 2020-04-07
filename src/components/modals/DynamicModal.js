@@ -12,11 +12,11 @@ import AddressView from '../forms/addresses/AddressView';
 
 
 const MyModal = (props) => {
-  const { onSubmit, handleHide, show, name, CRUDOption, label, entity } = props;
+  const { onSubmit, handleHide, show, name, command, children, entity } = props;
 
   const renderBody = () => {
 
-    switch (CRUDOption) {
+    switch (command) {
       case 'Delete':
         return (
           <div>
@@ -28,7 +28,7 @@ const MyModal = (props) => {
                 .then(
                   handleHide()
                 )
-            }}>{label}</Button>{' '}
+            }}>{children}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
       case 'Place Order':
@@ -42,7 +42,7 @@ const MyModal = (props) => {
                 .then(
                   handleHide()
                 )
-            }}>{label}</Button>{' '}
+            }}>{children}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)          
       case 'Create':
@@ -93,7 +93,7 @@ const MyModal = (props) => {
     <Modal isOpen={show} size="lg"
     // backdrop={true}
     >
-      <ModalHeader>{CRUDOption} {name}</ModalHeader>
+      <ModalHeader>{command} {name}</ModalHeader>
       <ModalBody>
         {renderBody()}
       </ModalBody>
@@ -104,8 +104,7 @@ const MyModal = (props) => {
 MyModal.propTypes = {
   name: PropTypes.string,
   entity: PropTypes.string,
-  label: PropTypes.string,
-  CRUDOption: PropTypes.string,
+  command: PropTypes.string,
   onSubmit: PropTypes.func,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
@@ -126,8 +125,7 @@ const DynamicModal = (props) => {
 
 DynamicModal.propTypes = {
   name: PropTypes.string,
-  label: PropTypes.string,
-  CRUDOption: PropTypes.string,
+  command: PropTypes.string,
   entity: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),

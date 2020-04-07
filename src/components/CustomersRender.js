@@ -13,16 +13,18 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
       let newObj = JSON.parse(JSON.stringify(obj))
 
       newObj["view"] = (
-        <ModalButton CRUDOption="View" label="View" name={obj.fullname} entity="Customer"
-          initialValues={{ ...obj }} />
+        <ModalButton command="View" name={obj.fullname} entity="Customer"
+          initialValues={{ ...obj }}>View</ModalButton>
       );
       newObj["delete"] = (
-        <ModalButton CRUDOption="Update" label="Update" name={obj.fullname} entity="Customer"
-          initialValues={{ ...obj }} onSubmit={(values) => handleUpdate(values, obj)} />
+        <ModalButton command="Update" name={obj.fullname} entity="Customer"
+          initialValues={{ ...obj }} 
+          onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
-        <ModalButton CRUDOption="Delete" label="Delete" name={obj.fullname} entity="Customer"
-          initialValues={{ ...obj }} onSubmit={() => handleDelete(obj)} />
+        <ModalButton command="Delete" name={obj.fullname} entity="Customer"
+          initialValues={{ ...obj }} 
+          onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
 
       return newObj;
@@ -66,8 +68,8 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
   return (
     <React.Fragment>
       <h1>Customers</h1>
-      <ModalButton CRUDOption="Create" label="Create New Customer" name={`Customer ${customers.length}`} entity="Customer"
-        onSubmit={(values) => handleCreate(values)} />
+      <ModalButton command="Create" name={`Customer ${customers.length}`} entity="Customer"
+        onSubmit={(values) => handleCreate(values)} >Create New Customer</ModalButton>
       <MDBDataTable
         striped
         bordered

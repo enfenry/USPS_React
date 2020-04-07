@@ -7,7 +7,7 @@ import { MDBDataTable } from 'mdbreact';
 
 const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
 
-  // console.log("orders", orders);
+  console.log("orders", orders);
 
   function getAppBodyContent() {
     return orders.map(obj => {
@@ -15,16 +15,18 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
       let newObj = JSON.parse(JSON.stringify(obj))
 
       newObj["view"] = (
-        <ModalButton CRUDOption="View" label="View" name={obj.ss_name} entity="Order" 
-        initialValues={{ ...obj}}  />
+        <ModalButton command="View" name={obj.ss_name} entity="Order" 
+        initialValues={{ ...obj}}>View</ModalButton>
       );
       newObj["delete"] = (
-        <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj }}  onSubmit={(values) => handleUpdate(values, obj)} />
+        <ModalButton command="Update" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj }}  
+        onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
-        <ModalButton CRUDOption="Delete" label="Delete" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj }}  onSubmit={() => handleDelete(obj)} />
+        <ModalButton command="Delete" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj }}  
+        onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
 
       return newObj;

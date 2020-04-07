@@ -6,14 +6,14 @@ import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const ModalButton = (props) => {
-  const {CRUDOption, label} = props;
+  const {command, children} = props;
 
   function handleOpen () {
       props.show("dynamic", props);
   }
 
-  function handleButtonStyle (CRUDOption) {
-    switch (CRUDOption) {
+  function handleButtonStyle (command) {
+    switch (command) {
       case 'Create':
         return 'primary'
       case 'View':
@@ -32,8 +32,8 @@ const ModalButton = (props) => {
     return (
       <div>
         <p>
-          <Button color={handleButtonStyle(CRUDOption)}
-           onClick={() => handleOpen()}>{label}</Button>
+          <Button color={handleButtonStyle(command)}
+           onClick={() => handleOpen()}>{children}</Button>
         </p>
       </div>
     )
@@ -42,8 +42,7 @@ const ModalButton = (props) => {
 ModalButton.propTypes = {
   show: PropTypes.func,
   name: PropTypes.string,
-  label: PropTypes.string,
-  CRUDOption: PropTypes.string,
+  command: PropTypes.string,
   entity: PropTypes.string,
   initialValues: PropTypes.object,
   children: PropTypes.oneOfType([

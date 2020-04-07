@@ -9,8 +9,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const ApplicationsContainer = (props) => {
-    
-    console.log("apps container: ",props);
 
     // useEffect(() => {
     //    // const { actions } = props;

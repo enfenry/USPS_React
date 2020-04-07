@@ -37,6 +37,12 @@ const OrderView = props => {
                     <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_destinationaddress_value, "ss_name")}</p>
                 </div>
             </div>
+            {/* <div>
+                <div>
+                    <span>Destination Address: </span>
+                    <p>{displayById(products, "ss_customaddressid", initialValues._ss_destinationaddress_value, "ss_name")}</p>
+                </div>
+            </div> */}
 
             <div className="control">
                 <Button color="secondary" onClick={handleHide}>Cancel</Button>
