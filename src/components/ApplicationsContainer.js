@@ -1,6 +1,7 @@
 "use strict"
 
 import * as applicationsActions from '../actions/applicationsActions';
+import * as ordersActions from '../actions/ordersActions';
 import ApplicationsRender from './ApplicationsRender';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -47,7 +48,10 @@ const ApplicationsContainer = (props) => {
                         props.actions.createApplication(values)
                     }}
                     handleAppToOrder={(application) => {
-                        props.actions.applicationToOrder(application.ss_applicationid)
+                        new Promise(() => {
+                            props.actions.applicationToOrder(application.ss_applicationid);
+                        })
+                            .then(props.orderActions.readOrders());
                     }}
                 />
             </div>
@@ -111,7 +115,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(applicationsActions, dispatch)
+        actions: bindActionCreators(applicationsActions, dispatch),
+        orderActions: bindActionCreators(ordersActions, dispatch)
     }
 }
 
