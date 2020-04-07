@@ -5,6 +5,8 @@ import { connectModal } from 'redux-modal';
 
 import AppCreateOrUpdate from '../forms/applications/AppCreateOrUpdate';
 import AppView from '../forms/applications/AppView';
+import OrderCreateOrUpdate from '../forms/orders/OrderCreateOrUpdate';
+import OrderView from '../forms/orders/OrderView';
 import CustomerCreateOrUpdate from '../forms/customers/CustomerCreateOrUpdate';
 import CustomerView from '../forms/customers/CustomerView';
 import AddressCreateOrUpdate from '../forms/addresses/AddressCreateOrUpdate';
@@ -44,7 +46,7 @@ const MyModal = (props) => {
                 )
             }}>{children}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
-          </div>)          
+          </div>)
       case 'Create':
       case 'Update':
         switch (entity) {
@@ -52,14 +54,18 @@ const MyModal = (props) => {
             return (
               <AppCreateOrUpdate {...props} />
             );
+          case 'Order':
+            return (
+              <OrderCreateOrUpdate {...props} />
+            );
           case 'Customer':
             return (
               <CustomerCreateOrUpdate {...props} />
             );
-            case 'Address':
+          case 'Address':
             return (
               <AddressCreateOrUpdate {...props} />
-            );
+            )
           default:
             return 'Invalid Entity';
         }
@@ -70,11 +76,15 @@ const MyModal = (props) => {
             return (
               <AppView {...props} />
             );
+          case 'Order':
+            return (
+              <OrderView {...props} />
+            );
           case 'Customer':
             return (
               <CustomerView {...props} />
             );
-            case 'Address':
+          case 'Address':
             return (
               <AddressView {...props} />
             );

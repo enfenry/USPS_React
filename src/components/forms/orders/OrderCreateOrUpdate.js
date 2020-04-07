@@ -3,15 +3,10 @@ import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getOrderlicationTypeName } from '../../OrderlicationsRender';
-import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './OrderValidate';
 
 let OrderCreateOrUpdate = props => {
-  const { handleSubmit, handleHide, appTypeValue, customers, addresses, products } = props;
-
-  const isPackageSubmission = parseInt(appTypeValue) === PACKAGE_SUBMISSION;
-  const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
+  const { handleSubmit, handleHide, customers, addresses } = props;
 
   const renderOptions = (array, value, display) => {
     return array.map(el => {
@@ -19,10 +14,6 @@ let OrderCreateOrUpdate = props => {
         <option key={el[value]} value={el[value]}>{el[display]}</option>
       )
     })
-  }
-
-  const filterProducts = () => {
-    return products.filter(product => product.hierarchypath === `USPS\\${(getOrderlicationTypeName(parseInt(appTypeValue)))}`);
   }
 
   return (
@@ -38,9 +29,6 @@ let OrderCreateOrUpdate = props => {
           <Field name="ss_applicationtype" component={renderField} type="select"
             label="Orderlication Type">
             <option value={null}></option>
-            <option value={ADDRESS_CHANGE}>Address Change</option>
-            <option value={MAIL_FORWARDING}>Mail Forwarding</option>
-            <option value={PACKAGE_SUBMISSION}>Package Submission</option>
           </Field>
         </div>
       </FormGroup>
@@ -50,17 +38,6 @@ let OrderCreateOrUpdate = props => {
           <Field name="_ss_product_value" component={renderField} type="select"
             label="Product">
             <option value={null}></option>
-            {renderOptions(filterProducts(), "productid", "name")}
-          </Field>
-        </div>
-      </FormGroup>
-
-      <FormGroup className="field">
-        <div className="control">
-          <Field show={isPackageSubmission} name="_ss_shippingspeed_value" component={renderField} type="select"
-            label="Shipping Speed">
-            <option value={null}></option>
-            {renderOptions(shippingSpeeds, "productid", "name")}
           </Field>
         </div>
       </FormGroup>
