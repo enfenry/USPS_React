@@ -9,7 +9,9 @@ import { bindActionCreators } from 'redux';
 
 const OrdersContainer = (props) => {
 
-    if (props.applicationsRequestPending || props.ordersRequestPending || props.productsRequestPending || props.customersRequestPending || props.addressesRequestPending) {
+    console.log("orders container: ", props);
+
+    if (props.applicationsReadPending || props.ordersReadPending || props.productsReadPending || props.customersReadPending || props.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -17,14 +19,14 @@ const OrdersContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.applicationsRequestFailed || props.ordersRequestFailed || props.productsRequestFailed || props.customersRequestFailed || props.addressesRequestFailed) {
+    } else if (props.applicationsReadFailed || props.ordersReadFailed || props.productsReadFailed || props.customersReadFailed || props.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading entities!
             </div>
         );
 
-    } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
+    } else if (props.applicationsReadSuccess && props.ordersReadSuccess && props.productsReadSuccess && props.customersReadSuccess && props.addressesReadSuccess) {
         return (
             <div className="reactive-margin">
                 <OrdersRender
@@ -63,25 +65,34 @@ function mapStateToProps(state) {
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
 
-        applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
-        applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
-        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess,
+        ordersReadPending: state.ordersReducer.ordersReadPending,
+        ordersReadFailed: state.ordersReducer.ordersReadFailed,
+        ordersReadSuccess: state.ordersReducer.ordersReadSuccess,
+        
+        ordersCreateFailed: state.ordersReducer.ordersCreateFailed,
+        ordersCreateSuccess: state.ordersReducer.ordersCreateSuccess,
 
-        customersRequestPending: state.customersReducer.customersRequestPending,
-        customersRequestFailed: state.customersReducer.customersRequestFailed,
-        customersRequestSuccess: state.customersReducer.customersRequestSuccess,
+        ordersUpdateFailed: state.ordersReducer.ordersUpdateFailed,
+        ordersUpdateSuccess: state.ordersReducer.ordersUpdateduccess,
 
-        productsRequestPending: state.productsReducer.productsRequestPending,
-        productsRequestFailed: state.productsReducer.productsRequestFailed,
-        productsRequestSuccess: state.productsReducer.productsRequestSuccess,
+        ordersDeleteFailed: state.ordersReducer.ordersDeleteFailed,
+        ordersDeleteSuccess: state.ordersReducer.ordersDeleteSuccess,
 
-        ordersRequestPending: state.ordersReducer.ordersRequestPending,
-        ordersRequestFailed: state.ordersReducer.ordersRequestFailed,
-        ordersRequestSuccess: state.ordersReducer.ordersRequestSuccess,
+        applicationsReadPending: state.applicationsReducer.applicationsReadPending,
+        applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
+        applicationsReadSuccess: state.applicationsReducer.applicationsReadSuccess,
 
-        addressesRequestPending: state.addressesReducer.addressesRequestPending,
-        addressesRequestFailed: state.addressesReducer.addressesRequestFailed,
-        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess,
+        customersReadPending: state.customersReducer.customersReadPending,
+        customersReadFailed: state.customersReducer.customersReadFailed,
+        customersReadSuccess: state.customersReducer.customersReadSuccess,
+
+        productsReadPending: state.productsReducer.productsReadPending,
+        productsReadFailed: state.productsReducer.productsReadFailed,
+        productsReadSuccess: state.productsReducer.productsReadSuccess,
+
+        addressesReadPending: state.addressesReducer.addressesReadPending,
+        addressesReadFailed: state.addressesReducer.addressesReadFailed,
+        addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
     }
 }
 

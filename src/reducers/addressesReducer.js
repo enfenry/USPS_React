@@ -8,30 +8,30 @@ export default function addressesReducer(state = {}, action) {
         case CREATE_ADDRESS_SUCCESSFUL: {
             let newAddresses = [...state.addresses];
             newAddresses.push(action.data);
-            return { ...state, addresses: newAddresses, addressesRequestSuccess: true, addressesRequestPending: false, addressesRequestFailed: false };
+            return { ...state, addresses: newAddresses, addressesCreateSuccess: true, addressesCreateFailed: false };
         }
         case CREATE_ADDRESS_FAILURE:
-            return { ...state, addresses: state.addresses, addressesRequestSuccess: false, addressesRequestPending: false, addressesRequestFailed: true };
+            return { ...state, addresses: state.addresses, addressesCreateSuccess: false,  addressesCreateFailed: true };
 
             case UPDATE_ADDRESS_SUCCESSFUL: {
                 const itemIndex = state.addresses.findIndex((e) => (e.ss_customaddressid === action.id));
                 let apps = [...state.addresses];
                 apps[itemIndex] = action.data;
-                return { ...state, addresses: apps, addressesRequestSuccess: true, addressesRequestPending: false, addressesRequestFailed: false };
+                return { ...state, addresses: apps, addressesUpdateSuccess: true, addressesUpdateFailed: false };
             }
             case UPDATE_ADDRESS_FAILURE:
-                return { ...state, addresses: state.addresses, addressesRequestSuccess: false, addressesRequestPending: false, addressesRequestFailed: true };
+                return { ...state, addresses: state.addresses, addressesUpdateSuccess: false,  addressesUpdateFailed: true };
             case DELETE_ADDRESS_SUCCESSFUL:
-                return { ...state, addresses: state.addresses.filter((e) => e.ss_customaddressid !== action.data), addressesRequestSuccess: true, addressesRequestPending: false, addressesRequestFailed: false };
+                return { ...state, addresses: state.addresses.filter((e) => e.ss_customaddressid !== action.data), addressesDeleteSuccess: true, addressesDeleteFailed: false };
             case DELETE_ADDRESS_FAILURE:
-                return { ...state, addressesRequestSuccess: false, addressesRequestPending: false, addressesRequestFailed: true };    
+                return { ...state, addressesDeleteSuccess: false, addressesDeleteFailed: true };    
             
         case READ_ADDRESSES_SUCCESSFUL:
-            return { ...state, addresses: action.data.value, addressesRequestSuccess: true, addressesRequestPending: false, addressesRequestFailed: false };
+            return { ...state, addresses: action.data.value, addressesReadSuccess: true, addressesReadPending: false, addressesReadFailed: false };
         case READ_ADDRESSES_PENDING:
-            return { ...state, addressesRequestSuccess: false, addressesRequestPending: true, addressesRequestFailed: false };
+            return { ...state, addressesReadSuccess: false, addressesReadPending: true, addressesReadFailed: false };
         case READ_ADDRESSES_FAILURE:
-            return { ...state, addressesRequestSuccess: false, addressesRequestPending: false, addressesRequestFailed: true };
+            return { ...state, addressesReadSuccess: false, addressesReadPending: false, addressesReadFailed: true };
         default:
             return state;
     }

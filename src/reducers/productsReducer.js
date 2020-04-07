@@ -4,11 +4,11 @@ export default function productsReducer(state = {}, action) {
 
     switch (action.type) {
         case READ_PRODUCTS_SUCCESSFUL:
-            return { ...state, products: action.data.value, productsRequestSuccess: true, productsRequestPending: false, productsRequestFailed: false };
+            return { ...state, products: action.data.value, productsReadSuccess: true, productsReadPending: false, productsReadFailed: false };
         case READ_PRODUCTS_PENDING:
-            return { ...state, productsRequestSuccess: false, productsRequestPending: true, productsRequestFailed: false };
+            return { ...state, productsReadSuccess: false, productsReadPending: true, productsReadFailed: false };
         case READ_PRODUCTS_FAILURE:
-            return { ...state, productsRequestSuccess: false, productsRequestPending: false, productsRequestFailed: true };
+            return { ...state, productsReadSuccess: false, productsReadPending: false, productsReadFailed: true };
         default:
             return state;
     }

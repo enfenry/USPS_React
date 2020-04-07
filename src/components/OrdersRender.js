@@ -5,28 +5,28 @@ import PropTypes from 'prop-types';
 import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 
-const OrdersRender = ({ orders, handleUpdate, handleDelete, handleCreate }) => {
+const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
+
+  console.log("orders", orders);
 
   function getAppBodyContent() {
     return orders.map(obj => {
       // Deep Clone object to avoid adding to it while mapping over it during map
       let newObj = JSON.parse(JSON.stringify(obj))
-      const appTypeLabel = getOrderTypeName(obj.salesorderid);
 
       newObj["view"] = (
         <ModalButton CRUDOption="View" label="View" name={obj.ss_name} entity="Order" 
-        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  />
+        initialValues={{ ...obj}}  />
       );
-      // newObj["delete"] = (
-        // <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application" 
-        // initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={(values) => handleUpdate(values, obj)} />
-      // );
+      newObj["delete"] = (
+        <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj }}  onSubmit={(values) => handleUpdate(values, obj)} />
+      );
       newObj["update"] = (
         <ModalButton CRUDOption="Delete" label="Delete" name={obj.ss_name} entity="Application" 
-        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={() => handleDelete(obj)} />
+        initialValues={{ ...obj }}  onSubmit={() => handleDelete(obj)} />
       );
 
-      newObj["appTypeLabel"] = appTypeLabel;
       return newObj;
     });
   }
@@ -34,20 +34,20 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete, handleCreate }) => {
   let data = {
     columns: [
       {
-        label: 'ID',
-        field: 'salesorderid',
+        label: 'Order Number',
+        field: 'ordernumber',
         sort: 'asc',
         width: 150
       },
       {
-        label: 'destination',
-        field: 'shipto_composite',
+        label: 'Destination',
+        field: '_ss_destinationaddress_value',
         sort: 'asc',
         width: 150
       },
       {
         label: 'Parent Application',
-        field: 'ss_application',
+        field: '_ss_application_value',
         sort: 'asc',
         width: 150
       },
