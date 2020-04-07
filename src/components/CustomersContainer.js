@@ -17,13 +17,13 @@ const CustomersContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.customersReadFailed || props.addressesReadPending) {
+    } else if (props.customersReadFailed || props.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading customers!
             </div>
         );
-    } else if (props.customersReadSuccess && props.addressesReadPending) {
+    } else if (props.customersReadSuccess && props.addressesReadSuccess) {
         return (
             <div className="reactive-margin">
                 <CustomersRender
