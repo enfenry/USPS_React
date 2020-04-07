@@ -3,13 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './modals/ModalButton';
-//import InfiniteScroll from 'react-infinite-scroll-component'; 
 import { MDBDataTable } from 'mdbreact';
-//import {CustomersContainer} from './CustomersContainer';
-
 
 const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }) => {
-
   function getTableBodyContent() {
     return customers.map(obj => {
 
@@ -36,35 +32,29 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
   let data = {
     columns: [
       {
-        label: 'ID',
-        field: 'contactid',
-        sort: 'asc',
-        width: 150
-      },
-
-      {
         label: 'Name',
         field: 'fullname',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
+      },
+      {
+        label: 'Email',
+        field: 'emailaddress1',
+        sort: 'asc'
       },
       {
         label: '',
         field: 'view',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'delete',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'update',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
 
     ],
@@ -72,6 +62,7 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
 
 
   }
+
   return (
     <React.Fragment>
       <h1>Customers</h1>

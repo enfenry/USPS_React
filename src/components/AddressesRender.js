@@ -38,68 +38,57 @@ const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate }
       {
         label: 'Name',
         field: 'ss_name',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Line 1',
         field: 'ss_line1',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Line 2',
         field: 'ss_line2',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Line 3',
         field: 'ss_line3',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'City',
         field: 'ss_city',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'State',
         field: 'ss_state',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Country',
         field: 'ss_country',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: 'Postal Code',
         field: 'ss_postalcode',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'view',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'delete',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
       {
         label: '',
         field: 'update',
-        sort: 'asc',
-        width: 150
+        sort: 'asc'
       },
 
     ],

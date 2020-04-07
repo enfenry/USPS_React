@@ -38,7 +38,7 @@ const Home = (props) => {
         var distribution1 = [0, 0];
         var appsThisMonth=0;
         var currentMonth=new Date().getMonth()+1;
-        console.log(currentMonth);
+
         props.applications.forEach((application) => {
             switch (application.ss_applicationtype) {
                 case ADDRESS_CHANGE:

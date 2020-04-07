@@ -19,18 +19,20 @@ const AddressView = props => {
                     <p>{initialValues.ss_line1}</p>
                 </div>
             </div>
+            {initialValues.ss_line2 ? 
             <div>
                 <div>
                     <span>Line 2: </span>
-                    <p>{initialValues.ss_line2 || 'None'}</p>
+                    <p>{initialValues.ss_line2}</p>
                 </div>
-            </div>
+            </div> : ''}
+            {initialValues.ss_line3 ? 
             <div>
                 <div>
-                    <span>Line 3: </span>
-                    <p>{initialValues.ss_line3 || 'None'}</p>
+                    <span>Line 2: </span>
+                    <p>{initialValues.ss_line3}</p>
                 </div>
-            </div>
+            </div> : ''}
             <div>
                 <div>
                     <span>City: </span>
