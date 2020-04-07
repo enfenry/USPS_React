@@ -12,7 +12,7 @@ import { bindActionCreators } from 'redux';
 
 const Home = (props) => {
 
-    if (props.applicationsRequestPending) {
+    if (props.applicationsReadPending) {
 
 
         return (
@@ -24,7 +24,7 @@ const Home = (props) => {
         );
 
 
-    } else if (props.applicationsRequestFailed) {
+    } else if (props.applicationsReadFailed) {
 
         return (
             <div className="alert alert-danger" role="alert">
@@ -32,7 +32,7 @@ const Home = (props) => {
             </div>
         );
 
-    } else if (props.applicationsRequestSuccess) {
+    } else if (props.applicationsReadSuccess) {
 
         var distribution0 = [0, 0, 0];
         var distribution1 = [0, 0];
@@ -138,9 +138,9 @@ Home.propTypes = {
 function mapStateToProps(state) {
     return {
         applications: state.applicationsReducer.applications,
-        applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
-        applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
-        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess
+        applicationsReadPending: state.applicationsReducer.applicationsReadPending,
+        applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
+        applicationsReadSuccess: state.applicationsReducer.applicationsReadSuccess
 
     }
 }

@@ -19,7 +19,7 @@ export function getApplicationTypeName(applicationType) {
   }
 }
 
-const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate }) => {
+const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate, handleAppToOrder }) => {
 
   function getAppBodyContent() {
     return applications.map(obj => {
@@ -31,13 +31,18 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
         <ModalButton CRUDOption="View" label="View" name={obj.ss_name} entity="Application" 
         initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  />
       );
-      newObj["delete"] = (
+      newObj["update"] = (
         <ModalButton CRUDOption="Update" label="Update" name={obj.ss_name} entity="Application" 
         initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={(values) => handleUpdate(values, obj)} />
       );
-      newObj["update"] = (
+      newObj["delete"] = (
         <ModalButton CRUDOption="Delete" label="Delete" name={obj.ss_name} entity="Application" 
         initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={() => handleDelete(obj)} />
+      );
+
+      newObj["toOrder"] = (
+        <ModalButton CRUDOption="Place Order" label="Place Order" name={obj.ss_name} entity="Application" 
+        initialValues={{ ...obj, appTypeLabel: appTypeLabel }}  onSubmit={() => handleAppToOrder(obj)} />
       );
 
       newObj["appTypeLabel"] = appTypeLabel;
@@ -79,7 +84,7 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
       },
       {
         label: '',
-        field: 'delete',
+        field: 'toOrder',
         sort: 'asc',
         width: 150
       },
@@ -89,6 +94,12 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
         sort: 'asc',
         width: 150
       },
+      {
+        label: '',
+        field: 'delete',
+        sort: 'asc',
+        width: 150
+      }
 
     ],
     rows: getAppBodyContent()
@@ -116,7 +127,8 @@ ApplicationsRender.propTypes = {
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
+  handleAppToOrder: PropTypes.func
 };
 
 export default ApplicationsRender;

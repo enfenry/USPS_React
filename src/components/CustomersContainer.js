@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 
 const CustomersContainer = (props) => {
 
-    if (props.customersRequestPending) {
+    if (props.customersReadPending || props.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -17,13 +17,13 @@ const CustomersContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.customersRequestFailed) {
+    } else if (props.customersReadFailed || props.addressesReadPending) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading customers!
             </div>
         );
-    } else if (props.customersRequestSuccess) {
+    } else if (props.customersReadSuccess && props.addressesReadPending) {
         return (
             <div className="reactive-margin">
                 <CustomersRender
@@ -52,9 +52,25 @@ CustomersContainer.propTypes = {
 function mapStateToProps(state) {
     return {
         customers: state.customersReducer.customers,
-        customersRequestPending: state.customersReducer.customersRequestPending,
-        customersRequestFailed: state.customersReducer.customersRequestFailed,
-        customersRequestSuccess: state.customersReducer.customersRequestSuccess
+        error: state.error,
+        
+        customersReadPending: state.customersReducer.customersReadPending,
+        customersReadFailed: state.customersReducer.customersReadFailed,
+        customersReadSuccess: state.customersReducer.customersReadSuccess,
+
+        customersCreateFailed: state.customersReducer.customersCreateFailed,
+        customersCreateSuccess: state.customersReducer.customersCreateSuccess,
+
+        customersUpdateFailed: state.customersReducer.customersUpdateFailed,
+        customersUpdateSuccess: state.customersReducer.customersUpdateduccess,
+
+        customersDeleteFailed: state.customersReducer.customersDeleteFailed,
+        customersDeleteSuccess: state.customersReducer.customersDeleteSuccess,
+
+        addressesReadPending: state.addressesReducer.addressesReadPending,
+        addressesReadFailed: state.addressesReducer.addressesReadFailed,
+        addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
+
     }
 }
 

@@ -1,6 +1,7 @@
 "use strict"
 
 import * as applicationsActions from '../actions/applicationsActions';
+import * as ordersActions from '../actions/ordersActions';
 import ApplicationsRender from './ApplicationsRender';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -8,8 +9,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const ApplicationsContainer = (props) => {
+    
+    console.log("apps container: ",props);
 
-    if (props.applicationsRequestPending || props.ordersRequestPending || props.productsRequestPending || props.customersRequestPending || props.addressesRequestPending) {
+    // useEffect(() => {
+    //    // const { actions } = props;
+    // }, [] );
+
+    if (props.applicationsReadPending || props.ordersReadPending || props.productsReadPending || props.customersReadPending || props.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -17,14 +24,16 @@ const ApplicationsContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.applicationsRequestFailed || props.ordersRequestFailed || props.productsRequestFailed || props.customersRequestFailed || props.addressesRequestFailed) {
+    }
+    if (props.applicationsReadFailed || props.ordersReadFailed || props.productsReadFailed || props.customersReadFailed || props.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading entities!
             </div>
         );
 
-    } else if (props.applicationsRequestSuccess && props.ordersRequestSuccess && props.productsRequestSuccess && props.customersRequestSuccess && props.addressesRequestSuccess) {
+    }
+    if (props.applicationsReadSuccess && props.ordersReadSuccess && props.productsReadSuccess && props.customersReadSuccess && props.addressesReadSuccess) {
         return (
             <div className="reactive-margin">
                 <ApplicationsRender
@@ -38,10 +47,17 @@ const ApplicationsContainer = (props) => {
                     handleCreate={(values) => {
                         props.actions.createApplication(values)
                     }}
+                    handleAppToOrder={(application) => {
+                        new Promise(() => {
+                            props.actions.applicationToOrder(application.ss_applicationid); // How to launch only after state change
+                        })
+                            .then(props.orderActions.readOrders());// Add output params to action? setTimeout?
+                    }}
                 />
             </div>
         );
-    } else {
+    } 
+    else {
         return (
             <div className="alert alert-danger" role="alert">
                 Invalid state! This message should never appear.
@@ -62,32 +78,46 @@ function mapStateToProps(state) {
         orders: state.ordersReducer.orders,
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
+        error: state.error,
 
-        applicationsRequestPending: state.applicationsReducer.applicationsRequestPending,
-        applicationsRequestFailed: state.applicationsReducer.applicationsRequestFailed,
-        applicationsRequestSuccess: state.applicationsReducer.applicationsRequestSuccess,
+        applicationsReadPending: state.applicationsReducer.applicationsReadPending,
+        applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
+        applicationsReadSuccess: state.applicationsReducer.applicationsReadSuccess,
 
-        customersRequestPending: state.customersReducer.customersRequestPending,
-        customersRequestFailed: state.customersReducer.customersRequestFailed,
-        customersRequestSuccess: state.customersReducer.customersRequestSuccess,
+        applicationsCreateFailed: state.applicationsReducer.applicationsCreateFailed,
+        applicationsCreateSuccess: state.applicationsReducer.applicationsCreateSuccess,
 
-        productsRequestPending: state.productsReducer.productsRequestPending,
-        productsRequestFailed: state.productsReducer.productsRequestFailed,
-        productsRequestSuccess: state.productsReducer.productsRequestSuccess,
+        applicationsUpdateFailed: state.applicationsReducer.applicationsUpdateFailed,
+        applicationsUpdateSuccess: state.applicationsReducer.applicationsUpdateduccess,
 
-        ordersRequestPending: state.ordersReducer.ordersRequestPending,
-        ordersRequestFailed: state.ordersReducer.ordersRequestFailed,
-        ordersRequestSuccess: state.ordersReducer.ordersRequestSuccess,
+        applicationsDeleteFailed: state.applicationsReducer.applicationsDeleteFailed,
+        applicationsDeleteSuccess: state.applicationsReducer.applicationsDeleteSuccess,
 
-        addressesRequestPending: state.addressesReducer.addressesRequestPending,
-        addressesRequestFailed: state.addressesReducer.addressesRequestFailed,
-        addressesRequestSuccess: state.addressesReducer.addressesRequestSuccess,
+        applicationsToOrderFailed: state.applicationsReducer.applicationsToOrderFailed,
+        applicationsToOrderSuccess: state.applicationsReducer.applicationsDeleteSuccess,
+
+        customersReadPending: state.customersReducer.customersReadPending,
+        customersReadFailed: state.customersReducer.customersReadFailed,
+        customersReadSuccess: state.customersReducer.customersReadSuccess,
+
+        productsReadPending: state.productsReducer.productsReadPending,
+        productsReadFailed: state.productsReducer.productsReadFailed,
+        productsReadSuccess: state.productsReducer.productsReadSuccess,
+
+        ordersReadPending: state.ordersReducer.ordersReadPending,
+        ordersReadFailed: state.ordersReducer.ordersReadFailed,
+        ordersReadSuccess: state.ordersReducer.ordersReadSuccess,
+
+        addressesReadPending: state.addressesReducer.addressesReadPending,
+        addressesReadFailed: state.addressesReducer.addressesReadFailed,
+        addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators(applicationsActions, dispatch)
+        actions: bindActionCreators(applicationsActions, dispatch),
+        orderActions: bindActionCreators(ordersActions, dispatch)
     }
 }
 

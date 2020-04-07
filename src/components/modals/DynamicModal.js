@@ -31,6 +31,20 @@ const MyModal = (props) => {
             }}>{label}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
+      case 'Place Order':
+        return (
+          <div>
+            <p>{'Confirm Order?'}</p>
+            <Button color="primary" onClick={() => {
+              new Promise(() => {
+                onSubmit();
+              })
+                .then(
+                  handleHide()
+                )
+            }}>{label}</Button>{' '}
+            <Button color="secondary" onClick={handleHide}>Cancel</Button>
+          </div>)          
       case 'Create':
       case 'Update':
         switch (entity) {
