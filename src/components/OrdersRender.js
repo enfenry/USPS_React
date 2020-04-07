@@ -15,16 +15,16 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
       let newObj = JSON.parse(JSON.stringify(obj))
 
       newObj["view"] = (
-        <ModalButton command="View" name={obj.ss_name} entity="Order" 
+        <ModalButton command="View" name={obj.ordernumber} entity="Order" 
         initialValues={{ ...obj}}>View</ModalButton>
       );
       newObj["delete"] = (
-        <ModalButton command="Update" name={obj.ss_name} entity="Application" 
+        <ModalButton command="Update" name={obj.ordernumber} entity="Application" 
         initialValues={{ ...obj }}  
         onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
-        <ModalButton command="Delete" name={obj.ss_name} entity="Application" 
+        <ModalButton command="Delete" name={obj.ordernumber} entity="Application" 
         initialValues={{ ...obj }}  
         onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
@@ -78,7 +78,7 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
   }
   return (
     <div>
-      <h1>Order</h1>
+      <h1>Orders</h1>
       <MDBDataTable
         striped
         bordered

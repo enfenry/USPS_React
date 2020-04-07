@@ -15,20 +15,20 @@ const OrderView = props => {
         <div>
             <div>
                 <div>
-                    <span>Name: </span>
+                    <span>Order Number: </span>
                     <p>{name}</p>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Associated Application: </span>
-                    <p>{displayById(applications, "ss_applicationid", initialValues.ss_application, "ss_name")}</p>
+                    <p>{displayById(applications, "ss_applicationid", initialValues._ss_application_value, "ss_name")}</p>
                 </div>
             </div>
             <div>
                 <div>
                     <span>Customer: </span>
-                    <p>{displayById(customers, "contactid", initialValues._ss_customer_value, "fullname")}</p>
+                    <p>{displayById(customers, "contactid", initialValues._customerid_value, "fullname")}</p>
                 </div>
             </div>
             <div>
