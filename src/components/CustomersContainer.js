@@ -52,6 +52,8 @@ CustomersContainer.propTypes = {
 function mapStateToProps(state) {
     return {
         customers: state.customersReducer.customers,
+        error: state.error,
+        
         customersReadPending: state.customersReducer.customersReadPending,
         customersReadFailed: state.customersReducer.customersReadFailed,
         customersReadSuccess: state.customersReducer.customersReadSuccess,

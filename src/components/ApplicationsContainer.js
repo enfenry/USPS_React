@@ -49,9 +49,9 @@ const ApplicationsContainer = (props) => {
                     }}
                     handleAppToOrder={(application) => {
                         new Promise(() => {
-                            props.actions.applicationToOrder(application.ss_applicationid);
+                            props.actions.applicationToOrder(application.ss_applicationid); // How to launch only after state change
                         })
-                            .then(props.orderActions.readOrders());
+                            .then(props.orderActions.readOrders());// Add output params to action? setTimeout?
                     }}
                 />
             </div>
@@ -78,6 +78,7 @@ function mapStateToProps(state) {
         orders: state.ordersReducer.orders,
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
+        error: state.error,
 
         applicationsReadPending: state.applicationsReducer.applicationsReadPending,
         applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
