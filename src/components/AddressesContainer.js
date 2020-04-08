@@ -3,13 +3,20 @@
 import * as addressesActions from '../actions/addressesActions';
 import AddressesRender from './AddressesRender';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const AddressesContainer = (props) => {
 
-    if (props.addressesReadPending) {
+    useEffect(() => {
+        const { actions } = props;
+        actions.readAddresses();
+     }, [] );
+
+    console.log("addresses:", props);
+
+    if (props.requestState.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -17,13 +24,13 @@ const AddressesContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.addressesReadFailed) {
+    } else if (props.requestState.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading customers!
             </div>
         );
-    } else if (props.addressesReadSuccess) {
+    } else if (props.requestState.addressesReadSuccess || props.requestState.addressesCreateSuccess || props.requestState.addressesUpdateSuccess || props.requestState.addressesDeleteSuccess) {
         return (
             <div className="reactive-margin">
                 <AddressesRender
@@ -52,20 +59,7 @@ AddressesContainer.propTypes = {
 function mapStateToProps(state) {
     return {
         addresses: state.addressesReducer.addresses,
-        error: state.error,
-        
-        addressesReadPending: state.addressesReducer.addressesReadPending,
-        addressesReadFailed: state.addressesReducer.addressesReadFailed,
-        addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
-
-        addressesCreateFailed: state.addressesReducer.addressesCreateFailed,
-        addressesCreateSuccess: state.addressesReducer.addressesCreateSuccess,
-
-        addressesUpdateFailed: state.addressesReducer.addressesUpdateFailed,
-        addressesUpdateSuccess: state.addressesReducer.addressesUpdateduccess,
-
-        addressesDeleteFailed: state.addressesReducer.addressesDeleteFailed,
-        addressesDeleteSuccess: state.addressesReducer.addressesDeleteSuccess,
+        requestState: state.addressesReducer.requestState
     }
 }
 

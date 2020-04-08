@@ -3,13 +3,20 @@
 import * as customersActions from '../actions/customersActions';
 import CustomersRender from './CustomersRender';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const CustomersContainer = (props) => {
 
-    if (props.customersReadPending || props.addressesReadPending) {
+    useEffect(() => {
+        const { actions } = props;
+        actions.readCustomers();
+     }, []);
+
+     console.log("customers:", props);
+
+    if (props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -17,13 +24,13 @@ const CustomersContainer = (props) => {
                 </div>
             </div>
         );
-    } else if (props.customersReadFailed || props.addressesReadFailed) {
+    } else if (props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading customers!
             </div>
         );
-    } else if (props.customersReadSuccess && props.addressesReadSuccess) {
+    } else if ((props.customerRequestState.customersReadSuccess || props.customerRequestState.customersCreateSuccess || props.customerRequestState.customersUpdateSuccess || props.customerRequestState.customersDeleteSuccess) && props.addressRequestState.addressesReadSuccess) {
         return (
             <div className="reactive-margin">
                 <CustomersRender
@@ -52,25 +59,9 @@ CustomersContainer.propTypes = {
 function mapStateToProps(state) {
     return {
         customers: state.customersReducer.customers,
-        error: state.error,
-        
-        customersReadPending: state.customersReducer.customersReadPending,
-        customersReadFailed: state.customersReducer.customersReadFailed,
-        customersReadSuccess: state.customersReducer.customersReadSuccess,
-
-        customersCreateFailed: state.customersReducer.customersCreateFailed,
-        customersCreateSuccess: state.customersReducer.customersCreateSuccess,
-
-        customersUpdateFailed: state.customersReducer.customersUpdateFailed,
-        customersUpdateSuccess: state.customersReducer.customersUpdateduccess,
-
-        customersDeleteFailed: state.customersReducer.customersDeleteFailed,
-        customersDeleteSuccess: state.customersReducer.customersDeleteSuccess,
-
-        addressesReadPending: state.addressesReducer.addressesReadPending,
-        addressesReadFailed: state.addressesReducer.addressesReadFailed,
-        addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
-
+        addresses: state.addressesReducer.addresses,
+        customerRequestState: state.customersReducer.requestState,
+        addressRequestState: state.addressesReducer.requestState
     }
 }
 
