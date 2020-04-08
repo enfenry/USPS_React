@@ -29,7 +29,7 @@ const AddressView = props => {
             {initialValues.ss_line3 ? 
             <div>
                 <div>
-                    <span>Line 3: </span>
+                    <span>Line 2: </span>
                     <p>{initialValues.ss_line3}</p>
                 </div>
             </div> : ''}
@@ -68,6 +68,7 @@ AddressView.propTypes = {
     handleHide: PropTypes.func,
     name: PropTypes.string,
     initialValues: PropTypes.object,
+    appTypeValue: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
