@@ -34,4 +34,20 @@ const renderField = (props) => {
     ])
   }
 
-export default renderField;
+  const checkRequiredField = (fieldName,values,errors) => {
+    const currentVal = values[fieldName];
+
+    if (!(currentVal) || currentVal === null) {
+      errors[fieldName] = 'Required';
+    }
+    else if (typeof currentVal === 'string') {
+
+      if (currentVal.trim() === '') {
+        errors[fieldName] = 'Cannot be empty';
+      }
+    }
+
+    return errors;
+  }
+
+export {renderField, checkRequiredField};

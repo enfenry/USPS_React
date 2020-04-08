@@ -41,13 +41,13 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
         sort: 'asc'
       },
       {
-        label: 'Destination',
-        field: '_ss_destinationaddress_value',
+        label: 'Parent Application',
+        field: '_ss_application_value@OData.Community.Display.V1.FormattedValue',
         sort: 'asc'
       },
       {
-        label: 'Parent Application',
-        field: '_ss_application_value',
+        label: 'Customer',
+        field: '_customerid_value@OData.Community.Display.V1.FormattedValue',
         sort: 'asc'
       },
       {
