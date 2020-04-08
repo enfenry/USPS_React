@@ -1,12 +1,20 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './OrderValidate';
+import { renderField } from '../formUtils';
 
 let OrderCreateOrUpdate = props => {
-  const { handleSubmit, handleHide, customers, addresses } = props;
+  const { handleSubmit, handleHide, initialValues, 
+    // customers, 
+    addresses, applications } = props;
+
+  const displayById = (array, key, value, display) => {
+    let filtered = array.filter(el => el[key] === value);
+    return filtered.length ? filtered[0][display] : 'None';
+  }
 
   const renderOptions = (array, value, display) => {
     return array.map(el => {
@@ -18,39 +26,18 @@ let OrderCreateOrUpdate = props => {
 
   return (
     <Form onSubmit={handleSubmit} className="form">
-      <FormGroup className="field">
-        <div className="control">
-          <Field name="ss_name" component={renderField} type="text" label="Name" />
-        </div>
-      </FormGroup>
-
-      <FormGroup className="field">
-        <div className="control">
-          <Field name="ss_applicationtype" component={renderField} type="select"
-            label="Orderlication Type">
-            <option value={null}></option>
-          </Field>
-        </div>
-      </FormGroup>
-
-      <FormGroup className="field">
-        <div className="control">
-          <Field name="_ss_product_value" component={renderField} type="select"
-            label="Product">
-            <option value={null}></option>
-          </Field>
-        </div>
-      </FormGroup>
-
-      <FormGroup className="field">
-        <div className="control">
-          <Field name="_ss_customer_value" component={renderField} type="select"
-            label="Customer">
-            <option value={null}></option>
-            {renderOptions(customers, "contactid", "fullname")}
-          </Field>
-        </div>
-      </FormGroup>
+      <div>
+        <span>Order Number: </span>
+        <p>{name}</p>
+      </div>
+      <div>
+        <span>Parent Application: </span>
+        <p>{displayById(applications, "ss_applicationid", initialValues._ss_application_value, "ss_name")}</p>
+      </div>
+      <div>
+        <span>Total Amount: </span>
+        <p>{initialValues['totalamount_base@OData.Community.Display.V1.FormattedValue']}</p>
+      </div>
 
       <FormGroup className="field">
         <div className="control">
@@ -72,38 +59,6 @@ let OrderCreateOrUpdate = props => {
   );
 };
 
-const renderField = (props) => {
-  const { input, label, type, show, meta: { touched, error, warning } } = props;
-
-  return (
-    <div style={{ display: show ? 'block' : 'none' }} >
-      <div className="control">
-        <Label className="field">{label}</Label>
-        <Input className="input" {...input} type={type}>
-          {props.children}
-        </Input>
-        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>) || (warning && <span style={{ color: 'orange' }}>{warning}</span>))}
-      </div>
-    </div>
-  )
-}
-
-renderField.defaultProps = {
-  show: true
-}
-
-renderField.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  show: PropTypes.bool,
-  meta: PropTypes.object,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
-}
-
 OrderCreateOrUpdate.propTypes = {
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
@@ -111,6 +66,7 @@ OrderCreateOrUpdate.propTypes = {
   customers: PropTypes.arrayOf(PropTypes.object),
   addresses: PropTypes.arrayOf(PropTypes.object),
   products: PropTypes.arrayOf(PropTypes.object),
+  applications: PropTypes.arrayOf(PropTypes.object),
   appTypeValue: PropTypes.oneOfType([
     PropTypes.number,
     PropTypes.string,
@@ -135,6 +91,7 @@ function mapStateToProps(state) {
 
   return {
     appTypeValue,
+    applications: state.applicationsReducer.applications,
     customers: state.customersReducer.customers,
     addresses: state.addressesReducer.addresses,
     products: state.productsReducer.products,

@@ -1,11 +1,24 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getApplicationTypeName } from '../../ApplicationsRender';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './AppValidate';
+import { renderField } from '../formUtils';
+
+ function getApplicationTypeName(applicationType) {
+  switch (applicationType) {
+    case ADDRESS_CHANGE:
+      return "Address Change";
+    case MAIL_FORWARDING:
+      return "Mail Forwarding";
+    case PACKAGE_SUBMISSION:
+      return "Package Submission";
+    default:
+      return applicationType;
+  }
+}
 
 let AppCreateOrUpdate = props => {
   const { handleSubmit, handleHide, appTypeValue, customers, addresses, products } = props;
@@ -94,38 +107,6 @@ let AppCreateOrUpdate = props => {
     </Form>
   );
 };
-
-const renderField = (props) => {
-  const { input, label, type, show, meta: { touched, error, warning } } = props;
-
-  return (
-    <div style={{ display: show ? 'block' : 'none' }} >
-      <div className="control">
-        <Label className="field">{label}</Label>
-        <Input className="input" {...input} type={type}>
-          {props.children}
-        </Input>
-        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>) || (warning && <span style={{ color: 'orange' }}>{warning}</span>))}
-      </div>
-    </div>
-  )
-}
-
-renderField.defaultProps = {
-  show: true
-}
-
-renderField.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  show: PropTypes.bool,
-  meta: PropTypes.object,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
-}
 
 AppCreateOrUpdate.propTypes = {
   handleSubmit: PropTypes.func,

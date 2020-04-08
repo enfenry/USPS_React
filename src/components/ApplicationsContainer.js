@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 
 const ApplicationsContainer = (props) => {
 
+
     useEffect(() => {
        const { actions } = props;
        actions.readApplications();
@@ -17,6 +18,7 @@ const ApplicationsContainer = (props) => {
     console.log("applications:", props);
 
     if (props.applicationRequestState.applicationsReadPending || props.productRequestState.productsReadPending || props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
+
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">

@@ -22,7 +22,7 @@ const MyModal = (props) => {
       case 'Delete':
         return (
           <div>
-            <p>{'Are you sure?'}</p>
+            <p>Are you sure?</p>
             <Button color="danger" onClick={() => {
               new Promise(() => {
                 onSubmit();
@@ -36,7 +36,7 @@ const MyModal = (props) => {
       case 'Place Order':
         return (
           <div>
-            <p>{'Confirm Order?'}</p>
+            <p>Confirm Order?</p>
             <Button color="primary" onClick={() => {
               new Promise(() => {
                 onSubmit();
@@ -55,6 +55,7 @@ const MyModal = (props) => {
               <AppCreateOrUpdate {...props} />
             );
           case 'Order':
+              console.log('making it to OrderCreateOrUpdate')
             return (
               <OrderCreateOrUpdate {...props} />
             );
