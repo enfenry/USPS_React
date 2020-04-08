@@ -29,7 +29,7 @@ const AddressView = props => {
             {initialValues.ss_line3 ? 
             <div>
                 <div>
-                    <span>Line 2: </span>
+                    <span>Line 3: </span>
                     <p>{initialValues.ss_line3}</p>
                 </div>
             </div> : ''}

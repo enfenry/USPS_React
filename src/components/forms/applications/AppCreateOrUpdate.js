@@ -3,10 +3,22 @@ import { Button, Form, FormGroup } from 'reactstrap';
 import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getApplicationTypeName } from '../../ApplicationsRender';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './AppValidate';
-import renderField from '../renderField';
+import renderField from '../formUtils';
+
+ function getApplicationTypeName(applicationType) {
+  switch (applicationType) {
+    case ADDRESS_CHANGE:
+      return "Address Change";
+    case MAIL_FORWARDING:
+      return "Mail Forwarding";
+    case PACKAGE_SUBMISSION:
+      return "Package Submission";
+    default:
+      return applicationType;
+  }
+}
 
 let AppCreateOrUpdate = props => {
   const { handleSubmit, handleHide, appTypeValue, customers, addresses, products } = props;

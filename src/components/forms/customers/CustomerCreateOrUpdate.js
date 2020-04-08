@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './CustomerValidate';
-import renderField from '../renderField';
+import renderField from '../formUtils';
 
 let CustomerCreateOrUpdate = props => {
   const { handleSubmit, handleHide, addresses, initialValues } = props;
