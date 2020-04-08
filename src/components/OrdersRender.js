@@ -19,12 +19,12 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
         initialValues={{ ...obj}}>View</ModalButton>
       );
       newObj["delete"] = (
-        <ModalButton command="Update" name={obj.ordernumber} entity="Application" 
+        <ModalButton command="Update" name={obj.ordernumber} entity="Order" 
         initialValues={{ ...obj }}  
         onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
-        <ModalButton command="Delete" name={obj.ordernumber} entity="Application" 
+        <ModalButton command="Delete" name={obj.ordernumber} entity="Order" 
         initialValues={{ ...obj }}  
         onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );

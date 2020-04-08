@@ -3,14 +3,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './modals/ModalButton';
-//import InfiniteScroll from 'react-infinite-scroll-component';
 import { MDBDataTable } from 'mdbreact';
-//import {CustomersContainer} from './CustomersContainer';
-
 
 const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate }) => {
-
-  console.log('addresses',addresses);
 
   function getTableBodyContent() {
     return addresses.map(obj => {

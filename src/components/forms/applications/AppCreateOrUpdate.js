@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './AppValidate';
-import renderField from '../formUtils';
+import { renderField } from '../formUtils';
 
  function getApplicationTypeName(applicationType) {
   switch (applicationType) {
