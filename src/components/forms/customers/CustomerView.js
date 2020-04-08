@@ -1,42 +1,27 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 const CustomerView = props => {
-    const { handleHide, initialValues, addresses } = props;
-
-    const displayById = (array, key, value, display) => {
-        let filtered = array.filter(el => el[key] === value);
-        return filtered.length ? filtered[0][display] : 'None';
-    }
+    const { handleHide, initialValues } = props;
 
     return (
         <div>
             <div>
-                <div>
-                    <span>First Name: </span>
-                    <p>{initialValues.firstname}</p>
-                </div>
+                <span>First Name: </span>
+                <p>{initialValues.firstname}</p>
             </div>
             <div>
-                <div>
-                    <span>Last Name: </span>
-                    <p>{initialValues.lastname}</p>
-                </div>
+                <span>Last Name: </span>
+                <p>{initialValues.lastname}</p>
             </div>
             <div>
-                <div>
-                    <span>Email: </span>
-                    <p>{initialValues.emailaddress1 || 'None'}</p>
-                </div>
+                <span>Email: </span>
+                <p>{initialValues.emailaddress1 || 'None'}</p>
             </div>
-
             <div>
-                <div>
-                    <span>Address Name: </span>
-                    <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_contactcustomaddress_value, "ss_name")}</p>
-                </div>
+                <span>Address Name: </span>
+                <p>{initialValues['_ss_contactcustomaddress_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
             <div className="control">
                 <Button color="secondary" onClick={handleHide}>Cancel</Button>
@@ -56,12 +41,4 @@ CustomerView.propTypes = {
     ])
 }
 
-function mapStateToProps(state) {
-    return {
-        addresses: state.addressesReducer.addresses
-    }
-}
-
-export default connect(
-    mapStateToProps
-)(CustomerView);
+export default CustomerView;

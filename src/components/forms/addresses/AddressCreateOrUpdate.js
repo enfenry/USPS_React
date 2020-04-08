@@ -1,9 +1,10 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup } from 'reactstrap';
 import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './AddressValidate';
+import renderField from '../renderField';
 
 let AddressCreateOrUpdate = props => {
   const { handleSubmit, handleHide } = props;
@@ -68,49 +69,10 @@ let AddressCreateOrUpdate = props => {
   );
 };
 
-const renderField = (props) => {
-  const { input, label, type, show, meta: { touched, error, warning } } = props;
-
-  return (
-    <div style={{ display: show ? 'block' : 'none' }} >
-      <div className="control">
-        <Label className="field">{label}</Label>
-        <Input className="input" {...input} type={type}>
-          {props.children}
-        </Input>
-        {touched && ((error && <span style={{ color: 'red' }}>{error}</span>) || (warning && <span style={{ color: 'orange' }}>{warning}</span>))}
-      </div>
-    </div>
-  )
-}
-
-renderField.defaultProps = {
-  show: true
-}
-
-renderField.propTypes = {
-  input: PropTypes.object,
-  label: PropTypes.string,
-  type: PropTypes.string,
-  show: PropTypes.bool,
-  meta: PropTypes.object,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ])
-}
-
 AddressCreateOrUpdate.propTypes = {
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
   initialValues: PropTypes.object,
-  customers: PropTypes.arrayOf(PropTypes.object),
-  addresses: PropTypes.arrayOf(PropTypes.object),
-  products: PropTypes.arrayOf(PropTypes.object),
-  appTypeValue: PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string,
-  ]),
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node

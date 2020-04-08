@@ -13,8 +13,6 @@ const ApplicationsContainer = (props) => {
     // useEffect(() => {
     //    // const { actions } = props;
     // }, [] );
-
-    console.log(props);
     
     if (props.applicationsReadPending || props.ordersReadPending || props.productsReadPending || props.customersReadPending || props.addressesReadPending) {
         return (
