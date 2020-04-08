@@ -14,6 +14,8 @@ const ApplicationsContainer = (props) => {
     //    // const { actions } = props;
     // }, [] );
 
+    console.log(props);
+    
     if (props.applicationsReadPending || props.ordersReadPending || props.productsReadPending || props.customersReadPending || props.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
@@ -49,7 +51,7 @@ const ApplicationsContainer = (props) => {
                         new Promise(() => {
                             props.actions.applicationToOrder(application.ss_applicationid); // How to launch only after state change
                         })
-                            .then(props.orderActions.readOrders());// Add output params to action? setTimeout?
+                            .then(props.orderActions.readOrders());// Add output params to action? setTimeout? setTimeout(f(), 300));
                     }}
                 />
             </div>

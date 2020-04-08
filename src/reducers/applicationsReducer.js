@@ -18,7 +18,7 @@ export default function applicationsReducer(state = {}, action) {
         case READ_APPLICATIONS_PENDING:
             return { ...state, applicationsReadSuccess: false, applicationsReadPending: true, applicationsReadFailed: false, error: null  };
         case READ_APPLICATIONS_FAILURE:
-            return { ...state, applicationsReadSuccess: false, applicationsReadPending: false, applicationsReadFailed: true, error: action.data };
+            return { ...state, applicationsReadSuccess: false, applicationsReadPending: false, applicationsReadFailed: true, error: action.data};
 
         case UPDATE_APPLICATION_SUCCESSFUL: {
             const itemIndex = state.applications.findIndex((e) => (e.ss_applicationid === action.id));
