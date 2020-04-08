@@ -55,6 +55,7 @@ const MyModal = (props) => {
               <AppCreateOrUpdate {...props} />
             );
           case 'Order':
+              console.log('making it to OrderCreateOrUpdate')
             return (
               <OrderCreateOrUpdate {...props} />
             );

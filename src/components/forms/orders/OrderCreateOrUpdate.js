@@ -4,15 +4,17 @@ import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './OrderValidate';
-import renderField from '../formUtils';
+import { renderField } from '../formUtils';
 
 let OrderCreateOrUpdate = props => {
-  const { handleSubmit, handleHide, customers, addresses, applications } = props;
+  const { handleSubmit, handleHide, initialValues, 
+    // customers, 
+    addresses, applications } = props;
 
   const displayById = (array, key, value, display) => {
     let filtered = array.filter(el => el[key] === value);
     return filtered.length ? filtered[0][display] : 'None';
-}
+  }
 
   const renderOptions = (array, value, display) => {
     return array.map(el => {
@@ -25,37 +27,17 @@ let OrderCreateOrUpdate = props => {
   return (
     <Form onSubmit={handleSubmit} className="form">
       <div>
-        <div>
-          <span>Order Number: </span>
-          <p>{name}</p>
-        </div>
+        <span>Order Number: </span>
+        <p>{name}</p>
       </div>
-
       <div>
-        <div>
-          <span>Parent Application: </span>
-          <p>{displayById(applications, "ss_applicationid", initialValues._ss_application_value, "ss_name")}</p>
-        </div>
+        <span>Parent Application: </span>
+        <p>{displayById(applications, "ss_applicationid", initialValues._ss_application_value, "ss_name")}</p>
       </div>
-
-      <FormGroup className="field">
-        <div className="control">
-          <Field name="_ss_product_value" component={renderField} type="select"
-            label="Product">
-            <option value={null}></option>
-          </Field>
-        </div>
-      </FormGroup>
-
-      <FormGroup className="field">
-        <div className="control">
-          <Field name="_ss_customer_value" component={renderField} type="select"
-            label="Customer">
-            <option value={null}></option>
-            {renderOptions(customers, "contactid", "fullname")}
-          </Field>
-        </div>
-      </FormGroup>
+      <div>
+        <span>Total Amount: </span>
+        <p>{initialValues['totalamount_base@OData.Community.Display.V1.FormattedValue']}</p>
+      </div>
 
       <FormGroup className="field">
         <div className="control">
