@@ -10,9 +10,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+
 const Home = (props) => {
 
-    if (props.applicationsReadPending) {
+    console.log("home",props);
+
+    if (props.requestState.applicationsReadPending) {
 
 
         return (
@@ -24,7 +27,7 @@ const Home = (props) => {
         );
 
 
-    } else if (props.applicationsReadFailed) {
+    } else if (props.requestState.applicationsReadFailed) {
 
         return (
             <div className="alert alert-danger" role="alert">
@@ -32,7 +35,7 @@ const Home = (props) => {
             </div>
         );
 
-    } else if (props.applicationsReadSuccess) {
+    } else if (props.requestState.applicationsReadSuccess) {
 
         var distribution0 = [0, 0, 0];
         var distribution1 = [0, 0];
@@ -138,17 +141,13 @@ Home.propTypes = {
 function mapStateToProps(state) {
     return {
         applications: state.applicationsReducer.applications,
-        applicationsReadPending: state.applicationsReducer.applicationsReadPending,
-        applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
-        applicationsReadSuccess: state.applicationsReducer.applicationsReadSuccess
-
+        requestState: state.applicationsReducer.requestState
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(applicationsActions, dispatch)
-
     }
 }
 

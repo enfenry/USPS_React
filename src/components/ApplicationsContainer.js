@@ -1,22 +1,22 @@
 "use strict"
 
 import * as applicationsActions from '../actions/applicationsActions';
-import * as ordersActions from '../actions/ordersActions';
 import ApplicationsRender from './ApplicationsRender';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 const ApplicationsContainer = (props) => {
 
-    // useEffect(() => {
-    //    // const { actions } = props;
-    // }, [] );
+    useEffect(() => {
+       const { actions } = props;
+       actions.readApplications();
+    }, [] );
 
-    console.log(props);
-    
-    if (props.applicationsReadPending || props.ordersReadPending || props.productsReadPending || props.customersReadPending || props.addressesReadPending) {
+    console.log("applications:", props);
+
+    if (props.applicationRequestState.applicationsReadPending || props.productRequestState.productsReadPending || props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
         return (
             <div className="d-flex justify-content-center">
                 <div className="spinner-border" role="status">
@@ -25,7 +25,7 @@ const ApplicationsContainer = (props) => {
             </div>
         );
     }
-    if (props.applicationsReadFailed || props.ordersReadFailed || props.productsReadFailed || props.customersReadFailed || props.addressesReadFailed) {
+    if (props.applicationRequestState.applicationsReadFailed || props.productRequestState.productsReadFailed || props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
                 Error while loading entities!
@@ -33,7 +33,7 @@ const ApplicationsContainer = (props) => {
         );
 
     }
-    if (props.applicationsReadSuccess && props.ordersReadSuccess && props.productsReadSuccess && props.customersReadSuccess && props.addressesReadSuccess) {
+    if ((props.applicationRequestState.applicationsReadSuccess || props.applicationRequestState.applicationsUpdateSuccess || props.applicationRequestState.applicationsCreateSuccess|| props.applicationRequestState.applicationsToOrderSuccess) && props.productRequestState.productsReadSuccess && props.customerRequestState.customersReadSuccess && props.addressRequestState.addressesReadSuccess) {
         return (
             <div className="reactive-margin">
                 <ApplicationsRender
@@ -48,10 +48,7 @@ const ApplicationsContainer = (props) => {
                         props.actions.createApplication(values)
                     }}
                     handleAppToOrder={(application) => {
-                        new Promise(() => {
-                            props.actions.applicationToOrder(application.ss_applicationid); // How to launch only after state change
-                        })
-                            .then(props.orderActions.readOrders());// Add output params to action? setTimeout? setTimeout(f(), 300));
+                            props.actions.applicationToOrder(application.ss_applicationid)
                     }}
                 />
             </div>
@@ -78,46 +75,17 @@ function mapStateToProps(state) {
         orders: state.ordersReducer.orders,
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
-        error: state.error,
-
-        applicationsReadPending: state.applicationsReducer.applicationsReadPending,
-        applicationsReadFailed: state.applicationsReducer.applicationsReadFailed,
-        applicationsReadSuccess: state.applicationsReducer.applicationsReadSuccess,
-
-        applicationsCreateFailed: state.applicationsReducer.applicationsCreateFailed,
-        applicationsCreateSuccess: state.applicationsReducer.applicationsCreateSuccess,
-
-        applicationsUpdateFailed: state.applicationsReducer.applicationsUpdateFailed,
-        applicationsUpdateSuccess: state.applicationsReducer.applicationsUpdateduccess,
-
-        applicationsDeleteFailed: state.applicationsReducer.applicationsDeleteFailed,
-        applicationsDeleteSuccess: state.applicationsReducer.applicationsDeleteSuccess,
-
-        applicationsToOrderFailed: state.applicationsReducer.applicationsToOrderFailed,
-        applicationsToOrderSuccess: state.applicationsReducer.applicationsDeleteSuccess,
-
-        customersReadPending: state.customersReducer.customersReadPending,
-        customersReadFailed: state.customersReducer.customersReadFailed,
-        customersReadSuccess: state.customersReducer.customersReadSuccess,
-
-        productsReadPending: state.productsReducer.productsReadPending,
-        productsReadFailed: state.productsReducer.productsReadFailed,
-        productsReadSuccess: state.productsReducer.productsReadSuccess,
-
-        ordersReadPending: state.ordersReducer.ordersReadPending,
-        ordersReadFailed: state.ordersReducer.ordersReadFailed,
-        ordersReadSuccess: state.ordersReducer.ordersReadSuccess,
-
-        addressesReadPending: state.addressesReducer.addressesReadPending,
-        addressesReadFailed: state.addressesReducer.addressesReadFailed,
-        addressesReadSuccess: state.addressesReducer.addressesReadSuccess,
+        
+        applicationRequestState: state.applicationsReducer.requestState,
+        productRequestState: state.productsReducer.requestState,
+        addressRequestState: state.addressesReducer.requestState,
+        customerRequestState: state.customersReducer.requestState,
     }
 }
 
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(applicationsActions, dispatch),
-        orderActions: bindActionCreators(ordersActions, dispatch)
     }
 }
 

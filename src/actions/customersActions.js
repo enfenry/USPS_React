@@ -92,6 +92,7 @@ export const updateCustomer = (values, id) => {
 
         return adalApiFetch(axios, uri, config)
             .then((res) => {
+                console.log("updatecust", res);
                 dispatch(_updateCustomerSuccess(res, id));
             })
             .catch((error) => {
