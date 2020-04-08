@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-
+import {Container, 
+    // Row, Col
+ } from 'reactstrap';
 import * as applicationsActions from '../actions/applicationsActions';
-import {ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION} from '../constants/applicationTypes';
+import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -13,7 +15,7 @@ import { bindActionCreators } from 'redux';
 
 const Home = (props) => {
 
-    console.log("home",props);
+    console.log("home", props);
 
     if (props.requestState.applicationsReadPending) {
 
@@ -39,8 +41,8 @@ const Home = (props) => {
 
         var distribution0 = [0, 0, 0];
         var distribution1 = [0, 0];
-        var appsThisMonth=0;
-        var currentMonth=new Date().getMonth()+1;
+        var appsThisMonth = 0;
+        var currentMonth = new Date().getMonth() + 1;
 
         props.applications.forEach((application) => {
             switch (application.ss_applicationtype) {
@@ -56,9 +58,9 @@ const Home = (props) => {
                     break;
             }
             distribution1[application.statecode]++;
-            var date1 = application.createdon.slice(5,7);
-            var dateStripped=date1.replace(/\b0+/, '');
-            if(currentMonth==dateStripped) 
+            var date1 = application.createdon.slice(5, 7);
+            var dateStripped = date1.replace(/\b0+/, '');
+            if (currentMonth == dateStripped)
                 appsThisMonth++;
         });
 
@@ -107,9 +109,12 @@ const Home = (props) => {
         };
 
         return (
-            <React.Fragment>
+            <Container>
                 <div>
+                    <br />
                     <h2>Applications this month:{appsThisMonth}</h2>
+                    <br />
+                    <br />
                 </div>
                 <div>
                     <Doughnut
@@ -125,7 +130,7 @@ const Home = (props) => {
                         options={{ maintainAspectRatio: false }}
                     />
                 </div>
-            </React.Fragment>
+            </Container>
 
         );
 

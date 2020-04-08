@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
 
 const OrdersContainer = (props) => {
 
@@ -15,13 +16,7 @@ const OrdersContainer = (props) => {
      }, [] );
 
     if (props.orderRequestState.ordersReadPending || props.productRequestState.productsReadPending || props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
-        return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
+        return <LoadingIcon/>;
     } else if (props.orderRequestState.ordersReadFailed || props.productRequestState.productsReadFailed || props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">

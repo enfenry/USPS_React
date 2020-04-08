@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
 
 const ApplicationsContainer = (props) => {
 
@@ -14,17 +15,10 @@ const ApplicationsContainer = (props) => {
        actions.readApplications();
     }, [] );
 
-    console.log("applications:", props);
+    console.log("props:", props);
 
     if (props.applicationRequestState.applicationsReadPending || props.productRequestState.productsReadPending || props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
-
-        return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
+        return <LoadingIcon/>;
     }
     if (props.applicationRequestState.applicationsReadFailed || props.productRequestState.productsReadFailed || props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
         return (
@@ -32,7 +26,6 @@ const ApplicationsContainer = (props) => {
                 Error while loading entities!
             </div>
         );
-
     }
     if ((props.applicationRequestState.applicationsReadSuccess || props.applicationRequestState.applicationsUpdateSuccess || props.applicationRequestState.applicationsCreateSuccess|| props.applicationRequestState.applicationsToOrderSuccess) && props.productRequestState.productsReadSuccess && props.customerRequestState.customersReadSuccess && props.addressRequestState.addressesReadSuccess) {
         return (

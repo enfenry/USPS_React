@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
 
 const AddressesContainer = (props) => {
 
@@ -17,13 +18,7 @@ const AddressesContainer = (props) => {
     console.log("addresses:", props);
 
     if (props.requestState.addressesReadPending) {
-        return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
+        return <LoadingIcon/>;
     } else if (props.requestState.addressesReadFailed) {
         return (
             <div className="alert alert-danger" role="alert">
@@ -48,7 +43,11 @@ const AddressesContainer = (props) => {
             </div>
         );
     } else {
-        return null;
+        return (
+            <div className="alert alert-danger" role="alert">
+                Invalid state! This message should never appear.
+            </div>
+        );
     }
 }
 
