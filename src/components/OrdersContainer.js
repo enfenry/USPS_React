@@ -43,6 +43,7 @@ const OrdersContainer = (props) => {
                     handleCreate={(values) => {
                         props.actions.createOrder(values)
                     }}
+                    handleRefresh={() => props.actions.readOrders()}
                 />
             </div>
         );
