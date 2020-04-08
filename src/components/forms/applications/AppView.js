@@ -1,58 +1,39 @@
 import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 const AppView = props => {
-    const { handleHide, name, initialValues, customers, addresses, products } = props;
-
-    const displayById = (array, key, value, display) => {
-        let filtered = array.filter(el => el[key] === value);
-        return filtered.length ? filtered[0][display] : 'None';
-    }
+    const { handleHide, name, initialValues } = props;
 
     return (
         <div>
             <div>
-                <div>
-                    <span>Name: </span>
-                    <p>{name}</p>
-                </div>
+                <span>Name: </span>
+                <p>{name}</p>
             </div>
             <div>
-                <div>
-                    <span>Application Type: </span>
-                    <p>{initialValues.appTypeLabel}</p>
-                </div>
+                <span>Application Type: </span>
+                <p>{initialValues['ss_applicationtype@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
             <div>
-                <div>
-                    <span>Product: </span>
-                    <p>{displayById(products, "productid", initialValues._ss_product_value, "name")}</p>
-                </div>
+                <span>Product: </span>
+                <p>{initialValues['_ss_product_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
-            {initialValues.appTypeLabel === 'Package Submission' ?
+            {initialValues['ss_applicationtype@OData.Community.Display.V1.FormattedValue'] === 'Package Submission' ?
                 <div>
-                    <div>
-                        <span>Shipping Speed: </span>
-                        <p>{displayById(products, "productid", initialValues._ss_shippingspeed_value, "name")}</p>
-                    </div>
+                    <span>Shipping Speed: </span>
+                    <p>{initialValues['_ss_shippingspeed_value@OData.Community.Display.V1.FormattedValue']}</p>
                 </div>
                 : ""
             }
             <div>
-                <div>
-                    <span>Customer: </span>
-                    <p>{displayById(customers, "contactid", initialValues._ss_customer_value, "fullname")}</p>
-                </div>
+                <span>Customer: </span>
+                <p>{initialValues['_ss_customer_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
             <div>
-                <div>
-                    <span>Destination Address: </span>
-                    <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_destinationaddress_value, "ss_name")}</p>
-                </div>
+                <span>Destination Address: </span>
+                <p>{initialValues['_ss_destinationaddress_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
-
             <div className="control">
                 <Button color="secondary" onClick={handleHide}>Cancel</Button>
             </div>
@@ -64,24 +45,10 @@ AppView.propTypes = {
     handleHide: PropTypes.func,
     name: PropTypes.string,
     initialValues: PropTypes.object,
-    customers: PropTypes.arrayOf(PropTypes.object),
-    addresses: PropTypes.arrayOf(PropTypes.object),
-    products: PropTypes.arrayOf(PropTypes.object),
-    appTypeValue: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node
     ])
 }
 
-function mapStateToProps(state) {
-    return {
-        customers: state.customersReducer.customers,
-        addresses: state.addressesReducer.addresses,
-        products: state.productsReducer.products,
-    }
-}
-
-export default connect(
-    mapStateToProps
-)(AppView);
+export default AppView;

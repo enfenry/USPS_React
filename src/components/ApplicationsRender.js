@@ -21,6 +21,8 @@ export function getApplicationTypeName(applicationType) {
 
 const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate, handleAppToOrder }) => {
 
+  console.log('applications',applications);
+
   function getAppBodyContent() {
     return applications.map(obj => {
       // Deep Clone object to avoid adding to it while mapping over it during map

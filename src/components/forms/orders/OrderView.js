@@ -14,36 +14,21 @@ const OrderView = props => {
     return (
         <div>
             <div>
-                <div>
-                    <span>Order Number: </span>
-                    <p>{name}</p>
-                </div>
+                <span>Order Number: </span>
+                <p>{name}</p>
             </div>
             <div>
-                <div>
-                    <span>Associated Application: </span>
-                    <p>{displayById(applications, "ss_applicationid", initialValues._ss_application_value, "ss_name")}</p>
-                </div>
+                <span>Parent Application: </span>
+                <p>{initialValues['_ss_application_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
             <div>
-                <div>
-                    <span>Customer: </span>
-                    <p>{displayById(customers, "contactid", initialValues._customerid_value, "fullname")}</p>
-                </div>
+                <span>Customer: </span>
+                <p>{initialValues['_customerid_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
             <div>
-                <div>
-                    <span>Destination Address: </span>
-                    <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_destinationaddress_value, "ss_name")}</p>
-                </div>
+                <span>Destination Address: </span>
+                <p>{initialValues['_ss_destinationaddress_value@OData.Community.Display.V1.FormattedValue']}</p>
             </div>
-            {/* <div>
-                <div>
-                    <span>Destination Address: </span>
-                    <p>{displayById(products, "ss_customaddressid", initialValues._ss_destinationaddress_value, "ss_name")}</p>
-                </div>
-            </div> */}
-
             <div className="control">
                 <Button color="secondary" onClick={handleHide}>Cancel</Button>
             </div>

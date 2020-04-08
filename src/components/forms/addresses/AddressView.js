@@ -68,7 +68,6 @@ AddressView.propTypes = {
     handleHide: PropTypes.func,
     name: PropTypes.string,
     initialValues: PropTypes.object,
-    appTypeValue: PropTypes.string,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
         PropTypes.node

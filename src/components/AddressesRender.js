@@ -10,6 +10,8 @@ import { MDBDataTable } from 'mdbreact';
 
 const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate }) => {
 
+  console.log('addresses',addresses);
+
   function getTableBodyContent() {
     return addresses.map(obj => {
 

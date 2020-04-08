@@ -6,6 +6,9 @@ import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 
 const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }) => {
+
+  console.log('customers',customers);
+
   function getTableBodyContent() {
     return customers.map(obj => {
 
