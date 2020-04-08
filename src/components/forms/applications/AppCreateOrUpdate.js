@@ -6,19 +6,7 @@ import { connect } from 'react-redux';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './AppValidate';
 import { renderField } from '../formUtils';
-
- function getApplicationTypeName(applicationType) {
-  switch (applicationType) {
-    case ADDRESS_CHANGE:
-      return "Address Change";
-    case MAIL_FORWARDING:
-      return "Mail Forwarding";
-    case PACKAGE_SUBMISSION:
-      return "Package Submission";
-    default:
-      return applicationType;
-  }
-}
+import { getApplicationTypeName } from '../../ApplicationsRender';
 
 let AppCreateOrUpdate = props => {
   const { handleSubmit, handleHide, appTypeValue, customers, addresses, products } = props;
