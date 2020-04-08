@@ -7,6 +7,7 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoadingIcon from './LoadingIcon';
+import ErrorBanner from './ErrorBanner';
 
 const OrdersContainer = (props) => {
 
@@ -19,9 +20,9 @@ const OrdersContainer = (props) => {
         return <LoadingIcon/>;
     } else if (props.orderRequestState.ordersReadFailed || props.productRequestState.productsReadFailed || props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
         return (
-            <div className="alert alert-danger" role="alert">
-                Error while loading entities!
-            </div>
+            <ErrorBanner>
+                Error while loading customers!
+            </ErrorBanner>
         );
 
     } else if ((props.orderRequestState.ordersReadSuccess || props.orderRequestState.ordersCreateSuccess || props.orderRequestState.ordersUpdateSuccess || props.orderRequestState.ordersDeleteSuccess) && props.productRequestState.productsReadSuccess && props.customerRequestState.customersReadSuccess && props.addressRequestState.addressesReadSuccess) {
@@ -43,9 +44,9 @@ const OrdersContainer = (props) => {
         );
     } else {
         return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
                 Invalid state! This message should never appear.
-            </div>
+            </ErrorBanner>
         );
     }
 }

@@ -3,22 +3,19 @@
 import * as customersActions from '../actions/customersActions';
 import CustomersRender from './CustomersRender';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoadingIcon from './LoadingIcon';
-import { Button } from 'reactstrap';
+import ErrorBanner from './ErrorBanner';
 
 const CustomersContainer = (props) => {
-
-    const [hidden, setHidden] = useState(true);
 
     useEffect(() => {
         const { actions } = props;
         actions.readCustomers();
     }, []);
 
-    // console.log("CustomersContainer props:", props);
     if (props.customerRequestState.error) {
         console.log('props.customerRequestState', props.customerRequestState);
     }
@@ -51,22 +48,18 @@ const CustomersContainer = (props) => {
         return <LoadingIcon />;
     } else if (props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
         return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
                 Error while loading customers!
-            </div>
+            </ErrorBanner>
         );
     } else if (props.customerRequestState.customersDeleteFailed) {
         return (
             <React.Fragment>
-                { hidden ? <div className="alert alert-danger" role="alert">
-                    <Button close onClick={() => setHidden(false)}/>
-                    <div onClick={(event) => event.stopPropagation()}>
-                        {props.customerRequestState.error.message}
-                        <br />
-                        Cannot delete: Record is associated with another entity record.
-                    </div>
-                </div>
-                : ''}
+                <ErrorBanner>
+                    {props.customerRequestState.error.message}
+                    <br />
+                    Cannot delete: Record is associated with another entity record.
+                </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>
         );
@@ -74,9 +67,9 @@ const CustomersContainer = (props) => {
         return renderSuccess();
     } else {
         return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
                 Invalid state! This message should never appear.
-            </div>
+            </ErrorBanner>
         );
     }
 }

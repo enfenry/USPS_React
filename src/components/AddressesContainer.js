@@ -7,6 +7,7 @@ import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoadingIcon from './LoadingIcon';
+import ErrorBanner from './ErrorBanner';
 
 const AddressesContainer = (props) => {
 
@@ -21,9 +22,9 @@ const AddressesContainer = (props) => {
         return <LoadingIcon/>;
     } else if (props.requestState.addressesReadFailed) {
         return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
                 Error while loading customers!
-            </div>
+            </ErrorBanner>
         );
     } else if (props.requestState.addressesReadSuccess || props.requestState.addressesCreateSuccess || props.requestState.addressesUpdateSuccess || props.requestState.addressesDeleteSuccess) {
         return (
@@ -44,9 +45,9 @@ const AddressesContainer = (props) => {
         );
     } else {
         return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
                 Invalid state! This message should never appear.
-            </div>
+            </ErrorBanner>
         );
     }
 }
