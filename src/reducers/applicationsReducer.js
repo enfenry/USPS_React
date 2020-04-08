@@ -18,7 +18,7 @@ export default function applicationsReducer(state = {}, action) {
         case READ_APPLICATIONS_PENDING:
             return { ...state, requestState: { applicationsReadSuccess: false, applicationsReadPending: true, applicationsReadFailed: false, error: null  }};
         case READ_APPLICATIONS_FAILURE:
-            return { ...state, requestState: { applicationsReadSuccess: false, applicationsReadPending: false, applicationsReadFailed: true, error: action.data}};
+            return { ...state, requestState: { applicationsReadSuccess: false, applicationsReadPending: false, applicationsReadFailed: true, error: action.error}};
 
         case UPDATE_APPLICATION_SUCCESSFUL: {
             const itemIndex = state.applications.findIndex((e) => (e.ss_applicationid === action.id));
@@ -27,17 +27,17 @@ export default function applicationsReducer(state = {}, action) {
             return { ...state, applications: apps, requestState: {applicationsUpdateSuccess: true,  applicationsUpdateFailed: false, error: null  }};
         }
         case UPDATE_APPLICATION_FAILURE:
-            return { ...state, applications:state.applications, requestState: {applicationsUpdateSuccess: false, applicationsUpdateFailed: true, error: action.data  }};    
+            return { ...state, applications:state.applications, requestState: {applicationsUpdateSuccess: false, applicationsUpdateFailed: true, error: action.error}};    
 
         case DELETE_APPLICATION_SUCCESSFUL:
             return { ...state, applications: state.applications.filter((e) => e.ss_applicationid !== action.data), requestState: {applicationsDeleteSuccess: true, applicationsDeleteFailed: false, error: null  }};
         case DELETE_APPLICATION_FAILURE:
-            return { ...state, applicationsDeleteSuccess: false,  requestState: { applicationsDeleteFailed: true, error: action.data  }};
+            return { ...state, applicationsDeleteSuccess: false,  requestState: { applicationsDeleteFailed: true, error: action.error }};
 
         case APP_TO_ORDER_SUCCESSFUL:
             return { ...state, requestState: { applicationsToOrderSuccess: true,  applicationsToOrderFailed: false, error: null }};
         case APP_TO_ORDER_FAILURE:
-            return { ...state, requestState: { applicationsToOrderSuccess: false, applicationsToOrderFailed: true, error: action.data  }};     
+            return { ...state, requestState: { applicationsToOrderSuccess: false, applicationsToOrderFailed: true, error: action.error }};     
 
         default:
             return state;

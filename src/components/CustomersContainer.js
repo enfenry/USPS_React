@@ -44,6 +44,7 @@ const CustomersContainer = (props) => {
                     handleCreate={(values) => {
                         props.actions.createCustomer(values)
                     }}
+                    handleRefresh={() => props.actions.readCustomers()}
                 />
             </div>
         );

@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './modals/ModalButton';
+import {Button} from 'reactstrap'
 import { MDBDataTable } from 'mdbreact';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
@@ -19,7 +20,7 @@ export function getApplicationTypeName(applicationType) {
   }
 }
 
-const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate, handleAppToOrder }) => {
+const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate, handleAppToOrder, handleRefresh}) => {
 
   function getAppBodyContent() {
     return applications.map(obj => {
@@ -99,9 +100,10 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
   return (
     <div>
       <h1>Applications</h1>
-      <ModalButton command="Create" name={`Application ${applications.length}`} entity="Application"
-        initialValues={{ ss_name: `Application ${applications.length}` }} 
-        onSubmit={(values) => handleCreate(values)}>Create New Application</ModalButton>
+        <ModalButton command="Create" name={`Application ${applications.length}`} entity="Application"
+          initialValues={{ ss_name: `Application ${applications.length}` }} 
+          onSubmit={(values) => handleCreate(values)}>Create New Application</ModalButton>
+        <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>
       <MDBDataTable  
         striped
         bordered
@@ -119,7 +121,8 @@ ApplicationsRender.propTypes = {
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
   handleDelete: PropTypes.func,
-  handleAppToOrder: PropTypes.func
+  handleAppToOrder: PropTypes.func,
+  handleRefresh: PropTypes.func
 };
 
 export default ApplicationsRender;

@@ -2,10 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'reactstrap';
 import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 
-const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }) => {
+const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate, handleRefresh }) => {
 
   function getTableBodyContent() {
     return customers.map(obj => {
@@ -71,6 +72,7 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate }
       <h1>Customers</h1>
       <ModalButton command="Create" name={`Customer ${customers.length}`} entity="Customer"
         onSubmit={(values) => handleCreate(values)} >Create New Customer</ModalButton>
+      <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>
       <MDBDataTable
         striped
         bordered
@@ -87,7 +89,8 @@ CustomersRender.propTypes = {
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
+  handleRefresh: PropTypes.func
 };
 
 export default CustomersRender;
