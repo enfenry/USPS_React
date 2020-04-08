@@ -19,12 +19,12 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
         initialValues={{ ...obj}}>View</ModalButton>
       );
       newObj["delete"] = (
-        <ModalButton command="Update" name={obj.ordernumber} entity="Order" 
+        <ModalButton command="Update" name={obj.ordernumber} entity="Application" 
         initialValues={{ ...obj }}  
         onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
-        <ModalButton command="Delete" name={obj.ordernumber} entity="Order" 
+        <ModalButton command="Delete" name={obj.ordernumber} entity="Application" 
         initialValues={{ ...obj }}  
         onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
@@ -41,13 +41,13 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
         sort: 'asc'
       },
       {
-        label: 'Parent Application',
-        field: '_ss_application_value@OData.Community.Display.V1.FormattedValue',
+        label: 'Destination',
+        field: '_ss_destinationaddress_value',
         sort: 'asc'
       },
       {
-        label: 'Customer',
-        field: '_customerid_value@OData.Community.Display.V1.FormattedValue',
+        label: 'Parent Application',
+        field: '_ss_application_value',
         sort: 'asc'
       },
       {

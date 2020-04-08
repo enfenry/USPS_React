@@ -11,7 +11,6 @@ const validate = (values) => {
     }
     checkRequiredField('emailaddress1',values,errors);
 
-
     return errors;
 };
 
