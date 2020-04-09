@@ -37,7 +37,7 @@ export const updateOrder = (values, id) => {
 
     let order = {}
 
-    if (values.ss_customaddressid) {order.ss_customaddressid = values.ss_customaddressid}
+    if (values._ss_destinationaddress_value) {order["ss_destinationAddress@odata.bind"] = `/ss_customaddresses(${values._ss_destinationaddress_value})`}
 
     let uri = "https://sstack.crm.dynamics.com/api/data/v9.1/salesorders(" + id + ")";
     let config = {
