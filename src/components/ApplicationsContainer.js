@@ -86,9 +86,10 @@ const ApplicationsContainer = (props) => {
     } else if ((applicationsReadSuccess || applicationsUpdateSuccess || applicationsCreateSuccess || applicationsDeleteSuccess || applicationsToOrderSuccess) && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
         return renderSuccess();
     } else {
+        console.log(requestState);
         return (
             <ErrorBanner>
-                Invalid state! This message should never appear.
+               Invalid state! This message should never appear.
             </ErrorBanner>
         );
     }
