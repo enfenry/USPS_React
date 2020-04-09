@@ -3,45 +3,61 @@
 import * as ordersActions from '../actions/ordersActions';
 import OrdersRender from './OrdersRender';
 import PropTypes from 'prop-types';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const OrdersContainer = (props) => {
+    const { actions, orders,
+        // applications, products, customers, applicationRequestState,
+        orderRequestState, productRequestState, customerRequestState, addressRequestState } = props;
 
     useEffect(() => {
-        const { actions } = props;
         actions.readOrders();
-     }, [] );
+    }, []);
 
-    if (props.orderRequestState.ordersReadPending || props.productRequestState.productsReadPending || props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
-        return <LoadingIcon/>;
-    } else if (props.orderRequestState.ordersReadFailed || props.productRequestState.productsReadFailed || props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
-        return (
-            <ErrorBanner>
-                Error while loading customers!
-            </ErrorBanner>
-        );
-
-    } else if ((props.orderRequestState.ordersReadSuccess || props.orderRequestState.ordersCreateSuccess || props.orderRequestState.ordersUpdateSuccess || props.orderRequestState.ordersDeleteSuccess) && props.productRequestState.productsReadSuccess && props.customerRequestState.customersReadSuccess && props.addressRequestState.addressesReadSuccess) {
+    const renderSuccess = () => {
         return (
             <div className="reactive-margin">
                 <OrdersRender
-                    orders={props.orders}
+                    orders={orders}
                     handleUpdate={(values, order) => {
-                        props.actions.updateOrder(values, order.salesorderid)
+                        actions.updateOrder(values, order.salesorderid)
                     }}
                     handleDelete={order => {
-                        props.actions.deleteOrder(order.salesorderid)
+                        actions.deleteOrder(order.salesorderid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createOrder(values)
+                        actions.createOrder(values)
                     }}
                 />
             </div>
         );
+    }
+
+    if (orderRequestState.ordersReadPending || productRequestState.productsReadPending || customerRequestState.customersReadPending || addressRequestState.addressesReadPending) {
+        return <LoadingIcon />;
+    } else if (orderRequestState.ordersReadFailed || productRequestState.productsReadFailed || customerRequestState.customersReadFailed || addressRequestState.addressesReadFailed) {
+        return (
+            <ErrorBanner>
+                Error while loading orders!
+            </ErrorBanner>
+        );
+    } else if (orderRequestState.ordersUpdateFailed || orderRequestState.ordersCreateFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {orderRequestState.error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if ((orderRequestState.ordersReadSuccess || orderRequestState.ordersCreateSuccess || orderRequestState.ordersUpdateSuccess || orderRequestState.ordersDeleteSuccess)
+        && productRequestState.productsReadSuccess && customerRequestState.customersReadSuccess && addressRequestState.addressesReadSuccess) {
+        return renderSuccess();
     } else {
         return (
             <ErrorBanner>
@@ -50,7 +66,6 @@ const OrdersContainer = (props) => {
         );
     }
 }
-
 
 OrdersContainer.propTypes = {
     actions: PropTypes.object

@@ -15,8 +15,6 @@ import { bindActionCreators } from 'redux';
 
 const Home = (props) => {
 
-    console.log("home", props);
-
     if (props.requestState.applicationsReadPending) {
 
 

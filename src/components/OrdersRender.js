@@ -7,8 +7,6 @@ import { MDBDataTable } from 'mdbreact';
 
 const OrdersRender = ({ orders, handleUpdate, handleDelete}) => {
 
-  console.log("orders", orders);
-
   function getAppBodyContent() {
     return orders.map(obj => {
       // Deep Clone object to avoid adding to it while mapping over it during map

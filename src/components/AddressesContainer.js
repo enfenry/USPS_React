@@ -10,39 +10,51 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const AddressesContainer = (props) => {
+    const { actions, addresses, addressRequestState } = props;
 
-    useEffect(() => {
-        const { actions } = props;
-        actions.readAddresses();
-     }, [] );
-
-    console.log("addresses:", props);
-
-    if (props.requestState.addressesReadPending) {
-        return <LoadingIcon/>;
-    } else if (props.requestState.addressesReadFailed) {
-        return (
-            <ErrorBanner>
-                Error while loading customers!
-            </ErrorBanner>
-        );
-    } else if (props.requestState.addressesReadSuccess || props.requestState.addressesCreateSuccess || props.requestState.addressesUpdateSuccess || props.requestState.addressesDeleteSuccess) {
+    const renderSuccess = () => {
         return (
             <div className="reactive-margin">
                 <AddressesRender
-                    addresses={props.addresses}
+                    addresses={addresses}
                     handleUpdate={(values, address) => {
-                        props.actions.updateAddress(values, address.ss_customaddressid)
+                        actions.updateAddress(values, address.ss_customaddressid)
                     }}
                     handleDelete={address => {
-                        props.actions.deleteAddress(address.ss_customaddressid)
+                        actions.deleteAddress(address.ss_customaddressid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createAddress(values)
+                        actions.createAddress(values)
                     }}
                 />
             </div>
         );
+    }
+
+    useEffect(() => {
+        actions.readAddresses();
+     }, [] );
+
+    if (addressRequestState.addressesReadPending) {
+        return <LoadingIcon/>;
+    } else if (addressRequestState.addressesReadFailed) {
+        return (
+            <ErrorBanner>
+                Error while loading addresses!
+            </ErrorBanner>
+        );
+    } else if (addressRequestState.addressesUpdateFailed || addressRequestState.addressesCreateFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {addressRequestState.error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );    
+    } else if (addressRequestState.addressesReadSuccess || addressRequestState.addressesCreateSuccess || addressRequestState.addressesUpdateSuccess || addressRequestState.addressesDeleteSuccess) {
+        return renderSuccess();
     } else {
         return (
             <ErrorBanner>
@@ -59,7 +71,7 @@ AddressesContainer.propTypes = {
 function mapStateToProps(state) {
     return {
         addresses: state.addressesReducer.addresses,
-        requestState: state.addressesReducer.requestState
+        addressRequestState: state.addressesReducer.requestState
     }
 }
 

@@ -10,60 +10,61 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const CustomersContainer = (props) => {
+    const { actions, customers, customerRequestState, addressRequestState } = props;
 
     useEffect(() => {
-        const { actions } = props;
         actions.readCustomers();
     }, []);
-
-    if (props.customerRequestState.error) {
-        console.log('props.customerRequestState', props.customerRequestState);
-    }
 
     const renderSuccess = () => {
         return (
             <div className="reactive-margin">
                 <CustomersRender
-                    customers={props.customers}
+                    customers={customers}
                     handleUpdate={(values, customer) => {
-                        props.actions.updateCustomer(values, customer.contactid)
+                        actions.updateCustomer(values, customer.contactid)
                     }}
                     handleDelete={customer => {
-                        props.actions.deleteCustomer(customer.contactid)
+                        actions.deleteCustomer(customer.contactid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createCustomer(values)
+                        actions.createCustomer(values)
                     }}
                 />
             </div>
         );
     }
 
-    renderSuccess.propTypes = {
-        customers: PropTypes.array,
-        actions: PropTypes.obj
-    }
-
-    if (props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
+    if (customerRequestState.customersReadPending || addressRequestState.addressesReadPending) {
         return <LoadingIcon />;
-    } else if (props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
+    } else if (customerRequestState.customersReadFailed || addressRequestState.addressesReadFailed) {
         return (
             <ErrorBanner>
                 Error while loading customers!
             </ErrorBanner>
         );
-    } else if (props.customerRequestState.customersDeleteFailed) {
+    } else if (customerRequestState.customersDeleteFailed) {
         return (
             <React.Fragment>
                 <ErrorBanner>
-                    {props.customerRequestState.error.message}
+                    {customerRequestState.error.message}
                     <br />
                     Cannot delete: Record is associated with another entity record.
                 </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>
         );
-    } else if ((props.customerRequestState.customersReadSuccess || props.customerRequestState.customersCreateSuccess || props.customerRequestState.customersUpdateSuccess || props.customerRequestState.customersDeleteSuccess) && props.addressRequestState.addressesReadSuccess) {
+    } else if (customerRequestState.customersUpdateFailed || customerRequestState.customersCreateFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {customerRequestState.error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if ((customerRequestState.customersReadSuccess || customerRequestState.customersCreateSuccess || customerRequestState.customersUpdateSuccess || customerRequestState.customersDeleteSuccess) && addressRequestState.addressesReadSuccess) {
         return renderSuccess();
     } else {
         return (
