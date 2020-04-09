@@ -34,7 +34,7 @@ const AddressesContainer = (props) => {
                     handleCreate={(values) => {
                         actions.createAddress(values)
                     }}
-                    handleRefresh={() => props.actions.readAddresses()}
+                    handleRefresh={() => actions.readAddresses()}
                 />
             </div>
         );

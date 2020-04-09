@@ -50,6 +50,11 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete, handleRefresh}) => {
         sort: 'asc'
       },
       {
+        label: 'Parent Application',
+        field: '_ss_application_value',
+        sort: 'asc'
+      },
+      {
         label: 'Created On',
         field: 'createdon',
         sort: 'asc'

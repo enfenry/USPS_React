@@ -48,7 +48,7 @@ const ApplicationsContainer = (props) => {
                     handleAppToOrder={(application) => {
                         actions.applicationToOrder(application.ss_applicationid)
                     }}
-                    handleRefresh={() => props.actions.readApplications()}
+                    handleRefresh={() => actions.readApplications()}
                 />
             </div>
         );

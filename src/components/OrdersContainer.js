@@ -48,7 +48,7 @@ const OrdersContainer = (props) => {
                     handleCreate={(values) => {
                         actions.createOrder(values)
                     }}
-                    handleRefresh={() => props.actions.readOrders()}
+                    handleRefresh={() => actions.readOrders()}
                 />
             </div>
         );
