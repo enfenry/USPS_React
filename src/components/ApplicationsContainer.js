@@ -27,8 +27,6 @@ const ApplicationsContainer = (props) => {
         productsReadPending, productsReadFailed, productsReadSuccess,
     } = requestState;
 
-    console.log(actions);
-
     useEffect(() => {
         actions.readApplications();
     }, []);
