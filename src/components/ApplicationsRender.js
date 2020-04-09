@@ -3,7 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ModalButton from './modals/ModalButton';
-import {Button} from 'reactstrap'
+import { Button } from 'reactstrap'
 import { MDBDataTable } from 'mdbreact';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
@@ -20,7 +20,7 @@ export function getApplicationTypeName(applicationType) {
   }
 }
 
-const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate, handleAppToOrder, handleRefresh}) => {
+const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCreate, handleAppToOrder, handleRefresh }) => {
 
   function getAppBodyContent() {
     return applications.map(obj => {
@@ -34,18 +34,18 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
       );
       newObj["update"] = (
         <ModalButton command="Update" name={obj.ss_name} entity="Application"
-          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} 
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }}
           onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["delete"] = (
         <ModalButton command="Delete" name={obj.ss_name} entity="Application"
-          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} 
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }}
           onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
 
       newObj["toOrder"] = (
         <ModalButton command="Place Order" name={obj.ss_name} entity="Application"
-          initialValues={{ ...obj, appTypeLabel: appTypeLabel }} 
+          initialValues={{ ...obj, appTypeLabel: appTypeLabel }}
           onSubmit={() => handleAppToOrder(obj)}>Place Order</ModalButton>
       );
 
@@ -100,11 +100,11 @@ const ApplicationsRender = ({ applications, handleUpdate, handleDelete, handleCr
   return (
     <div>
       <h1>Applications</h1>
-        <ModalButton command="Create" name={`Application ${applications.length}`} entity="Application"
-          initialValues={{ ss_name: `Application ${applications.length}` }} 
-          onSubmit={(values) => handleCreate(values)}>Create New Application</ModalButton>
-        <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>
-      <MDBDataTable  
+      <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>{' '}
+      <ModalButton command="Create" name={`Application ${applications.length}`} entity="Application"
+        initialValues={{ ss_name: `Application ${applications.length}` }}
+        onSubmit={(values) => handleCreate(values)}>Create New Application</ModalButton>
+      <MDBDataTable
         striped
         bordered
         small
