@@ -10,7 +10,18 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const CustomersContainer = (props) => {
-    const { actions, customers, customerRequestState, addressRequestState } = props;
+    const { actions, customers, requestState } = props;
+    const {
+        error,
+
+        customersCreateFailed, customersCreateSuccess,
+        customersReadPending, customersReadFailed, customersReadSuccess,
+        customersUpdateFailed, customersUpdateSuccess,
+        customersDeleteFailed, customersDeleteSuccess,
+
+        // Associated Entities required for displaying information in tables
+        addressesReadPending, addressesReadFailed, addressesReadSuccess,
+    } = requestState;
 
     useEffect(() => {
         actions.readCustomers();
@@ -35,36 +46,36 @@ const CustomersContainer = (props) => {
         );
     }
 
-    if (customerRequestState.customersReadPending || addressRequestState.addressesReadPending) {
+    if (customersReadPending || addressesReadPending) {
         return <LoadingIcon />;
-    } else if (customerRequestState.customersReadFailed || addressRequestState.addressesReadFailed) {
+    } else if (customersReadFailed || addressesReadFailed) {
         return (
             <ErrorBanner>
                 Error while loading customers!
             </ErrorBanner>
         );
-    } else if (customerRequestState.customersDeleteFailed) {
+    } else if (customersDeleteFailed) {
         return (
             <React.Fragment>
                 <ErrorBanner>
-                    {customerRequestState.error.message}
+                    {error.message}
                     <br />
                     Cannot delete: Record is associated with another entity record.
                 </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>
         );
-    } else if (customerRequestState.customersUpdateFailed || customerRequestState.customersCreateFailed) {
+    } else if (customersUpdateFailed || customersCreateFailed) {
         return (
             <React.Fragment>
                 <ErrorBanner>
-                    {customerRequestState.error.message}
+                    {error.message}
                     <br />
                 </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>
         );
-    } else if ((customerRequestState.customersReadSuccess || customerRequestState.customersCreateSuccess || customerRequestState.customersUpdateSuccess || customerRequestState.customersDeleteSuccess) && addressRequestState.addressesReadSuccess) {
+    } else if ((customersReadSuccess || customersCreateSuccess || customersUpdateSuccess || customersDeleteSuccess) && addressesReadSuccess) {
         return renderSuccess();
     } else {
         return (
@@ -80,11 +91,13 @@ CustomersContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
+    const { customersReducer, addressesReducer } = state;
     return {
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
-        customerRequestState: state.customersReducer.requestState,
-        addressRequestState: state.addressesReducer.requestState
+        requestState: Object.assign({},
+            addressesReducer.requestState,
+            customersReducer.requestState)
     }
 }
 

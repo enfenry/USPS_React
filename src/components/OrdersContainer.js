@@ -11,8 +11,24 @@ import ErrorBanner from './ErrorBanner';
 
 const OrdersContainer = (props) => {
     const { actions, orders,
-        // applications, products, customers, applicationRequestState,
-        orderRequestState, productRequestState, customerRequestState, addressRequestState } = props;
+        // applications, products, customers,
+        requestState } = props;
+    const {
+        error,
+
+        ordersCreateFailed, ordersCreateSuccess,
+        ordersReadPending, ordersReadFailed, ordersReadSuccess,
+        ordersUpdateFailed, ordersUpdateSuccess,
+        ordersDeleteFailed, ordersDeleteSuccess,
+
+        // Associated Entities required for displaying information in tables
+        applicationsReadPending, applicationsReadFailed, applicationsReadSuccess,
+        customersReadPending, customersReadFailed, customersReadSuccess,
+        addressesReadPending, addressesReadFailed, addressesReadSuccess,
+        productsReadPending, productsReadFailed, productsReadSuccess,
+
+
+    } = requestState;
 
     useEffect(() => {
         actions.readOrders();
@@ -37,26 +53,26 @@ const OrdersContainer = (props) => {
         );
     }
 
-    if (orderRequestState.ordersReadPending || productRequestState.productsReadPending || customerRequestState.customersReadPending || addressRequestState.addressesReadPending) {
+    if (ordersReadPending || productsReadPending || customersReadPending || addressesReadPending) {
         return <LoadingIcon />;
-    } else if (orderRequestState.ordersReadFailed || productRequestState.productsReadFailed || customerRequestState.customersReadFailed || addressRequestState.addressesReadFailed) {
+    } else if (ordersReadFailed || productsReadFailed || customersReadFailed || addressesReadFailed) {
         return (
             <ErrorBanner>
                 Error while loading orders!
             </ErrorBanner>
         );
-    } else if (orderRequestState.ordersUpdateFailed || orderRequestState.ordersCreateFailed) {
+    } else if (ordersUpdateFailed || ordersCreateFailed) {
         return (
             <React.Fragment>
                 <ErrorBanner>
-                    {orderRequestState.error.message}
+                    {error.message}
                     <br />
                 </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>
         );
-    } else if ((orderRequestState.ordersReadSuccess || orderRequestState.ordersCreateSuccess || orderRequestState.ordersUpdateSuccess || orderRequestState.ordersDeleteSuccess)
-        && productRequestState.productsReadSuccess && customerRequestState.customersReadSuccess && addressRequestState.addressesReadSuccess) {
+    } else if ((ordersReadSuccess || ordersCreateSuccess || ordersUpdateSuccess || ordersDeleteSuccess)
+        && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
         return renderSuccess();
     } else {
         return (
@@ -72,17 +88,19 @@ OrdersContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
+    const { applicationsReducer, productsReducer, ordersReducer, customersReducer, addressesReducer } = state;
     return {
-        applications: state.applicationsReducer.applications,
-        products: state.productsReducer.products,
-        orders: state.ordersReducer.orders,
-        customers: state.customersReducer.customers,
-        addresses: state.addressesReducer.addresses,
-
-        orderRequestState: state.ordersReducer.requestState,
-        productRequestState: state.productsReducer.requestState,
-        addressRequestState: state.addressesReducer.requestState,
-        customerRequestState: state.customersReducer.requestState,
+        applications: applicationsReducer.applications,
+        products: productsReducer.products,
+        orders: ordersReducer.orders,
+        customers: customersReducer.customers,
+        addresses: addressesReducer.addresses,
+        requestState: Object.assign({},
+            applicationsReducer.requestState,
+            productsReducer.requestState,
+            addressesReducer.requestState,
+            customersReducer.requestState,
+            ordersReducer.requestState)
     }
 }
 

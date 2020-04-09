@@ -10,7 +10,22 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const ApplicationsContainer = (props) => {
-    const { actions, applications, applicationRequestState, productRequestState, customerRequestState, addressRequestState } = props;
+    const { actions, applications, requestState } = props;
+    const {
+        error,
+
+        applicationsCreateFailed, applicationsCreateSuccess,
+        applicationsReadPending, applicationsReadFailed, applicationsReadSuccess,
+        applicationsUpdateFailed, applicationsUpdateSuccess,
+        applicationsDeleteFailed, applicationsDeleteSuccess,
+
+        applicationsToOrderFailed, applicationsToOrderSuccess,
+
+        // Associated Entities required for displaying information in tables
+        customersReadPending, customersReadFailed, customersReadSuccess,
+        addressesReadPending, addressesReadFailed, addressesReadSuccess,
+        productsReadPending, productsReadFailed, productsReadSuccess,
+    } = requestState;
 
     useEffect(() => {
         actions.readApplications();
@@ -38,31 +53,38 @@ const ApplicationsContainer = (props) => {
         );
     }
 
-    if (applicationRequestState.applicationsReadPending || productRequestState.productsReadPending || customerRequestState.customersReadPending || addressRequestState.addressesReadPending) {
+    if (applicationsReadPending || productsReadPending || customersReadPending || addressesReadPending) {
         return <LoadingIcon />;
-    }
-    else if (applicationRequestState.applicationsReadFailed || productRequestState.productsReadFailed || customerRequestState.customersReadFailed || addressRequestState.addressesReadFailed) {
+    } else if (applicationsReadFailed || productsReadFailed || customersReadFailed || addressesReadFailed) {
         return (
             <ErrorBanner>
                 Error while loading applications!
             </ErrorBanner>
         );
-    }
-    else if (applicationRequestState.applicationsUpdateFailed || applicationRequestState.applicationsCreateFailed) {
+    } else if (applicationsUpdateFailed || applicationsCreateFailed || applicationsToOrderFailed) {
         return (
             <React.Fragment>
                 <ErrorBanner>
-                    {addressRequestState.error.message}
+                    {error.message}
                     <br />
                 </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>
         );
-    }
-    else if ((applicationRequestState.applicationsReadSuccess || applicationRequestState.applicationsUpdateSuccess || applicationRequestState.applicationsCreateSuccess || applicationRequestState.applicationsToOrderSuccess) && productRequestState.productsReadSuccess && customerRequestState.customersReadSuccess && addressRequestState.addressesReadSuccess) {
+    } else if (applicationsDeleteFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                    Cannot delete: Record is associated with another entity record.
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if ((applicationsReadSuccess || applicationsUpdateSuccess || applicationsCreateSuccess || applicationsDeleteSuccess || applicationsToOrderSuccess) && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
         return renderSuccess();
-    }
-    else {
+    } else {
         return (
             <ErrorBanner>
                 Invalid state! This message should never appear.
@@ -71,23 +93,23 @@ const ApplicationsContainer = (props) => {
     }
 }
 
-
 ApplicationsContainer.propTypes = {
     actions: PropTypes.object
 };
 
 function mapStateToProps(state) {
+    const { applicationsReducer, productsReducer, ordersReducer, customersReducer, addressesReducer } = state;
     return {
-        applications: state.applicationsReducer.applications,
-        products: state.productsReducer.products,
-        orders: state.ordersReducer.orders,
-        customers: state.customersReducer.customers,
-        addresses: state.addressesReducer.addresses,
-
-        applicationRequestState: state.applicationsReducer.requestState,
-        productRequestState: state.productsReducer.requestState,
-        addressRequestState: state.addressesReducer.requestState,
-        customerRequestState: state.customersReducer.requestState,
+        applications: applicationsReducer.applications,
+        products: productsReducer.products,
+        orders: ordersReducer.orders,
+        customers: customersReducer.customers,
+        addresses: addressesReducer.addresses,
+        requestState: Object.assign({},
+            applicationsReducer.requestState,
+            productsReducer.requestState,
+            addressesReducer.requestState,
+            customersReducer.requestState)
     }
 }
 
