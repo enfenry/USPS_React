@@ -22,6 +22,7 @@ const OrdersContainer = (props) => {
         ordersDeleteFailed, ordersDeleteSuccess,
 
         // Associated Entities required for displaying information in tables
+        orderLinesReadPending, orderLinesReadFailed, orderLinesReadSuccess,
         applicationsReadPending, applicationsReadFailed, applicationsReadSuccess,
         customersReadPending, customersReadFailed, customersReadSuccess,
         addressesReadPending, addressesReadFailed, addressesReadSuccess,
@@ -54,9 +55,11 @@ const OrdersContainer = (props) => {
         );
     }
 
-    if (ordersReadPending || productsReadPending || customersReadPending || addressesReadPending) {
+    if (ordersReadPending || orderLinesReadPending || applicationsReadPending ||
+        productsReadPending || customersReadPending || addressesReadPending) {
         return <LoadingIcon />;
-    } else if (ordersReadFailed || productsReadFailed || customersReadFailed || addressesReadFailed) {
+    } else if (ordersReadFailed || orderLinesReadFailed || applicationsReadFailed ||
+        productsReadFailed || customersReadFailed || addressesReadFailed) {
         return (
             <ErrorBanner>
                 Error while loading orders!
@@ -72,8 +75,19 @@ const OrdersContainer = (props) => {
                 {renderSuccess()}
             </React.Fragment>
         );
+    } else if (ordersDeleteFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                    Cannot delete: Record is associated with another entity record.
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
     } else if ((ordersReadSuccess || ordersCreateSuccess || ordersUpdateSuccess || ordersDeleteSuccess)
-        && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
+        && orderLinesReadSuccess && applicationsReadSuccess && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
         return renderSuccess();
     } else {
         return (
