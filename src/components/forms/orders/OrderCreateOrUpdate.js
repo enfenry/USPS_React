@@ -31,7 +31,7 @@ let OrderCreateOrUpdate = props => {
       </div>
       <div>
         <span>Total Amount: </span>
-        <p>{initialValues['totalamount_base@OData.Community.Display.V1.FormattedValue']}</p>
+        <p>{`$${initialValues['totalamount']}`}</p>
       </div>
 
       <FormGroup className="field">
