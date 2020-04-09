@@ -3,9 +3,9 @@ import { adalApiFetch } from '../adalConfig.js';
 
 import {
     READ_ADDRESSES_SUCCESSFUL, READ_ADDRESSES_FAILURE, READ_ADDRESSES_PENDING,
-    CREATE_ADDRESSES_SUCCESSFUL, CREATE_ADDRESSES_FAILURE,
-    UPDATE_ADDRESSES_SUCCESSFUL, UPDATE_ADDRESSES_FAILURE,
-    DELETE_ADDRESSES_SUCCESSFUL, DELETE_ADDRESSES_FAILURE
+    CREATE_ADDRESS_SUCCESSFUL, CREATE_ADDRESS_FAILURE,
+    UPDATE_ADDRESS_SUCCESSFUL, UPDATE_ADDRESS_FAILURE,
+    DELETE_ADDRESS_SUCCESSFUL, DELETE_ADDRESS_FAILURE
 
 } from '../constants/actionTypes';
 
@@ -73,7 +73,7 @@ export const createAddress = (values) => {
 }
 
 export const updateAddress = (values, id) => {
-
+    
     let address = {}
 
     if (values.ss_name) { address.ss_name = values.ss_name }
@@ -158,20 +158,20 @@ const _readAddressesStarted = () => {
 
 const _createAddressSuccess = (res) => {
     return {
-        type: CREATE_ADDRESSES_SUCCESSFUL,
+        type: CREATE_ADDRESS_SUCCESSFUL,
         data: res.data
     };
 }
 
 const _createAddressFailed = (error) => {
     return {
-        type: CREATE_ADDRESSES_FAILURE,
+        type: CREATE_ADDRESS_FAILURE,
         error
     };
 }
 const _updateAddressSuccess = (res, id) => {
     return {
-        type: UPDATE_ADDRESSES_SUCCESSFUL,
+        type: UPDATE_ADDRESS_SUCCESSFUL,
         data: res.data,
         id: id
     };
@@ -179,21 +179,21 @@ const _updateAddressSuccess = (res, id) => {
 
 const _updateAddressFailed = (error) => {
     return {
-        type: UPDATE_ADDRESSES_FAILURE,
+        type: UPDATE_ADDRESS_FAILURE,
         error
     };
 }
 
 const _deleteAddressSuccess = (id) => {
     return {
-        type: DELETE_ADDRESSES_SUCCESSFUL,
+        type: DELETE_ADDRESS_SUCCESSFUL,
         data: id
     };
 }
 
 const _deleteAddressFailed = (error) => {
     return {
-        type: DELETE_ADDRESSES_FAILURE,
+        type: DELETE_ADDRESS_FAILURE,
         error
     };
 }
