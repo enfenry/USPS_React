@@ -18,6 +18,7 @@ import * as customersActions from './actions/customersActions';
 import * as ordersActions from './actions/ordersActions';
 import * as productsActions from './actions/productsActions';
 import * as addressesActions from './actions/addressesActions';
+import * as orderLinesActions from './actions/orderLinesActions';
 
 const store = configureStore();
 
@@ -28,6 +29,7 @@ runWithAdal(authContext, () => {
   store.dispatch(ordersActions.readOrders());
   store.dispatch(productsActions.readProducts());
   store.dispatch(addressesActions.readAddresses());
+  store.dispatch(orderLinesActions.readOrderLines());
 
   ReactDom.render((
     <Provider store={store}>
