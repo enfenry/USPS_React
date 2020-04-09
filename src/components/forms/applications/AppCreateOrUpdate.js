@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../../../constants/applicationTypes';
 import validate from './AppValidate';
-import { renderField } from '../formUtils';
+import { renderField, renderOptions } from '../formUtils';
 import { getApplicationTypeName } from '../../ApplicationsRender';
 
 let AppCreateOrUpdate = props => {
@@ -13,14 +13,6 @@ let AppCreateOrUpdate = props => {
 
   const isPackageSubmission = parseInt(appTypeValue) === PACKAGE_SUBMISSION;
   const shippingSpeeds = products.filter(product => product.hierarchypath === "USPS\\Shipping Speed");
-
-  const renderOptions = (array, value, display) => {
-    return array.map(el => {
-      return (
-        <option key={el[value]} value={el[value]}>{el[display]}</option>
-      )
-    })
-  }
 
   const filterProducts = () => {
     return products.filter(product => product.hierarchypath === `USPS\\${(getApplicationTypeName(parseInt(appTypeValue)))}`);

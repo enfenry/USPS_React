@@ -37,9 +37,9 @@ export default function applicationsReducer(state = {}, action) {
             return { ...state, applicationsDeleteSuccess: false,  requestState: { applicationsDeleteFailed: true, error: action.error }};
 
         case APP_TO_ORDER_SUCCESSFUL:
-            return { ...state, requestState: { applicationsToOrderSuccess: true, applicationsToOrderFailed: false, error: null } };
+            return { ...state, requestState: { ...state.requestState, applicationsToOrderSuccess: true, applicationsToOrderFailed: false, error: null } };
         case APP_TO_ORDER_FAILURE:
-            return { ...state, requestState: { applicationsToOrderSuccess: false, applicationsToOrderFailed: true, error: action.error }};     
+            return { ...state, requestState: { ...state.requestState, applicationsToOrderSuccess: false, applicationsToOrderFailed: true, error: action.error }};     
 
         default:
             return state;

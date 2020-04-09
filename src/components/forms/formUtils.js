@@ -55,4 +55,12 @@ const renderField = (props) => {
     return filtered.length ? filtered[0][display] : 'None';
   }
 
-export {renderField, checkRequiredField, displayById};
+  const renderOptions = (array, value, display) => {
+    return array.map(el => {
+      return (
+        <option key={el[value]} value={el[value]}>{el[display]}</option>
+      )
+    })
+  }
+
+export {renderField, checkRequiredField, displayById, renderOptions};

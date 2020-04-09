@@ -5,25 +5,30 @@ import PropTypes from 'prop-types';
 import {Button} from 'reactstrap';
 import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
+import { displayById } from './forms/formUtils';
 
-const OrdersRender = ({ orders, applications, customers, handleUpdate, handleDelete, handleRefresh}) => {
+const OrdersRender = ({ orders, applications, customers, addresses, handleUpdate, handleDelete, handleRefresh}) => {
 
   function getAppBodyContent() {
     return orders.map(obj => {
       // Deep Clone object to avoid adding to it while mapping over it during map
       let newObj = JSON.parse(JSON.stringify(obj))
 
+      newObj["displayApplication"] = displayById(applications, "ss_applicationid", obj._ss_application_value, "ss_name");
+      newObj["displayCustomer"] = displayById(customers, "contactid", obj._customerid_value, "fullname");
+      newObj["displayDestination"] = displayById(addresses, "ss_customaddressid", obj._ss_destinationaddress_value, "ss_name");
+
       newObj["view"] = (
         <ModalButton command="View" name={obj.ordernumber} entity="Order" 
         initialValues={{ ...obj}}>View</ModalButton>
       );
       newObj["delete"] = (
-        <ModalButton command="Update" name={obj.ordernumber} entity="Application" 
+        <ModalButton command="Update" name={obj.ordernumber} entity="Order" 
         initialValues={{ ...obj }}  
         onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
-        <ModalButton command="Delete" name={obj.ordernumber} entity="Application" 
+        <ModalButton command="Delete" name={obj.ordernumber} entity="Order" 
         initialValues={{ ...obj }}  
         onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
@@ -41,17 +46,22 @@ const OrdersRender = ({ orders, applications, customers, handleUpdate, handleDel
       },
       {
         label: 'Destination',
-        field: '_ss_destinationaddress_value',
+        field: 'displayDestination',
         sort: 'asc'
       },
       {
         label: 'Customer',
-        field: '_ss_application_value',
+        field: 'displayCustomer',
+        sort: 'asc'
+      },
+      {
+        label: 'Total Amount',
+        field: 'totalamount',
         sort: 'asc'
       },
       {
         label: 'Parent Application',
-        field: '_ss_application_value',
+        field: 'displayApplication',
         sort: 'asc'
       },
       {
@@ -99,6 +109,7 @@ OrdersRender.propTypes = {
   orders: PropTypes.array,
   applications: PropTypes.array,
   customers: PropTypes.array,
+  addresses: PropTypes.array,
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
