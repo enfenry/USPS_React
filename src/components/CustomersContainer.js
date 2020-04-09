@@ -3,53 +3,87 @@
 import * as customersActions from '../actions/customersActions';
 import CustomersRender from './CustomersRender';
 import PropTypes from 'prop-types';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
+import ErrorBanner from './ErrorBanner';
 
 const CustomersContainer = (props) => {
+    const { actions, customers, requestState } = props;
+    const {
+        error,
+
+        customersCreateFailed, customersCreateSuccess,
+        customersReadPending, customersReadFailed, customersReadSuccess,
+        customersUpdateFailed, customersUpdateSuccess,
+        customersDeleteFailed, customersDeleteSuccess,
+
+        // Associated Entities required for displaying information in tables
+        addressesReadPending, addressesReadFailed, addressesReadSuccess,
+    } = requestState;
 
     useEffect(() => {
-        const { actions } = props;
         actions.readCustomers();
-     }, []);
+    }, []);
 
-     console.log("customers:", props);
-
-    if (props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
-        return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
-    } else if (props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Error while loading customers!
-            </div>
-        );
-    } else if ((props.customerRequestState.customersReadSuccess || props.customerRequestState.customersCreateSuccess || props.customerRequestState.customersUpdateSuccess || props.customerRequestState.customersDeleteSuccess) && props.addressRequestState.addressesReadSuccess) {
+    const renderSuccess = () => {
         return (
             <div className="reactive-margin">
                 <CustomersRender
-                    customers={props.customers}
+                    customers={customers}
                     handleUpdate={(values, customer) => {
-                        props.actions.updateCustomer(values, customer.contactid)
+                        actions.updateCustomer(values, customer.contactid)
                     }}
                     handleDelete={customer => {
-                        props.actions.deleteCustomer(customer.contactid)
+                        actions.deleteCustomer(customer.contactid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createCustomer(values)
+                        actions.createCustomer(values)
                     }}
-                    handleRefresh={() => props.actions.readCustomers()}
+                    handleRefresh={() => actions.readCustomers()}
                 />
             </div>
         );
+    }
+
+    if (customersReadPending || addressesReadPending) {
+        return <LoadingIcon />;
+    } else if (customersReadFailed || addressesReadFailed) {
+        return (
+            <ErrorBanner>
+                Error while loading customers!
+            </ErrorBanner>
+        );
+    } else if (customersDeleteFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                    Cannot delete: Record is associated with another entity record.
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if (customersUpdateFailed || customersCreateFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if ((customersReadSuccess || customersCreateSuccess || customersUpdateSuccess || customersDeleteSuccess) && addressesReadSuccess) {
+        return renderSuccess();
     } else {
-        return null;
+        return (
+            <ErrorBanner>
+                Invalid state! This message should never appear.
+            </ErrorBanner>
+        );
     }
 }
 
@@ -58,11 +92,13 @@ CustomersContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
+    const { customersReducer, addressesReducer } = state;
     return {
         customers: state.customersReducer.customers,
         addresses: state.addressesReducer.addresses,
-        customerRequestState: state.customersReducer.requestState,
-        addressRequestState: state.addressesReducer.requestState
+        requestState: Object.assign({},
+            addressesReducer.requestState,
+            customersReducer.requestState)
     }
 }
 

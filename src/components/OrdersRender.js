@@ -8,8 +8,6 @@ import { MDBDataTable } from 'mdbreact';
 
 const OrdersRender = ({ orders, handleUpdate, handleDelete, handleRefresh}) => {
 
-  console.log("orders", orders);
-
   function getAppBodyContent() {
     return orders.map(obj => {
       // Deep Clone object to avoid adding to it while mapping over it during map
@@ -44,6 +42,11 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete, handleRefresh}) => {
       {
         label: 'Destination',
         field: '_ss_destinationaddress_value',
+        sort: 'asc'
+      },
+      {
+        label: 'Parent Application',
+        field: '_ss_application_value',
         sort: 'asc'
       },
       {

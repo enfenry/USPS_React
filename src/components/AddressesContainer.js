@@ -3,53 +3,84 @@
 import * as addressesActions from '../actions/addressesActions';
 import AddressesRender from './AddressesRender';
 import PropTypes from 'prop-types';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
+import ErrorBanner from './ErrorBanner';
 
 const AddressesContainer = (props) => {
+    const { actions, addresses, requestState } = props;
 
-    useEffect(() => {
-        const { actions } = props;
-        actions.readAddresses();
-     }, [] );
+    const {
+        error,
+        addressesCreateFailed, addressesCreateSuccess,
+        addressesReadPending, addressesReadFailed, addressesReadSuccess,
+        addressesUpdateFailed, addressesUpdateSuccess,
+        addressesDeleteFailed, addressesDeleteSuccess,
+    } = requestState;
 
-    console.log("addresses:", props);
-
-    if (props.requestState.addressesReadPending) {
-        return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
-    } else if (props.requestState.addressesReadFailed) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Error while loading customers!
-            </div>
-        );
-    } else if (props.requestState.addressesReadSuccess || props.requestState.addressesCreateSuccess || props.requestState.addressesUpdateSuccess || props.requestState.addressesDeleteSuccess) {
+    const renderSuccess = () => {
         return (
             <div className="reactive-margin">
                 <AddressesRender
-                    addresses={props.addresses}
+                    addresses={addresses}
                     handleUpdate={(values, address) => {
-                        props.actions.updateAddress(values, address.ss_customaddressid)
+                        actions.updateAddress(values, address.ss_customaddressid)
                     }}
                     handleDelete={address => {
-                        props.actions.deleteAddress(address.ss_customaddressid)
+                        actions.deleteAddress(address.ss_customaddressid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createAddress(values)
+                        actions.createAddress(values)
                     }}
-                    handleRefresh={() => props.actions.readAddresses()}
+                    handleRefresh={() => actions.readAddresses()}
                 />
             </div>
         );
+    }
+
+    useEffect(() => {
+        actions.readAddresses();
+    }, []);
+
+    if (addressesReadPending) {
+        return <LoadingIcon />;
+    } else if (addressesReadFailed) {
+        return (
+            <ErrorBanner>
+                Error while loading addresses!
+            </ErrorBanner>
+        );
+    } else if (addressesUpdateFailed || addressesCreateFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if (addressesDeleteFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                    Cannot delete: Record is associated with another entity record.
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if (addressesReadSuccess || addressesCreateSuccess || addressesUpdateSuccess || addressesDeleteSuccess) {
+        return renderSuccess();
     } else {
-        return null;
+        return (
+            <ErrorBanner>
+                Invalid state! This message should never appear.
+            </ErrorBanner>
+        );
     }
 }
 

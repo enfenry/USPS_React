@@ -3,85 +3,114 @@
 import * as applicationsActions from '../actions/applicationsActions';
 import ApplicationsRender from './ApplicationsRender';
 import PropTypes from 'prop-types';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
+import ErrorBanner from './ErrorBanner';
 
 const ApplicationsContainer = (props) => {
+    const { actions, applications, requestState } = props;
+    const {
+        error,
+
+        applicationsCreateFailed, applicationsCreateSuccess,
+        applicationsReadPending, applicationsReadFailed, applicationsReadSuccess,
+        applicationsUpdateFailed, applicationsUpdateSuccess,
+        applicationsDeleteFailed, applicationsDeleteSuccess,
+
+        applicationsToOrderFailed, applicationsToOrderSuccess,
+
+        // Associated Entities required for displaying information in tables
+        customersReadPending, customersReadFailed, customersReadSuccess,
+        addressesReadPending, addressesReadFailed, addressesReadSuccess,
+        productsReadPending, productsReadFailed, productsReadSuccess,
+    } = requestState;
 
     useEffect(() => {
-       const { actions } = props;
-       actions.readApplications();
-    }, [] );
+        actions.readApplications();
+    }, []);
 
-    console.log("applications:", props);
-
-    if (props.applicationRequestState.applicationsReadPending || props.productRequestState.productsReadPending || props.customerRequestState.customersReadPending || props.addressRequestState.addressesReadPending) {
-
-        return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
-    }
-    if (props.applicationRequestState.applicationsReadFailed || props.productRequestState.productsReadFailed || props.customerRequestState.customersReadFailed || props.addressRequestState.addressesReadFailed) {
-        return (
-            <div className="alert alert-danger" role="alert">
-                Error while loading entities!
-            </div>
-        );
-
-    }
-    if ((props.applicationRequestState.applicationsReadSuccess || props.applicationRequestState.applicationsUpdateSuccess || props.applicationRequestState.applicationsCreateSuccess|| props.applicationRequestState.applicationsToOrderSuccess) && props.productRequestState.productsReadSuccess && props.customerRequestState.customersReadSuccess && props.addressRequestState.addressesReadSuccess) {
+    const renderSuccess = () => {
         return (
             <div className="reactive-margin">
                 <ApplicationsRender
-                    applications={props.applications}
+                    applications={applications}
                     handleUpdate={(values, application) => {
-                        props.actions.updateApplication(values, application.ss_applicationid)
+                        actions.updateApplication(values, application.ss_applicationid)
                     }}
                     handleDelete={application => {
-                        props.actions.deleteApplication(application.ss_applicationid)
+                        actions.deleteApplication(application.ss_applicationid)
                     }}
                     handleCreate={(values) => {
-                        props.actions.createApplication(values)
+                        actions.createApplication(values)
                     }}
                     handleAppToOrder={(application) => {
-                            props.actions.applicationToOrder(application.ss_applicationid)
+                        actions.applicationToOrder(application.ss_applicationid)
                     }}
-                    handleRefresh={() => props.actions.readApplications()}
+                    handleRefresh={() => actions.readApplications()}
                 />
             </div>
         );
-    } 
-    else {
+    }
+
+    if (applicationsReadPending || productsReadPending || customersReadPending || addressesReadPending) {
+        return <LoadingIcon />;
+    } else if (applicationsReadFailed || productsReadFailed || customersReadFailed || addressesReadFailed) {
         return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
+                Error while loading applications!
+            </ErrorBanner>
+        );
+    } else if (applicationsUpdateFailed || applicationsCreateFailed || applicationsToOrderFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if (applicationsDeleteFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                    Cannot delete: Record is associated with another entity record.
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
+    } else if ((applicationsReadSuccess || applicationsUpdateSuccess || applicationsCreateSuccess || applicationsDeleteSuccess || applicationsToOrderSuccess) && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
+        return renderSuccess();
+    } else {
+        return (
+            <ErrorBanner>
                 Invalid state! This message should never appear.
-            </div>
+            </ErrorBanner>
         );
     }
 }
-
 
 ApplicationsContainer.propTypes = {
     actions: PropTypes.object
 };
 
 function mapStateToProps(state) {
+    const { applicationsReducer, productsReducer, ordersReducer, customersReducer, addressesReducer } = state;
     return {
-        applications: state.applicationsReducer.applications,
-        products: state.productsReducer.products,
-        orders: state.ordersReducer.orders,
-        customers: state.customersReducer.customers,
-        addresses: state.addressesReducer.addresses,
-        
-        applicationRequestState: state.applicationsReducer.requestState,
-        productRequestState: state.productsReducer.requestState,
-        addressRequestState: state.addressesReducer.requestState,
-        customerRequestState: state.customersReducer.requestState,
+        applications: applicationsReducer.applications,
+        products: productsReducer.products,
+        orders: ordersReducer.orders,
+        customers: customersReducer.customers,
+        addresses: addressesReducer.addresses,
+        requestState: Object.assign({},
+            applicationsReducer.requestState,
+            productsReducer.requestState,
+            addressesReducer.requestState,
+            customersReducer.requestState)
     }
 }
 

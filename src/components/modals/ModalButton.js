@@ -32,7 +32,7 @@ const ModalButton = (props) => {
     return (
       <div>
         <p>
-          <Button color={handleButtonStyle(command)}
+          <Button outline color={handleButtonStyle(command)}
            onClick={() => handleOpen()}>{children}</Button>
         </p>
       </div>
