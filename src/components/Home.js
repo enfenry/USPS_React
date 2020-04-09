@@ -19,7 +19,6 @@ import HomeCard from './HomeCard';
 
 const Home = (props) => {
     const { applications, customers, orders, requestState } = props;
-    console.log('customers',customers);
     
     const getNewThisMonth = (array) => {
         let count = 0;
