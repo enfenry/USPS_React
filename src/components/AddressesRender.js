@@ -2,10 +2,11 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Button} from 'reactstrap';
 import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 
-const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate }) => {
+const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate, handleRefresh }) => {
 
   function getTableBodyContent() {
     return addresses.map(obj => {
@@ -100,6 +101,7 @@ const AddressesRender = ({ addresses, handleUpdate, handleDelete, handleCreate }
       <h1>Addresses</h1>
       <ModalButton command="Create" name={`Address ${addresses.length}`} entity="Address"
         onSubmit={(values) => handleCreate(values)}>Create New Address</ModalButton>
+      <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>
       <MDBDataTable
         striped
         bordered
@@ -116,7 +118,8 @@ AddressesRender.propTypes = {
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,
-  handleDelete: PropTypes.func
+  handleDelete: PropTypes.func,
+  handleRefresh: PropTypes.func
 };
 
 export default AddressesRender;
