@@ -17,15 +17,15 @@ export default function ordersReducer(state = {}, action) {
             const itemIndex = state.orders.findIndex((e) => (e.salesorderid === action.id));
             let newOrders = [...state.orders];
             newOrders[itemIndex] = action.data;
-            return { ...state, orders: newOrders, requestState: { ordersUpdateSuccess: true, ordersUpdateFailed: false, error: null } };
+            return { ...state, orders: newOrders, requestState: { ...state.requestState, ordersUpdateSuccess: true, ordersUpdateFailed: false, error: null } };
         }
         case UPDATE_ORDER_FAILURE:
-            return { ...state, orders: state.orders, requestState: { ordersUpdateSuccess: false, ordersUpdateFailed: true, error: action.error } };
+            return { ...state, orders: state.orders, requestState: { ...state.requestState, ordersUpdateSuccess: false, ordersUpdateFailed: true, error: action.error } };
 
         case DELETE_ORDER_SUCCESSFUL:
-            return { ...state, orders: state.orders.filter((e) => e.salesorderid !== action.data), requestState: { ordersDeleteSuccess: true, ordersDeleteFailed: false, error: null } };
+            return { ...state, orders: state.orders.filter((e) => e.salesorderid !== action.data), requestState: { ...state.requestState, ordersDeleteSuccess: true, ordersDeleteFailed: false, error: null } };
         case DELETE_ORDER_FAILURE:
-            return { ...state, requestState: { ordersDeleteSuccess: false, ordersDeleteFailed: true, error: action.error } };
+            return { ...state, requestState: { ...state.requestState, ordersDeleteSuccess: false, ordersDeleteFailed: true, error: action.error } };
         default:
             return state;
     }

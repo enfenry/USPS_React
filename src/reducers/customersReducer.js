@@ -6,10 +6,10 @@ export default function customersReducer(state = {}, action) {
         case CREATE_CUSTOMER_SUCCESSFUL: {
             let newCustomers = [...state.customers];
             newCustomers.push(action.data);
-            return { ...state, customers: newCustomers, requestState: { customersCreateSuccess: true, customersCreateFailed: false, error: null } };
+            return { ...state, customers: newCustomers, requestState: { ...state.requestState, customersCreateSuccess: true, customersCreateFailed: false, error: null } };
         }
         case CREATE_CUSTOMER_FAILURE:
-            return { ...state, customers: state.customers, requestState: { customersCreateSuccess: false, customersCreateFailed: true, error: action.error } };
+            return { ...state, customers: state.customers, requestState: { ...state.requestState, customersCreateSuccess: false, customersCreateFailed: true, error: action.error } };
 
         case READ_CUSTOMERS_SUCCESSFUL:
             return { ...state, customers: action.data.value, requestState: { customersReadSuccess: true, customersReadPending: false, customersReadFailed: false, error: null } };
@@ -22,15 +22,15 @@ export default function customersReducer(state = {}, action) {
             const itemIndex = state.customers.findIndex((e) => (e.contactid === action.id));
             let newCustomers = [...state.customers];
             newCustomers[itemIndex] = action.data;
-            return { ...state, customers: newCustomers, requestState: { customersUpdateSuccess: true, customersUpdateFailed: false, error: null } };
+            return { ...state, customers: newCustomers, requestState: { ...state.requestState, customersUpdateSuccess: true, customersUpdateFailed: false, error: null } };
         }
         case UPDATE_CUSTOMER_FAILURE:
-            return { ...state, customers: state.customers, requestState: { customersUpdateSuccess: false, customersUpdateFailed: true, error: action.error } };
+            return { ...state, customers: state.customers, requestState: { ...state.requestState, customersUpdateSuccess: false, customersUpdateFailed: true, error: action.error } };
 
         case DELETE_CUSTOMER_SUCCESSFUL:
-            return { ...state, customers: state.customers.filter((e) => e.contactid !== action.data), requestState: { customersDeleteSuccess: true, customersDeleteFailed: false, error: null } };
+            return { ...state, customers: state.customers.filter((e) => e.contactid !== action.data), requestState: { ...state.requestState, customersDeleteSuccess: true, customersDeleteFailed: false, error: null } };
         case DELETE_CUSTOMER_FAILURE:
-            return { ...state, requestState: { customersDeleteSuccess: false, customersDeleteFailed: true, error: action.error } };
+            return { ...state, requestState: { ...state.requestState, customersDeleteSuccess: false, customersDeleteFailed: true, error: action.error } };
 
         default:
             return state;
