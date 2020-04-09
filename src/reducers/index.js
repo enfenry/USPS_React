@@ -3,6 +3,7 @@ import applicationsReducer from './applicationsReducer';
 import addressesReducer from './addressesReducer';
 import customersReducer from './customersReducer';
 import ordersReducer from './ordersReducer';
+import orderLinesReducer from './orderLinesReducer';
 import productsReducer from './productsReducer';
 
 import { reducer as modal } from 'redux-modal';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   productsReducer,
   customersReducer,
   ordersReducer,
+  orderLinesReducer,
   modal,
   form: formReducer
 });

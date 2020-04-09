@@ -55,6 +55,16 @@ const CustomersContainer = (props) => {
                 Error while loading customers!
             </ErrorBanner>
         );
+    } else if (customersUpdateFailed || customersCreateFailed) {
+        return (
+            <React.Fragment>
+                <ErrorBanner>
+                    {error.message}
+                    <br />
+                </ErrorBanner>
+                {renderSuccess()}
+            </React.Fragment>
+        );
     } else if (customersDeleteFailed) {
         return (
             <React.Fragment>
@@ -62,16 +72,6 @@ const CustomersContainer = (props) => {
                     {error.message}
                     <br />
                     Cannot delete: Record is associated with another entity record.
-                </ErrorBanner>
-                {renderSuccess()}
-            </React.Fragment>
-        );
-    } else if (customersUpdateFailed || customersCreateFailed) {
-        return (
-            <React.Fragment>
-                <ErrorBanner>
-                    {error.message}
-                    <br />
                 </ErrorBanner>
                 {renderSuccess()}
             </React.Fragment>

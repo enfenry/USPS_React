@@ -50,4 +50,9 @@ const renderField = (props) => {
     return errors;
   }
 
-export {renderField, checkRequiredField};
+  const displayById = (array, key, value, display) => {
+    let filtered = array.filter(el => el[key] === value);
+    return filtered.length ? filtered[0][display] : 'None';
+  }
+
+export {renderField, checkRequiredField, displayById};
