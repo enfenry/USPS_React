@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import validate from './OrderValidate';
 import { renderField, renderOptions, displayById } from '../formUtils';
 
-let OrderCreateOrUpdate = props => {
+let OrderUpdate = props => {
   const { name, handleSubmit, handleHide, initialValues, 
     // customers, 
     addresses, applications } = props;
@@ -46,7 +46,7 @@ let OrderCreateOrUpdate = props => {
   );
 };
 
-OrderCreateOrUpdate.propTypes = {
+OrderUpdate.propTypes = {
   name: PropTypes.string,
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
@@ -65,16 +65,16 @@ OrderCreateOrUpdate.propTypes = {
   ])
 }
 
-OrderCreateOrUpdate = reduxForm({
-  form: 'OrderCreateOrUpdate',
+OrderUpdate = reduxForm({
+  form: 'OrderUpdate',
   validate,
   onSubmitSuccess: (result, dispatch, props) => {
     props.handleHide();
   }
-})(OrderCreateOrUpdate);
+})(OrderUpdate);
 
 function mapStateToProps(state) {
-  const selector = formValueSelector('OrderCreateOrUpdate');
+  const selector = formValueSelector('OrderUpdate');
   const appTypeValue = selector(state, 'ss_applicationtype')
 
   return {
@@ -88,4 +88,4 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps
-)(OrderCreateOrUpdate);
+)(OrderUpdate);

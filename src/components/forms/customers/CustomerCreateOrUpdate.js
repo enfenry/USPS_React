@@ -4,7 +4,7 @@ import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './CustomerValidate';
-import { renderField, displayById } from '../formUtils';
+import { renderField, renderOptions, displayById } from '../formUtils';
 
 let CustomerCreateOrUpdate = props => {
   const { handleSubmit, handleHide, addresses, initialValues } = props;
@@ -29,12 +29,19 @@ let CustomerCreateOrUpdate = props => {
         </div>
       </FormGroup>
 
-      <div>
+      {initialValues ?
         <div>
           <span>Address Name: </span>
           <p>{displayById(addresses, "ss_customaddressid", initialValues._ss_contactcustomaddress_value, "ss_name")}</p>
         </div>
-      </div>
+        : <FormGroup className="field">
+          <div className="control">
+            <Field name="_ss_contactcustomaddress_value" component={renderField} type="select" label="Address Name" >
+            <option value={null}></option>
+            {renderOptions(addresses, "ss_customaddressid", "ss_name")}
+            </Field>
+          </div>
+        </FormGroup>}
 
       <div className="field">
         <div className="control">
