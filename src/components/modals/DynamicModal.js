@@ -5,7 +5,7 @@ import { connectModal } from 'redux-modal';
 
 import AppCreateOrUpdate from '../forms/applications/AppCreateOrUpdate';
 import AppView from '../forms/applications/AppView';
-import OrderCreateOrUpdate from '../forms/orders/OrderCreateOrUpdate';
+import OrderUpdate from '../forms/orders/OrderUpdate';
 import OrderView from '../forms/orders/OrderView';
 import CustomerCreateOrUpdate from '../forms/customers/CustomerCreateOrUpdate';
 import CustomerView from '../forms/customers/CustomerView';
@@ -61,7 +61,7 @@ const MyModal = (props) => {
             );
           case 'Order':
             return (
-              <OrderCreateOrUpdate {...props} />
+              <OrderUpdate {...props} />
             );
           case 'Customer':
             return (

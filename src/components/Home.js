@@ -2,47 +2,54 @@
 
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import {Container, 
-    // Row, Col
- } from 'reactstrap';
+import {
+    Container,
+    Row, Col
+} from 'reactstrap';
 import * as applicationsActions from '../actions/applicationsActions';
 import { ADDRESS_CHANGE, MAIL_FORWARDING, PACKAGE_SUBMISSION } from '../constants/applicationTypes';
 
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import LoadingIcon from './LoadingIcon';
+import ErrorBanner from './ErrorBanner';
+import HomeCard from './HomeCard';
 
 
 const Home = (props) => {
+    const { applications, customers, orders, requestState } = props;
+    console.log('customers',customers);
+    
+    const getNewThisMonth = (array) => {
+        let count = 0;
+        var currentMonth = new Date().getMonth() + 1;
 
-    if (props.requestState.applicationsReadPending) {
+        array.forEach((el) => {
+            var date1 = el.createdon.slice(5, 7);
+            var dateStripped = date1.replace(/\b0+/, '');
+            if (currentMonth == dateStripped)
+                count++;
+        });
+        return count;
+    }
 
-
+    if (requestState.applicationsReadPending || requestState.orderssReadPending || requestState.customersReadPending) {
+        return <LoadingIcon />;
+    } else if (requestState.applicationsReadFailed || requestState.ordersReadFailed || requestState.customersReadFailed) {
         return (
-            <div className="d-flex justify-content-center">
-                <div className="spinner-border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </div>
-            </div>
-        );
-
-
-    } else if (props.requestState.applicationsReadFailed) {
-
-        return (
-            <div className="alert alert-danger" role="alert">
+            <ErrorBanner>
                 Error while loading applications!
-            </div>
+            </ErrorBanner>
         );
-
-    } else if (props.requestState.applicationsReadSuccess) {
+    } else if (requestState.applicationsReadSuccess && requestState.ordersReadSuccess && requestState.customersReadSuccess) {
 
         var distribution0 = [0, 0, 0];
         var distribution1 = [0, 0];
         var appsThisMonth = 0;
         var currentMonth = new Date().getMonth() + 1;
 
-        props.applications.forEach((application) => {
+        applications.forEach((application) => {
             switch (application.ss_applicationtype) {
                 case ADDRESS_CHANGE:
                     distribution0[0]++;
@@ -52,7 +59,6 @@ const Home = (props) => {
                     break;
                 case PACKAGE_SUBMISSION:
                     distribution0[2]++;
-
                     break;
             }
             distribution1[application.statecode]++;
@@ -61,8 +67,6 @@ const Home = (props) => {
             if (currentMonth == dateStripped)
                 appsThisMonth++;
         });
-
-
 
         const data0 = {
 
@@ -87,7 +91,6 @@ const Home = (props) => {
             }]
         };
 
-
         const data1 = {
             labels: [
                 "Active",
@@ -108,26 +111,38 @@ const Home = (props) => {
 
         return (
             <Container>
-                <div>
-                    <br />
-                    <h2>Applications this month: {appsThisMonth}</h2>
-                    <br />
-                    <br />
-                </div>
-                <div>
-                    <Doughnut
-                        data={data0}
-                        height={256}
-                        options={{ maintainAspectRatio: false }}
-                    />
-                </div>
-                <div>
-                    <Doughnut
-                        data={data1}
-                        height={256}
-                        options={{ maintainAspectRatio: false }}
-                    />
-                </div>
+                <Row>
+                    <Col xs="4">
+                        <br />
+                        <HomeCard color='primary' header='New Applications' title='Applications created this month: '>
+                            {appsThisMonth}
+                        </HomeCard>
+                        <br />
+                        <HomeCard color='warning' header='New Orders' title='Orders placed this month: '>{getNewThisMonth(orders)}</HomeCard>
+                        <br />
+                        <HomeCard color='danger' header='New Customers' title='Customers this month: '>{getNewThisMonth(customers)}</HomeCard>
+                        <br />
+                    </Col>
+                    <Col xs="8">
+                        <br />
+                        <h3 style={{ textAlign: 'center' }}>Applications Data:</h3>
+                        <br />
+                        <div>
+                            <Doughnut
+                                data={data0}
+                                height={256}
+                                options={{ maintainAspectRatio: false }}
+                            />
+                        </div>
+                        <div>
+                            <Doughnut
+                                data={data1}
+                                height={256}
+                                options={{ maintainAspectRatio: false }}
+                            />
+                        </div>
+                    </Col>
+                </Row>
             </Container>
 
         );
@@ -142,9 +157,16 @@ Home.propTypes = {
 };
 
 function mapStateToProps(state) {
+    const { applicationsReducer, ordersReducer, customersReducer } = state;
     return {
-        applications: state.applicationsReducer.applications,
-        requestState: state.applicationsReducer.requestState
+        applications: applicationsReducer.applications,
+        customers: customersReducer.customers,
+        orders: ordersReducer.orders,
+        requestState: Object.assign({},
+            applicationsReducer.requestState,
+            customersReducer.requestState,
+            ordersReducer.requestState,
+        )
     }
 }
 
