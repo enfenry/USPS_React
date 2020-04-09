@@ -4,20 +4,12 @@ import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './OrderValidate';
-import { renderField, displayById } from '../formUtils';
+import { renderField, renderOptions, displayById } from '../formUtils';
 
 let OrderCreateOrUpdate = props => {
-  const { handleSubmit, handleHide, initialValues, 
+  const { name, handleSubmit, handleHide, initialValues, 
     // customers, 
     addresses, applications } = props;
-
-  const renderOptions = (array, value, display) => {
-    return array.map(el => {
-      return (
-        <option key={el[value]} value={el[value]}>{el[display]}</option>
-      )
-    })
-  }
 
   return (
     <Form onSubmit={handleSubmit} className="form">
@@ -55,6 +47,7 @@ let OrderCreateOrUpdate = props => {
 };
 
 OrderCreateOrUpdate.propTypes = {
+  name: PropTypes.string,
   handleSubmit: PropTypes.func,
   handleHide: PropTypes.func,
   initialValues: PropTypes.object,

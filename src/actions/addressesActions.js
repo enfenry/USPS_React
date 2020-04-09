@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { adalApiFetch } from '../adalConfig.js';
 
-import { READ_ADDRESSES_SUCCESSFUL, READ_ADDRESSES_FAILURE, READ_ADDRESSES_PENDING, 
+import {
+    READ_ADDRESSES_SUCCESSFUL, READ_ADDRESSES_FAILURE, READ_ADDRESSES_PENDING,
     CREATE_ADDRESSES_SUCCESSFUL, CREATE_ADDRESSES_FAILURE,
     UPDATE_ADDRESSES_SUCCESSFUL, UPDATE_ADDRESSES_FAILURE,
-    DELETE_ADDRESSES_SUCCESSFUL, DELETE_ADDRESSES_FAILURE 
+    DELETE_ADDRESSES_SUCCESSFUL, DELETE_ADDRESSES_FAILURE
 
 } from '../constants/actionTypes';
 
@@ -18,7 +19,7 @@ export const readAddresses = () => {
         'Content-Type': 'application/json; charset=utf-8',
         headers: {
             'Prefer': "odata.include-annotations=*"
-         }
+        }
     };
 
     return dispatch => {
@@ -36,19 +37,17 @@ export const readAddresses = () => {
 }
 
 export const createAddress = (values) => {
-    
+
     let address = {}
 
-    if (values.ss_name) {address.ss_name = values.ss_name}
-    if (values.ss_line1) {address.ss_line1 = values.ss_line1}
-    if (values.ss_line2) {address.ss_line2 = values.ss_line2}
-    if (values.ss_line3) {address.ss_line3 = values.ss_line3}
-    if (values.ss_city) {address.ss_city = values.ss_city}
-    if (values.ss_state) {address.ss_state = values.ss_state}
-    if (values.ss_country) {address.ss_country = values.ss_country}
-    if (values.ss_postalcode) {address.ss_postalcode = values.ss_postalcode}
-
-
+    if (values.ss_name) { address.ss_name = values.ss_name }
+    if (values.ss_line1) { address.ss_line1 = values.ss_line1 }
+    if (values.ss_line2 || values.ss_line2 == "") { address.ss_line2 = values.ss_line2 }
+    if (values.ss_line3 || values.ss_line3 == "") { address.ss_line3 = values.ss_line3 }
+    if (values.ss_city) { address.ss_city = values.ss_city }
+    if (values.ss_state) { address.ss_state = values.ss_state }
+    if (values.ss_country) { address.ss_country = values.ss_country }
+    if (values.ss_postalcode) { address.ss_postalcode = values.ss_postalcode }
 
     let config = {
         method: 'post',
@@ -58,8 +57,8 @@ export const createAddress = (values) => {
         'Content-Type': 'application/json; charset=utf-8',
         headers: {
             'Prefer': 'return=representation'
-         },
-         data: address
+        },
+        data: address
     };
     return dispatch => {
         return adalApiFetch(axios, "https://sstack.crm.dynamics.com/api/data/v9.1/ss_customaddresses", config)
@@ -77,14 +76,14 @@ export const updateAddress = (values, id) => {
 
     let address = {}
 
-    if (values.ss_name) {address.ss_name = values.ss_name}
-    if (values.ss_line1) {address.ss_line1 = values.ss_line1}
-    if (values.ss_line2) {address.ss_line2 = values.ss_line2}
-    if (values.ss_line3) {address.ss_line3 = values.ss_line3}
-    if (values.ss_city) {address.ss_city = values.ss_city}
-    if (values.ss_state) {address.ss_state = values.ss_state}
-    if (values.ss_country) {address.ss_country = values.ss_country}
-    if (values.ss_postalcode) {address.ss_postalcode = values.ss_postalcode}
+    if (values.ss_name) { address.ss_name = values.ss_name }
+    if (values.ss_line1) { address.ss_line1 = values.ss_line1 }
+    if (values.ss_line2 || values.ss_line2 == "") { address.ss_line2 = values.ss_line2 }
+    if (values.ss_line3 || values.ss_line3 == "") { address.ss_line3 = values.ss_line3 }
+    if (values.ss_city) { address.ss_city = values.ss_city }
+    if (values.ss_state) { address.ss_state = values.ss_state }
+    if (values.ss_country) { address.ss_country = values.ss_country }
+    if (values.ss_postalcode) { address.ss_postalcode = values.ss_postalcode }
 
 
 
@@ -96,7 +95,7 @@ export const updateAddress = (values, id) => {
         Accept: 'application/json',
         'Content-Type': 'application/json; charset=utf-8',
         headers: {
-           'Prefer': 'return=representation'
+            'Prefer': 'return=representation'
         },
         data: address
     };

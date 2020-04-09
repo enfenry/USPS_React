@@ -10,7 +10,7 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const OrdersContainer = (props) => {
-    const { actions, orders, orderLines, applications, customers,
+    const { actions, orders, orderLines, applications, customers, addresses,
         requestState } = props;
     const {
         error,
@@ -42,6 +42,7 @@ const OrdersContainer = (props) => {
                     orderLines={orderLines}
                     applications ={applications}
                     customers = {customers}
+                    addresses={addresses}
                     handleUpdate={(values, order) => {
                         actions.updateOrder(values, order.salesorderid)
                     }}

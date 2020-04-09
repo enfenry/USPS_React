@@ -16,9 +16,9 @@ export default function addressesReducer(state = {}, action) {
 
         case UPDATE_ADDRESS_SUCCESSFUL: {
             const itemIndex = state.addresses.findIndex((e) => (e.ss_customaddressid === action.id));
-            let apps = [...state.addresses];
-            apps[itemIndex] = action.data;
-            return { ...state, addresses: apps, requestState: { addressesUpdateSuccess: true, addressesUpdateFailed: false, error: null } };
+            let newAddresses = [...state.addresses];
+            newAddresses[itemIndex] = action.data;
+            return { ...state, addresses: newAddresses, requestState: { addressesUpdateSuccess: true, addressesUpdateFailed: false, error: null } };
         }
         case UPDATE_ADDRESS_FAILURE:
             return { ...state, addresses: state.addresses, requestState: { addressesUpdateSuccess: false, addressesUpdateFailed: true, error: action.error } };

@@ -4,15 +4,10 @@ import { reduxForm, Field } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './CustomerValidate';
-import { renderField } from '../formUtils';
+import { renderField, displayById } from '../formUtils';
 
 let CustomerCreateOrUpdate = props => {
   const { handleSubmit, handleHide, addresses, initialValues } = props;
-
-  const displayById = (array, key, value, display) => {
-    let filtered = array.filter(el => el[key] === value);
-    return filtered.length ? filtered[0][display] : 'None';
-  }
 
   return (
     <Form onSubmit={handleSubmit} className="form">
