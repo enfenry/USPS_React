@@ -6,13 +6,13 @@ import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 
 const ModalButton = (props) => {
-  const {command, children} = props;
+  const { command, children } = props;
 
-  function handleOpen () {
-      props.show("dynamic", props);
+  function handleOpen() {
+    props.show("dynamic", props);
   }
 
-  function handleButtonStyle (command) {
+  function handleButtonStyle(command) {
     switch (command) {
       case 'Create':
         return 'primary'
@@ -29,14 +29,10 @@ const ModalButton = (props) => {
     }
   }
 
-    return (
-      <div>
-        <p>
-          <Button outline color={handleButtonStyle(command)}
-           onClick={() => handleOpen()}>{children}</Button>
-        </p>
-      </div>
-    )
+  return (
+    <Button outline color={handleButtonStyle(command)}
+      onClick={() => handleOpen()}>{children}</Button>
+  )
 }
 
 ModalButton.propTypes = {

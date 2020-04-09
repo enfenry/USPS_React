@@ -2,7 +2,7 @@
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Button} from 'reactstrap';
+import { Button } from 'reactstrap';
 import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 
@@ -20,12 +20,12 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate, 
       );
       newObj["delete"] = (
         <ModalButton command="Update" name={obj.fullname} entity="Customer"
-          initialValues={{ ...obj }} 
+          initialValues={{ ...obj }}
           onSubmit={(values) => handleUpdate(values, obj)}>Update</ModalButton>
       );
       newObj["update"] = (
         <ModalButton command="Delete" name={obj.fullname} entity="Customer"
-          initialValues={{ ...obj }} 
+          initialValues={{ ...obj }}
           onSubmit={() => handleDelete(obj)}>Delete</ModalButton>
       );
 
@@ -70,9 +70,9 @@ const CustomersRender = ({ customers, handleUpdate, handleDelete, handleCreate, 
   return (
     <React.Fragment>
       <h1>Customers</h1>
+      <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>{' '}
       <ModalButton command="Create" name={`Customer ${customers.length}`} entity="Customer"
         onSubmit={(values) => handleCreate(values)} >Create New Customer</ModalButton>
-      <Button color='info' onClick={() => handleRefresh()}>Refresh Data</Button>
       <MDBDataTable
         striped
         bordered
