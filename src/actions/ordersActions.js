@@ -22,7 +22,7 @@ export const readOrders = () => {
     return dispatch => {
         dispatch(_readOrdersStarted());
 
-        return adalApiFetch(axios, "https://sstack.crm.dynamics.com/api/data/v9.1/salesorders", config)
+        return adalApiFetch(axios, "https://sstack.crm.dynamics.com/api/data/v9.1/salesorders$expand=primarycontactid($select=contactid,fullname)", config)
             .then(res => {
                 dispatch(_readOrdersSuccess(res));
             })
