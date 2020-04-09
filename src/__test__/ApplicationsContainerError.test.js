@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomerView from '../components/forms/customers/CustomerView';
+import ApplicationsContainer from '../components/ApplicationsContainer';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
@@ -8,15 +8,16 @@ import * as basicStateUtils from "./basicState";
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore([]);
 
-test('CustomerView renders correctly', () => {
+test('ApplicationsContainer shows error when orders have an error', () => {
 
-    const state = basicStateUtils.getBasicState();
+    var state = basicStateUtils.getBasicState();
+    state.ordersReducer.ordersRequestSuccess = false;
+    state.ordersReducer.ordersRequestFailed = true;
     const store = mockStore(state);
-    const initialValues = state.customersReducer.customers[0];
 
     const component = renderer.create(
         <Provider store={store}>
-            <CustomerView initialValues={initialValues} />
+            <ApplicationsContainer />
         </Provider>
     );
 

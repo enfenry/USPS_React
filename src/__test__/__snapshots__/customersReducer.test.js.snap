@@ -2,17 +2,23 @@
 
 exports[`customers reducer should handle READ_CUSTOMERS_FAILURE 1`] = `
 Object {
-  "customersRequestFailed": true,
-  "customersRequestPending": false,
-  "customersRequestSuccess": false,
+  "requestState": Object {
+    "customersReadFailed": true,
+    "customersReadPending": false,
+    "customersReadSuccess": false,
+    "error": undefined,
+  },
 }
 `;
 
 exports[`customers reducer should handle READ_CUSTOMERS_PENDING 1`] = `
 Object {
-  "customersRequestFailed": false,
-  "customersRequestPending": true,
-  "customersRequestSuccess": false,
+  "requestState": Object {
+    "customersReadFailed": false,
+    "customersReadPending": true,
+    "customersReadSuccess": false,
+    "error": null,
+  },
 }
 `;
 
@@ -21,9 +27,12 @@ Object {
   "customers": Array [
     "dummy data",
   ],
-  "customersRequestFailed": false,
-  "customersRequestPending": false,
-  "customersRequestSuccess": true,
+  "requestState": Object {
+    "customersReadFailed": false,
+    "customersReadPending": false,
+    "customersReadSuccess": true,
+    "error": null,
+  },
 }
 `;
 

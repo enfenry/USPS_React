@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CustomersContainer renders correctly 1`] = `
+exports[`ApplicationsContainer shows error when orders have an error 1`] = `
 <div
   className="alert alert-danger"
   role="alert"

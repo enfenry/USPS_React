@@ -3,15 +3,16 @@ import AppView from '../components/forms/applications/AppView';
 import renderer from 'react-test-renderer';
 import { Provider } from 'react-redux';
 
-import basicState from "./basicState";
+import * as basicStateUtils from "./basicState";
 
 import configureStore from 'redux-mock-store';
 const mockStore = configureStore([]);
 
 test('AppView renders correctly', () => {
 
-    const store = mockStore(basicState);
-    const initialValues = basicState.applicationsReducer.applications[0];
+    const state = basicStateUtils.getBasicState();
+    const store = mockStore(state);
+    const initialValues = state.applicationsReducer.applications[0];
 
     const component = renderer.create(
         <Provider store={store}>

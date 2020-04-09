@@ -8,7 +8,7 @@ exports[`CustomerView renders correctly 1`] = `
         First Name: 
       </span>
       <p>
-        example first name
+        Barack
       </p>
     </div>
   </div>
@@ -18,7 +18,7 @@ exports[`CustomerView renders correctly 1`] = `
         Last Name: 
       </span>
       <p>
-        example last name
+        Obama
       </p>
     </div>
   </div>
@@ -28,7 +28,17 @@ exports[`CustomerView renders correctly 1`] = `
         Email: 
       </span>
       <p>
-        example email address
+        obamaslastname@example.com
+      </p>
+    </div>
+  </div>
+  <div>
+    <div>
+      <span>
+        Address Name: 
+      </span>
+      <p>
+        None
       </p>
     </div>
   </div>
