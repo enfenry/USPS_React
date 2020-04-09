@@ -4,17 +4,12 @@ import { reduxForm, Field, formValueSelector } from 'redux-form';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import validate from './OrderValidate';
-import { renderField } from '../formUtils';
+import { renderField, displayById } from '../formUtils';
 
 let OrderCreateOrUpdate = props => {
   const { handleSubmit, handleHide, initialValues, 
     // customers, 
     addresses, applications } = props;
-
-  const displayById = (array, key, value, display) => {
-    let filtered = array.filter(el => el[key] === value);
-    return filtered.length ? filtered[0][display] : 'None';
-  }
 
   const renderOptions = (array, value, display) => {
     return array.map(el => {

@@ -2,16 +2,12 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { displayById }  from '../formUtils';
 
 const OrderView = props => {
     const { handleHide, name, initialValues, applications, customers, addresses, 
         // products
      } = props;
-
-    const displayById = (array, key, value, display) => {
-        let filtered = array.filter(el => el[key] === value);
-        return filtered.length ? filtered[0][display] : 'None';
-    }
 
     return (
         <div>

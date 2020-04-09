@@ -6,7 +6,7 @@ import {Button} from 'reactstrap';
 import ModalButton from './modals/ModalButton';
 import { MDBDataTable } from 'mdbreact';
 
-const OrdersRender = ({ orders, handleUpdate, handleDelete, handleRefresh}) => {
+const OrdersRender = ({ orders, applications, customers, handleUpdate, handleDelete, handleRefresh}) => {
 
   function getAppBodyContent() {
     return orders.map(obj => {
@@ -45,7 +45,7 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete, handleRefresh}) => {
         sort: 'asc'
       },
       {
-        label: 'Parent Application',
+        label: 'Customer',
         field: '_ss_application_value',
         sort: 'asc'
       },
@@ -97,6 +97,8 @@ const OrdersRender = ({ orders, handleUpdate, handleDelete, handleRefresh}) => {
 
 OrdersRender.propTypes = {
   orders: PropTypes.array,
+  applications: PropTypes.array,
+  customers: PropTypes.array,
   handleCreate: PropTypes.func,
   handleView: PropTypes.func,
   handleUpdate: PropTypes.func,

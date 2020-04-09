@@ -10,8 +10,7 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 
 const OrdersContainer = (props) => {
-    const { actions, orders,
-        // applications, products, customers,
+    const { actions, orders, orderLines, applications, customers,
         requestState } = props;
     const {
         error,
@@ -40,6 +39,9 @@ const OrdersContainer = (props) => {
             <div className="reactive-margin">
                 <OrdersRender
                     orders={orders}
+                    orderLines={orderLines}
+                    applications ={applications}
+                    customers = {customers}
                     handleUpdate={(values, order) => {
                         actions.updateOrder(values, order.salesorderid)
                     }}
@@ -90,6 +92,7 @@ const OrdersContainer = (props) => {
         && orderLinesReadSuccess && applicationsReadSuccess && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
         return renderSuccess();
     } else {
+        console.log('requestState',requestState);
         return (
             <ErrorBanner>
                 Invalid state! This message should never appear.
@@ -103,11 +106,12 @@ OrdersContainer.propTypes = {
 };
 
 function mapStateToProps(state) {
-    const { applicationsReducer, productsReducer, ordersReducer, customersReducer, addressesReducer } = state;
+    const { applicationsReducer, productsReducer, ordersReducer, orderLinesReducer, customersReducer, addressesReducer } = state;
     return {
         applications: applicationsReducer.applications,
         products: productsReducer.products,
         orders: ordersReducer.orders,
+        orderLines: orderLinesReducer.orderLines,
         customers: customersReducer.customers,
         addresses: addressesReducer.addresses,
         requestState: Object.assign({},
@@ -115,7 +119,9 @@ function mapStateToProps(state) {
             productsReducer.requestState,
             addressesReducer.requestState,
             customersReducer.requestState,
-            ordersReducer.requestState)
+            ordersReducer.requestState,
+            orderLinesReducer.requestState,
+            )
     }
 }
 

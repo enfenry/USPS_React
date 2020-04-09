@@ -2,14 +2,10 @@ import React from 'react';
 import { Button } from 'reactstrap';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { displayById }  from '../formUtils';
 
 const CustomerView = props => {
     const { handleHide, initialValues, addresses } = props;
-
-    const displayById = (array, key, value, display) => {
-        let filtered = array.filter(el => el[key] === value);
-        return filtered.length ? filtered[0][display] : 'None';
-    }
 
     return (
         <div>
