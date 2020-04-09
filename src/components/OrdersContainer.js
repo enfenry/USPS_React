@@ -93,7 +93,6 @@ const OrdersContainer = (props) => {
         && orderLinesReadSuccess && applicationsReadSuccess && productsReadSuccess && customersReadSuccess && addressesReadSuccess) {
         return renderSuccess();
     } else {
-        console.log('requestState',requestState);
         return (
             <ErrorBanner>
                 Invalid state! This message should never appear.

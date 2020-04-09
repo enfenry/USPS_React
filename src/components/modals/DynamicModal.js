@@ -14,10 +14,9 @@ import AddressView from '../forms/addresses/AddressView';
 
 
 const MyModal = (props) => {
-  const { onSubmit, handleHide, show, name, command, children, entity } = props;
+  const { onSubmit, handleHide, show, name, command, children, entity, initialValues } = props;
 
   const renderBody = () => {
-
     switch (command) {
       case 'Delete':
         return (
@@ -34,7 +33,8 @@ const MyModal = (props) => {
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
       case 'Place Order':
-        return (
+        
+        return initialValues.statecode == 0 ? (
           <div>
             <p>Confirm Order?</p>
             <Button color="primary" onClick={() => {
@@ -47,6 +47,11 @@ const MyModal = (props) => {
             }}>{children}</Button>{' '}
             <Button color="secondary" onClick={handleHide}>Cancel</Button>
           </div>)
+          : (
+            <div>
+              <p>Cannot Place Order from an Inactive Application.</p>
+              <Button color="secondary" onClick={handleHide}>Cancel</Button>
+            </div>)
       case 'Create':
       case 'Update':
         switch (entity) {
@@ -116,6 +121,7 @@ MyModal.propTypes = {
   entity: PropTypes.string,
   command: PropTypes.string,
   onSubmit: PropTypes.func,
+  initialValues: PropTypes.object,
   handleHide: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
   children: PropTypes.oneOfType([
