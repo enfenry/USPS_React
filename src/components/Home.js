@@ -110,7 +110,7 @@ const Home = (props) => {
             <Container>
                 <div>
                     <br />
-                    <h2>Applications this month:{appsThisMonth}</h2>
+                    <h2>Applications this month: {appsThisMonth}</h2>
                     <br />
                     <br />
                 </div>
