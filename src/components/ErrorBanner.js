@@ -7,14 +7,12 @@ import PropTypes from 'prop-types';
 const ErrorBanner = (props) => {
 
     const [hidden, setHidden] = useState(true);
-
+    
     return (
         hidden ?
             <div className="alert alert-danger" role="alert">
                 <Button close onClick={() => setHidden(false)} />
-                <div onClick={(event) => event.stopPropagation()}>
                     {props.children}
-                </div >
             </div >
             : ''
     );
