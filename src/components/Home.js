@@ -16,10 +16,8 @@ import LoadingIcon from './LoadingIcon';
 import ErrorBanner from './ErrorBanner';
 import HomeCard from './HomeCard';
 
-
 const Home = (props) => {
     const { applications, customers, orders, requestState } = props;
-    console.log('customers', customers);
 
     const getNewThisMonth = (array) => {
         let count = 0;
@@ -53,9 +51,6 @@ const Home = (props) => {
                 yearList[i] = yearList[i + 1] - 1;
             }
         }
-        console.log(monthList);
-        console.log(yearList);
-        console.log(pivotIndex);
 
         array.forEach((el) => {
             var year = el.createdon.slice(0, 4);
@@ -67,12 +62,10 @@ const Home = (props) => {
 
                 var monthIndex = monthList.indexOf(Number(monthStripped));
                 if (yearList[monthIndex] == Number(year)) {
-                    console.log("madeit");
                     count[monthIndex] = count[monthIndex] + 1;
                 }
             }
         });
-        console.log(count);
         return count;
     }
 
@@ -236,13 +229,13 @@ const Home = (props) => {
                 <Row>
                     <Col xs="4">
                         <br />
-                        <HomeCard color='primary' header='New Applications' title='Applications created this month: '>
+                        <HomeCard color='danger' header='New Applications' title='Applications created this month: '>
                             {getNewThisMonth(applications)}
                         </HomeCard>
                         <br />
-                        <HomeCard color='warning' header='New Orders' title='Orders placed this month: '>{getNewThisMonth(orders)}</HomeCard>
+                        <HomeCard color='primary' header='New Orders' title='Orders placed this month: '>{getNewThisMonth(orders)}</HomeCard>
                         <br />
-                        <HomeCard color='danger' header='New Customers' title='Customers this month: '>{getNewThisMonth(customers)}</HomeCard>
+                        <HomeCard color='warning' header='New Customers' title='Customers this month: '>{getNewThisMonth(customers)}</HomeCard>
                         <br />
                     </Col>
                     <Col xs="8">
