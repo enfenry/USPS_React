@@ -1,7 +1,7 @@
 "use strict"
 
 import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import { Doughnut, Bar } from 'react-chartjs-2';
 import {
     Container,
     Row, Col
@@ -19,17 +19,59 @@ import HomeCard from './HomeCard';
 
 const Home = (props) => {
     const { applications, customers, orders, requestState } = props;
-    
+
     const getNewThisMonth = (array) => {
         let count = 0;
         var currentMonth = new Date().getMonth() + 1;
+        var currentYear = new Date().getFullYear();
 
         array.forEach((el) => {
             var date1 = el.createdon.slice(5, 7);
-            var dateStripped = date1.replace(/\b0+/, '');
-            if (currentMonth == dateStripped)
+            var monthStripped = date1.replace(/\b0+/, '');
+            var year = el.createdon.slice(0, 4);
+            if (currentMonth == monthStripped && year == currentYear)
                 count++;
         });
+        return count;
+    }
+
+    const getLastSixMonths = (array) => {
+        let count = [0, 0, 0, 0, 0, 0];
+        var currentMonth = new Date().getMonth() + 1;
+        var currentYear = new Date().getFullYear();
+        var monthList = [0, 0, 0, 0, 0, currentMonth];
+        var yearList = [0, 0, 0, 0, 0, currentYear];
+        var pivotIndex = 0;
+        for (var i = 4; i >= 0; i--) {
+            if (monthList[i + 1] - 1 > 0) {
+                monthList[i] = monthList[i + 1] - 1;
+                yearList[i] = yearList[i + 1];
+            } else {
+                monthList[i] = 12;
+                pivotIndex = i;
+                yearList[i] = yearList[i + 1] - 1;
+            }
+        }
+        console.log(monthList);
+        console.log(yearList);
+        console.log(pivotIndex);
+
+        array.forEach((el) => {
+            var year = el.createdon.slice(0, 4);
+
+            var month = el.createdon.slice(5, 7);
+            var monthStripped = month.replace(/\b0+/, '');
+            if ((monthList[0] <= monthStripped && monthStripped <= monthList[pivotIndex])
+                || (monthList[pivotIndex + 1] <= monthStripped && monthStripped <= monthList[5])) {
+
+                var monthIndex = monthList.indexOf(Number(monthStripped));
+                if (yearList[monthIndex] == Number(year)) {
+                    console.log("madeit");
+                    count[monthIndex] = count[monthIndex] + 1;
+                }
+            }
+        });
+        console.log(count);
         return count;
     }
 
@@ -45,8 +87,6 @@ const Home = (props) => {
 
         var distribution0 = [0, 0, 0];
         var distribution1 = [0, 0];
-        var appsThisMonth = 0;
-        var currentMonth = new Date().getMonth() + 1;
 
         applications.forEach((application) => {
             switch (application.ss_applicationtype) {
@@ -61,11 +101,93 @@ const Home = (props) => {
                     break;
             }
             distribution1[application.statecode]++;
-            var date1 = application.createdon.slice(5, 7);
-            var dateStripped = date1.replace(/\b0+/, '');
-            if (currentMonth == dateStripped)
-                appsThisMonth++;
+
         });
+
+        const applicationData = {
+            labels: [
+                "5 months",
+                "4 months",
+                "3 months",
+                "2 months",
+                "1 month",
+                "This month",
+            ],
+            datasets: [
+                {
+                    label: 'Applications in the last 6 months',
+
+                    data: getLastSixMonths(applications),
+
+
+                    backgroundColor: [
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384'
+                    ],
+                    hoverBackgroundColor: [
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384',
+                        '#FF6384'
+                    ]
+                },
+                {
+                    label: 'Orders in the last 6 months',
+
+                    data: getLastSixMonths(orders),
+
+
+                    backgroundColor: [
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB'
+                    ],
+                    hoverBackgroundColor: [
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB',
+                        '#36A2EB'
+
+
+                    ]
+                },
+                {
+                    label: 'New Customers in the last 6 months',
+
+                    data: getLastSixMonths(customers),
+
+
+                    backgroundColor: [
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56'
+                    ],
+                    hoverBackgroundColor: [
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56',
+                        '#FFCE56'
+
+                    ]
+                }
+            ]
+        };
 
         const data0 = {
 
@@ -114,7 +236,7 @@ const Home = (props) => {
                     <Col xs="4">
                         <br />
                         <HomeCard color='primary' header='New Applications' title='Applications created this month: '>
-                            {appsThisMonth}
+                            {getNewThisMonth(applications)}
                         </HomeCard>
                         <br />
                         <HomeCard color='warning' header='New Orders' title='Orders placed this month: '>{getNewThisMonth(orders)}</HomeCard>
@@ -126,6 +248,14 @@ const Home = (props) => {
                         <br />
                         <h3 style={{ textAlign: 'center' }}>Applications Data:</h3>
                         <br />
+                        <div>
+                            <Bar
+                                label='Applications in the last 6 months'
+                                data={applicationData}
+                                height={256}
+                                options={{ maintainAspectRatio: false }}
+                            />
+                        </div>
                         <div>
                             <Doughnut
                                 data={data0}
