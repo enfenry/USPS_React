@@ -100,16 +100,16 @@ const Home = (props) => {
 
         const applicationData = {
             labels: [
-                "5 months",
-                "4 months",
-                "3 months",
-                "2 months",
-                "1 month",
+                "5 months ago",
+                "4 months ago",
+                "3 months ago",
+                "2 months ago",
+                "Last month",
                 "This month",
             ],
             datasets: [
                 {
-                    label: 'Applications in the last 6 months',
+                    label: 'Applications',
 
                     data: getLastSixMonths(applications),
 
@@ -132,7 +132,7 @@ const Home = (props) => {
                     ]
                 },
                 {
-                    label: 'Orders in the last 6 months',
+                    label: 'Orders',
 
                     data: getLastSixMonths(orders),
 
@@ -157,7 +157,7 @@ const Home = (props) => {
                     ]
                 },
                 {
-                    label: 'New Customers in the last 6 months',
+                    label: 'Customers',
 
                     data: getLastSixMonths(customers),
 
@@ -233,35 +233,57 @@ const Home = (props) => {
                             {getNewThisMonth(applications)}
                         </HomeCard>
                         <br />
-                        <HomeCard color='primary' header='New Orders' title='Orders placed this month: '>{getNewThisMonth(orders)}</HomeCard>
+                        <HomeCard color='primary' header='New Orders' title='Orders placed this month: '>
+                            {getNewThisMonth(orders)}
+                        </HomeCard>
                         <br />
-                        <HomeCard color='warning' header='New Customers' title='Customers this month: '>{getNewThisMonth(customers)}</HomeCard>
+                        <HomeCard color='warning' header='New Customers' title='Customers this month: '>
+                            {getNewThisMonth(customers)}
+                        </HomeCard>
                         <br />
                     </Col>
                     <Col xs="8">
-                        <br />
-                        <h3 style={{ textAlign: 'center' }}>Applications Data:</h3>
-                        <br />
                         <div>
                             <Bar
-                                label='Applications in the last 6 months'
                                 data={applicationData}
                                 height={256}
-                                options={{ maintainAspectRatio: false }}
+                                options={{
+                                    maintainAspectRatio: false,
+                                    title: {
+                                        display: true,
+                                        text: 'Applications, Orders, and Customers in the Last 6 Months'
+                                    }
+                                }}
                             />
                         </div>
+                        <br />
+                        <br />
                         <div>
                             <Doughnut
                                 data={data0}
                                 height={256}
-                                options={{ maintainAspectRatio: false }}
+                                options={{
+                                    maintainAspectRatio: false,
+                                    title: {
+                                        display: true,
+                                        text: 'Applications by Type'
+                                    }
+                                }}
                             />
                         </div>
+                        <br />
+                        <br />
                         <div>
                             <Doughnut
                                 data={data1}
                                 height={256}
-                                options={{ maintainAspectRatio: false }}
+                                options={{
+                                    maintainAspectRatio: false,
+                                    title: {
+                                        display: true,
+                                        text: 'Applications by Status'
+                                    }
+                                }}
                             />
                         </div>
                     </Col>
