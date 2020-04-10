@@ -10,25 +10,33 @@ Object {
       "ss_applicationid": "c",
     },
   ],
-  "applicationsRequestFailed": false,
-  "applicationsRequestPending": false,
-  "applicationsRequestSuccess": true,
+  "requestState": Object {
+    "applicationsDeleteFailed": false,
+    "applicationsDeleteSuccess": true,
+    "error": null,
+  },
 }
 `;
 
 exports[`applications reducer should handle READ_APPLICATIONS_FAILURE 1`] = `
 Object {
-  "applicationsRequestFailed": true,
-  "applicationsRequestPending": false,
-  "applicationsRequestSuccess": false,
+  "requestState": Object {
+    "applicationsReadFailed": true,
+    "applicationsReadPending": false,
+    "applicationsReadSuccess": false,
+    "error": undefined,
+  },
 }
 `;
 
 exports[`applications reducer should handle READ_APPLICATIONS_PENDING 1`] = `
 Object {
-  "applicationsRequestFailed": false,
-  "applicationsRequestPending": true,
-  "applicationsRequestSuccess": false,
+  "requestState": Object {
+    "applicationsReadFailed": false,
+    "applicationsReadPending": true,
+    "applicationsReadSuccess": false,
+    "error": null,
+  },
 }
 `;
 
@@ -37,9 +45,12 @@ Object {
   "applications": Array [
     "dummy data",
   ],
-  "applicationsRequestFailed": false,
-  "applicationsRequestPending": false,
-  "applicationsRequestSuccess": true,
+  "requestState": Object {
+    "applicationsReadFailed": false,
+    "applicationsReadPending": false,
+    "applicationsReadSuccess": true,
+    "error": null,
+  },
 }
 `;
 

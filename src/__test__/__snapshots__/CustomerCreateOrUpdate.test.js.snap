@@ -113,6 +113,14 @@ exports[`CustomerCreateOrUpdate renders correctly 1`] = `
       </div>
     </div>
   </div>
+  <div>
+    <span>
+      Address Name: 
+    </span>
+    <p>
+      None
+    </p>
+  </div>
   <div
     className="field"
   >
